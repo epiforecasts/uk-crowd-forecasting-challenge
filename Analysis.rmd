@@ -1,0 +1,32 @@
+---
+title: "Analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+options(knitr.kable.NA = '')
+library(here)
+library(magrittr)
+library(scoringutils)
+library(knitr)
+library(kableExtra)
+library(data.table)
+library(ggplot2)
+library(ggridges)
+library(RColorBrewer)
+library(patchwork)
+library(stringr)
+library(covid.german.forecasts)
+library(grates)
+library(ggdist)
+library(ggthemes)
+library(scales)
+library(dplyr)
+library(tidyr)
+library(forcats)
+
+```
+
+
+
