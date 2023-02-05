@@ -17,7 +17,6 @@ library(ggridges)
 library(RColorBrewer)
 library(patchwork)
 library(stringr)
-library(covid.german.forecasts)
 library(grates)
 library(ggdist)
 library(ggthemes)
@@ -28,5 +27,63 @@ library(forcats)
 
 ```
 
+
+```{r}
+forecasts <- fread("data/forecast-data.csv")
+scores <- fread("data/all-scores-crowd-forecasts.csv")
+weekly_truth <- fread("data/weekly-truth-Europe.csv")
+daily_truth <- fread("data/daily-truth-Europe.csv")
+
+time_start <- as.Date("2021-05-24")
+time_stop <- as.Date("2021-08-16")
+
+label_fn <- function(x) {
+  x <- ifelse(x%%1 == 0, 
+              as.integer(x), x)
+  ifelse(x < 1000, 
+         paste(x), 
+         ifelse(x < 1e6, 
+                paste0(x / 1000, "k"),
+                ifelse(x < 1e9, 
+                       paste0(x / 1e6, "m"), 
+                       paste0(x / 1e9, "b"))
+         )
+  )
+}
+
+```
+
+
+```{r}
+weekly_truth |>
+  ggplot(aes(x = target_end_date, y = true_value)) +
+  annotate("rect", xmin = time_start, xmax = time_stop, ymin = 0, ymax = Inf,
+           fill = "darkolivegreen3", alpha = .1) + 
+  geom_line() + 
+  geom_point(size = 0.8, aes(color = status)) + 
+  geom_bar(data = daily_truth |>
+             mutate(true_value = true_value * 7), 
+           stat = "identity", 
+           fill = "skyblue3", alpha = 0.4) + 
+  facet_wrap(~ target_type, 
+             nrow = 2, scale = "free_y") + 
+  scale_y_continuous(labels = label_fn) +
+  theme_scoringutils() + 
+  scale_colour_manual(values = c("red", "black")) + 
+  labs(y = "Observed value", x = "Date", color = "Data status")
+```
+
+
+
+
+```{r}
+forecasts |>
+  filter(target_end_date >= "2021-04-01", 
+         target_end_date <= "2021-10-01") |>
+  filter(model == "direct crowd") |>
+  
+
+
+```
 
 
