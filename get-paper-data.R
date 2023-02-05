@@ -222,6 +222,29 @@ data <- merge_pred_and_obs(combined_forecasts,
 fwrite(data, "data/forecast-data.csv")
 
 
+# --- collect data on how many models were included in the hub-ensemble
+
+root_dirs <- c(here::here("data", "EuroCOVIDhub-ensemble", "criteria"))
+file_paths_inclusion <- c(here::here(root_dirs[1], list.files(root_dirs[1])))
+
+ensemble_inclusions <- purrr::map_dfr(file_paths_inclusion,
+                                      .f = function(x) {
+                                        data <- data.table::fread(x)
+                                        data[location == "GB" & included_in_ensemble]
+                                        
+                                        date <- substr(x,1,nchar(x)-4)
+                                        date <- substr(date, nchar(date)-9, nchar(date))
+                                        
+                                        data[, forecast_date := date]
+                                        return(data)
+                                      }) |>
+  filter(forecast_date >= time_start, 
+         forecast_date <= time_stop)
+
+fwrite(ensemble_inclusions, "data/ensemble-inclusions.csv")
+
+
+
 ## -------------------------------------------------------------------------- ##  
 ##                               Score forecasts                              ##
 ## -------------------------------------------------------------------------- ##

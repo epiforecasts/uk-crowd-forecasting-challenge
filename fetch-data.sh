@@ -12,3 +12,5 @@ svn checkout https://github.com/epiforecasts/europe-covid-forecast/trunk/crowd-r
 cd ../EuroCOVIDhub-ensemble
 svn checkout https://github.com/covid19-forecast-hub-europe/covid19-forecast-hub-europe/trunk/data-processed/EuroCOVIDhub-ensemble
 mv EuroCOVIDhub-ensemble processed-forecast-data
+
+svn checkout https://github.com/covid19-forecast-hub-europe/covid19-forecast-hub-europe/trunk/code/ensemble/EuroCOVIDhub/criteria
