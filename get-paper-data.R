@@ -11,7 +11,9 @@ library(here)
 library(stringr)
 library(tidyr)
 
-analysis_date <- "2022-12-12"
+analysis_date <- Sys.Date()
+time_start <- as.Date("2021-05-24")
+time_stop <- as.Date("2021-08-16")
 
 ## -------------------------------------------------------------------------- ##  
 ##                  Download and process Forecast Hub data                    ##
@@ -180,16 +182,20 @@ forecasts <- load_forecasts(
 # ---------------------- load individual prediction data --------------------- #
 
 root_dirs <- c(here::here("data", "crowd-direct-forecast", "processed-forecast-data"),
-               here::here("data", "crowd-rt-forecast", "processed-forecast-data"))
+               here::here("data", "crowd-rt-forecast", "processed-forecast-data"), 
+               here::here("data", "EuroCOVIDhub-ensemble", "processed-forecast-data"))
 file_paths_forecast <- c(here::here(root_dirs[1], list.files(root_dirs[1])),
-                         here::here(root_dirs[2], list.files(root_dirs[2])))
+                         here::here(root_dirs[2], list.files(root_dirs[2])), 
+                         here::here(root_dirs[3], list.files(root_dirs[3])))
 
 individual_prediction_data <- purrr::map_dfr(file_paths_forecast,
                                              .f = function(x) {
                                                data <- data.table::fread(x)
-                                               
                                                if ("board_name" %in% names(data)) {
                                                  setnames(data, old = "board_name", new = "model")
+                                               }
+                                               if (!("model" %in% names(data))) {
+                                                 data[, model := "EuroCOVIDhub-ensemble"]
                                                }
                                                data[, target_end_date := as.character(target_end_date)]
                                                data[, forecast_date := calc_submission_due_date(forecast_date)]
