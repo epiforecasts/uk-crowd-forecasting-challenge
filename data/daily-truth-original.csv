@@ -1,0 +1,729 @@
+location,target_end_date,target_type,true_value,location_name,population
+GB,2021-01-01,Cases,53285,United Kingdom,66022273
+GB,2021-01-01,Deaths,613,,
+GB,2021-01-02,Cases,57724,United Kingdom,66022273
+GB,2021-01-02,Deaths,445,,
+GB,2021-01-03,Cases,54990,United Kingdom,66022273
+GB,2021-01-03,Deaths,454,,
+GB,2021-01-04,Cases,58784,United Kingdom,66022273
+GB,2021-01-04,Deaths,407,,
+GB,2021-01-05,Cases,60916,United Kingdom,66022273
+GB,2021-01-05,Deaths,874,,
+GB,2021-01-06,Cases,62322,United Kingdom,66022273
+GB,2021-01-06,Deaths,1041,,
+GB,2021-01-07,Cases,52618,United Kingdom,66022273
+GB,2021-01-07,Deaths,1162,,
+GB,2021-01-08,Cases,68053,United Kingdom,66022273
+GB,2021-01-08,Deaths,1325,,
+GB,2021-01-09,Cases,59937,United Kingdom,66022273
+GB,2021-01-09,Deaths,1035,,
+GB,2021-01-10,Cases,54940,United Kingdom,66022273
+GB,2021-01-10,Deaths,563,,
+GB,2021-01-11,Cases,46169,United Kingdom,66022273
+GB,2021-01-11,Deaths,529,,
+GB,2021-01-12,Cases,45533,United Kingdom,66022273
+GB,2021-01-12,Deaths,1243,,
+GB,2021-01-13,Cases,47525,United Kingdom,66022273
+GB,2021-01-13,Deaths,1564,,
+GB,2021-01-14,Cases,48682,United Kingdom,66022273
+GB,2021-01-14,Deaths,1248,,
+GB,2021-01-15,Cases,55761,United Kingdom,66022273
+GB,2021-01-15,Deaths,1280,,
+GB,2021-01-16,Cases,41342,United Kingdom,66022273
+GB,2021-01-16,Deaths,1295,,
+GB,2021-01-17,Cases,38598,United Kingdom,66022273
+GB,2021-01-17,Deaths,671,,
+GB,2021-01-18,Cases,37535,United Kingdom,66022273
+GB,2021-01-18,Deaths,599,,
+GB,2021-01-19,Cases,33355,United Kingdom,66022273
+GB,2021-01-19,Deaths,1610,,
+GB,2021-01-20,Cases,38905,United Kingdom,66022273
+GB,2021-01-20,Deaths,1820,,
+GB,2021-01-21,Cases,37892,United Kingdom,66022273
+GB,2021-01-21,Deaths,1290,,
+GB,2021-01-22,Cases,40261,United Kingdom,66022273
+GB,2021-01-22,Deaths,1401,,
+GB,2021-01-23,Cases,33552,United Kingdom,66022273
+GB,2021-01-23,Deaths,1348,,
+GB,2021-01-24,Cases,30004,United Kingdom,66022273
+GB,2021-01-24,Deaths,610,,
+GB,2021-01-25,Cases,22195,United Kingdom,66022273
+GB,2021-01-25,Deaths,592,,
+GB,2021-01-26,Cases,20088,United Kingdom,66022273
+GB,2021-01-26,Deaths,1631,,
+GB,2021-01-27,Cases,25308,United Kingdom,66022273
+GB,2021-01-27,Deaths,1725,,
+GB,2021-01-28,Cases,28680,United Kingdom,66022273
+GB,2021-01-28,Deaths,1239,,
+GB,2021-01-29,Cases,29079,United Kingdom,66022273
+GB,2021-01-29,Deaths,1245,,
+GB,2021-01-30,Cases,23275,United Kingdom,66022273
+GB,2021-01-30,Deaths,1200,,
+GB,2021-01-31,Cases,21088,United Kingdom,66022273
+GB,2021-01-31,Deaths,587,,
+GB,2021-02-01,Cases,18607,United Kingdom,66022273
+GB,2021-02-01,Deaths,406,,
+GB,2021-02-02,Cases,16840,United Kingdom,66022273
+GB,2021-02-02,Deaths,1449,,
+GB,2021-02-03,Cases,19202,United Kingdom,66022273
+GB,2021-02-03,Deaths,1322,,
+GB,2021-02-04,Cases,20634,United Kingdom,66022273
+GB,2021-02-04,Deaths,915,,
+GB,2021-02-05,Cases,19114,United Kingdom,66022273
+GB,2021-02-05,Deaths,1014,,
+GB,2021-02-06,Cases,18262,United Kingdom,66022273
+GB,2021-02-06,Deaths,828,,
+GB,2021-02-07,Cases,15845,United Kingdom,66022273
+GB,2021-02-07,Deaths,373,,
+GB,2021-02-08,Cases,14104,United Kingdom,66022273
+GB,2021-02-08,Deaths,333,,
+GB,2021-02-09,Cases,12364,United Kingdom,66022273
+GB,2021-02-09,Deaths,1052,,
+GB,2021-02-10,Cases,13013,United Kingdom,66022273
+GB,2021-02-10,Deaths,1001,,
+GB,2021-02-11,Cases,13494,United Kingdom,66022273
+GB,2021-02-11,Deaths,678,,
+GB,2021-02-12,Cases,15144,United Kingdom,66022273
+GB,2021-02-12,Deaths,758,,
+GB,2021-02-13,Cases,13307,United Kingdom,66022273
+GB,2021-02-13,Deaths,621,,
+GB,2021-02-14,Cases,10972,United Kingdom,66022273
+GB,2021-02-14,Deaths,258,,
+GB,2021-02-15,Cases,9765,United Kingdom,66022273
+GB,2021-02-15,Deaths,230,,
+GB,2021-02-16,Cases,10625,United Kingdom,66022273
+GB,2021-02-16,Deaths,799,,
+GB,2021-02-17,Cases,12717,United Kingdom,66022273
+GB,2021-02-17,Deaths,738,,
+GB,2021-02-18,Cases,12057,United Kingdom,66022273
+GB,2021-02-18,Deaths,454,,
+GB,2021-02-19,Cases,12027,United Kingdom,66022273
+GB,2021-02-19,Deaths,533,,
+GB,2021-02-20,Cases,10406,United Kingdom,66022273
+GB,2021-02-20,Deaths,445,,
+GB,2021-02-21,Cases,9834,United Kingdom,66022273
+GB,2021-02-21,Deaths,215,,
+GB,2021-02-22,Cases,10641,United Kingdom,66022273
+GB,2021-02-22,Deaths,177,,
+GB,2021-02-23,Cases,8489,United Kingdom,66022273
+GB,2021-02-23,Deaths,548,,
+GB,2021-02-24,Cases,9938,United Kingdom,66022273
+GB,2021-02-24,Deaths,442,,
+GB,2021-02-25,Cases,9985,United Kingdom,66022273
+GB,2021-02-25,Deaths,323,,
+GB,2021-02-26,Cases,8523,United Kingdom,66022273
+GB,2021-02-26,Deaths,345,,
+GB,2021-02-27,Cases,7434,United Kingdom,66022273
+GB,2021-02-27,Deaths,290,,
+GB,2021-02-28,Cases,6035,United Kingdom,66022273
+GB,2021-02-28,Deaths,144,,
+GB,2021-03-01,Cases,5455,United Kingdom,66022273
+GB,2021-03-01,Deaths,104,,
+GB,2021-03-02,Cases,6391,United Kingdom,66022273
+GB,2021-03-02,Deaths,343,,
+GB,2021-03-03,Cases,6385,United Kingdom,66022273
+GB,2021-03-03,Deaths,487,,
+GB,2021-03-04,Cases,6573,United Kingdom,66022273
+GB,2021-03-04,Deaths,242,,
+GB,2021-03-05,Cases,5946,United Kingdom,66022273
+GB,2021-03-05,Deaths,236,,
+GB,2021-03-06,Cases,6039,United Kingdom,66022273
+GB,2021-03-06,Deaths,158,,
+GB,2021-03-07,Cases,5177,United Kingdom,66022273
+GB,2021-03-07,Deaths,82,,
+GB,2021-03-08,Cases,4712,United Kingdom,66022273
+GB,2021-03-08,Deaths,65,,
+GB,2021-03-09,Cases,5766,United Kingdom,66022273
+GB,2021-03-09,Deaths,231,,
+GB,2021-03-10,Cases,5926,United Kingdom,66022273
+GB,2021-03-10,Deaths,190,,
+GB,2021-03-11,Cases,6753,United Kingdom,66022273
+GB,2021-03-11,Deaths,181,,
+GB,2021-03-12,Cases,6609,United Kingdom,66022273
+GB,2021-03-12,Deaths,175,,
+GB,2021-03-13,Cases,5534,United Kingdom,66022273
+GB,2021-03-13,Deaths,121,,
+GB,2021-03-14,Cases,4618,United Kingdom,66022273
+GB,2021-03-14,Deaths,52,,
+GB,2021-03-15,Cases,5089,United Kingdom,66022273
+GB,2021-03-15,Deaths,64,,
+GB,2021-03-16,Cases,5294,United Kingdom,66022273
+GB,2021-03-16,Deaths,110,,
+GB,2021-03-17,Cases,5758,United Kingdom,66022273
+GB,2021-03-17,Deaths,141,,
+GB,2021-03-18,Cases,6303,United Kingdom,66022273
+GB,2021-03-18,Deaths,95,,
+GB,2021-03-19,Cases,4802,United Kingdom,66022273
+GB,2021-03-19,Deaths,100,,
+GB,2021-03-20,Cases,5587,United Kingdom,66022273
+GB,2021-03-20,Deaths,96,,
+GB,2021-03-21,Cases,5312,United Kingdom,66022273
+GB,2021-03-21,Deaths,33,,
+GB,2021-03-22,Cases,5342,United Kingdom,66022273
+GB,2021-03-22,Deaths,17,,
+GB,2021-03-23,Cases,5379,United Kingdom,66022273
+GB,2021-03-23,Deaths,112,,
+GB,2021-03-24,Cases,5604,United Kingdom,66022273
+GB,2021-03-24,Deaths,98,,
+GB,2021-03-25,Cases,6220,United Kingdom,66022273
+GB,2021-03-25,Deaths,63,,
+GB,2021-03-26,Cases,6187,United Kingdom,66022273
+GB,2021-03-26,Deaths,70,,
+GB,2021-03-27,Cases,3865,United Kingdom,66022273
+GB,2021-03-27,Deaths,58,,
+GB,2021-03-28,Cases,3862,United Kingdom,66022273
+GB,2021-03-28,Deaths,19,,
+GB,2021-03-29,Cases,4654,United Kingdom,66022273
+GB,2021-03-29,Deaths,23,,
+GB,2021-03-30,Cases,4040,United Kingdom,66022273
+GB,2021-03-30,Deaths,55,,
+GB,2021-03-31,Cases,4052,United Kingdom,66022273
+GB,2021-03-31,Deaths,43,,
+GB,2021-04-01,Cases,4478,United Kingdom,66022273
+GB,2021-04-01,Deaths,51,,
+GB,2021-04-02,Cases,3402,United Kingdom,66022273
+GB,2021-04-02,Deaths,52,,
+GB,2021-04-03,Cases,3423,United Kingdom,66022273
+GB,2021-04-03,Deaths,10,,
+GB,2021-04-04,Cases,2297,United Kingdom,66022273
+GB,2021-04-04,Deaths,10,,
+GB,2021-04-05,Cases,2762,United Kingdom,66022273
+GB,2021-04-05,Deaths,26,,
+GB,2021-04-06,Cases,2379,United Kingdom,66022273
+GB,2021-04-06,Deaths,20,,
+GB,2021-04-07,Cases,2762,United Kingdom,66022273
+GB,2021-04-07,Deaths,45,,
+GB,2021-04-08,Cases,3030,United Kingdom,66022273
+GB,2021-04-08,Deaths,53,,
+GB,2021-04-09,Cases,-4860,United Kingdom,66022273
+GB,2021-04-09,Deaths,60,,
+GB,2021-04-10,Cases,2584,United Kingdom,66022273
+GB,2021-04-10,Deaths,40,,
+GB,2021-04-11,Cases,1730,United Kingdom,66022273
+GB,2021-04-11,Deaths,7,,
+GB,2021-04-12,Cases,3568,United Kingdom,66022273
+GB,2021-04-12,Deaths,13,,
+GB,2021-04-13,Cases,2471,United Kingdom,66022273
+GB,2021-04-13,Deaths,23,,
+GB,2021-04-14,Cases,2491,United Kingdom,66022273
+GB,2021-04-14,Deaths,38,,
+GB,2021-04-15,Cases,2671,United Kingdom,66022273
+GB,2021-04-15,Deaths,30,,
+GB,2021-04-16,Cases,2756,United Kingdom,66022273
+GB,2021-04-16,Deaths,34,,
+GB,2021-04-17,Cases,2206,United Kingdom,66022273
+GB,2021-04-17,Deaths,35,,
+GB,2021-04-18,Cases,1882,United Kingdom,66022273
+GB,2021-04-18,Deaths,10,,
+GB,2021-04-19,Cases,2963,United Kingdom,66022273
+GB,2021-04-19,Deaths,4,,
+GB,2021-04-20,Cases,2524,United Kingdom,66022273
+GB,2021-04-20,Deaths,33,,
+GB,2021-04-21,Cases,2396,United Kingdom,66022273
+GB,2021-04-21,Deaths,20,,
+GB,2021-04-22,Cases,2728,United Kingdom,66022273
+GB,2021-04-22,Deaths,18,,
+GB,2021-04-23,Cases,2678,United Kingdom,66022273
+GB,2021-04-23,Deaths,40,,
+GB,2021-04-24,Cases,2061,United Kingdom,66022273
+GB,2021-04-24,Deaths,32,,
+GB,2021-04-25,Cases,1712,United Kingdom,66022273
+GB,2021-04-25,Deaths,11,,
+GB,2021-04-26,Cases,2064,United Kingdom,66022273
+GB,2021-04-26,Deaths,6,,
+GB,2021-04-27,Cases,2685,United Kingdom,66022273
+GB,2021-04-27,Deaths,17,,
+GB,2021-04-28,Cases,2166,United Kingdom,66022273
+GB,2021-04-28,Deaths,29,,
+GB,2021-04-29,Cases,2445,United Kingdom,66022273
+GB,2021-04-29,Deaths,22,,
+GB,2021-04-30,Cases,2381,United Kingdom,66022273
+GB,2021-04-30,Deaths,15,,
+GB,2021-05-01,Cases,1907,United Kingdom,66022273
+GB,2021-05-01,Deaths,7,,
+GB,2021-05-02,Cases,1671,United Kingdom,66022273
+GB,2021-05-02,Deaths,14,,
+GB,2021-05-03,Cases,1649,United Kingdom,66022273
+GB,2021-05-03,Deaths,1,,
+GB,2021-05-04,Cases,1946,United Kingdom,66022273
+GB,2021-05-04,Deaths,4,,
+GB,2021-05-05,Cases,2144,United Kingdom,66022273
+GB,2021-05-05,Deaths,27,,
+GB,2021-05-06,Cases,2613,United Kingdom,66022273
+GB,2021-05-06,Deaths,13,,
+GB,2021-05-07,Cases,2490,United Kingdom,66022273
+GB,2021-05-07,Deaths,15,,
+GB,2021-05-08,Cases,2047,United Kingdom,66022273
+GB,2021-05-08,Deaths,5,,
+GB,2021-05-09,Cases,1770,United Kingdom,66022273
+GB,2021-05-09,Deaths,2,,
+GB,2021-05-10,Cases,2357,United Kingdom,66022273
+GB,2021-05-10,Deaths,4,,
+GB,2021-05-11,Cases,2474,United Kingdom,66022273
+GB,2021-05-11,Deaths,20,,
+GB,2021-05-12,Cases,2284,United Kingdom,66022273
+GB,2021-05-12,Deaths,11,,
+GB,2021-05-13,Cases,2656,United Kingdom,66022273
+GB,2021-05-13,Deaths,11,,
+GB,2021-05-14,Cases,2193,United Kingdom,66022273
+GB,2021-05-14,Deaths,17,,
+GB,2021-05-15,Cases,2027,United Kingdom,66022273
+GB,2021-05-15,Deaths,7,,
+GB,2021-05-16,Cases,1926,United Kingdom,66022273
+GB,2021-05-16,Deaths,4,,
+GB,2021-05-17,Cases,1979,United Kingdom,66022273
+GB,2021-05-17,Deaths,5,,
+GB,2021-05-18,Cases,-2364,United Kingdom,66022273
+GB,2021-05-18,Deaths,7,,
+GB,2021-05-19,Cases,2135,United Kingdom,66022273
+GB,2021-05-19,Deaths,3,,
+GB,2021-05-20,Cases,2694,United Kingdom,66022273
+GB,2021-05-20,Deaths,7,,
+GB,2021-05-21,Cases,2702,United Kingdom,66022273
+GB,2021-05-21,Deaths,9,,
+GB,2021-05-22,Cases,2523,United Kingdom,66022273
+GB,2021-05-22,Deaths,6,,
+GB,2021-05-23,Cases,2092,United Kingdom,66022273
+GB,2021-05-23,Deaths,5,,
+GB,2021-05-24,Cases,2362,United Kingdom,66022273
+GB,2021-05-24,Deaths,3,,
+GB,2021-05-25,Cases,2410,United Kingdom,66022273
+GB,2021-05-25,Deaths,15,,
+GB,2021-05-26,Cases,2987,United Kingdom,66022273
+GB,2021-05-26,Deaths,9,,
+GB,2021-05-27,Cases,3380,United Kingdom,66022273
+GB,2021-05-27,Deaths,10,,
+GB,2021-05-28,Cases,4028,United Kingdom,66022273
+GB,2021-05-28,Deaths,10,,
+GB,2021-05-29,Cases,3240,United Kingdom,66022273
+GB,2021-05-29,Deaths,7,,
+GB,2021-05-30,Cases,3111,United Kingdom,66022273
+GB,2021-05-30,Deaths,6,,
+GB,2021-05-31,Cases,3283,United Kingdom,66022273
+GB,2021-05-31,Deaths,1,,
+GB,2021-06-01,Cases,3099,United Kingdom,66022273
+GB,2021-06-01,Deaths,0,,
+GB,2021-06-02,Cases,4261,United Kingdom,66022273
+GB,2021-06-02,Deaths,12,,
+GB,2021-06-03,Cases,5179,United Kingdom,66022273
+GB,2021-06-03,Deaths,18,,
+GB,2021-06-04,Cases,6140,United Kingdom,66022273
+GB,2021-06-04,Deaths,11,,
+GB,2021-06-05,Cases,5651,United Kingdom,66022273
+GB,2021-06-05,Deaths,13,,
+GB,2021-06-06,Cases,5223,United Kingdom,66022273
+GB,2021-06-06,Deaths,4,,
+GB,2021-06-07,Cases,5584,United Kingdom,66022273
+GB,2021-06-07,Deaths,1,,
+GB,2021-06-08,Cases,5966,United Kingdom,66022273
+GB,2021-06-08,Deaths,13,,
+GB,2021-06-09,Cases,7312,United Kingdom,66022273
+GB,2021-06-09,Deaths,6,,
+GB,2021-06-10,Cases,7232,United Kingdom,66022273
+GB,2021-06-10,Deaths,7,,
+GB,2021-06-11,Cases,7958,United Kingdom,66022273
+GB,2021-06-11,Deaths,17,,
+GB,2021-06-12,Cases,7550,United Kingdom,66022273
+GB,2021-06-12,Deaths,12,,
+GB,2021-06-13,Cases,7319,United Kingdom,66022273
+GB,2021-06-13,Deaths,8,,
+GB,2021-06-14,Cases,7606,United Kingdom,66022273
+GB,2021-06-14,Deaths,3,,
+GB,2021-06-15,Cases,7587,United Kingdom,66022273
+GB,2021-06-15,Deaths,10,,
+GB,2021-06-16,Cases,8808,United Kingdom,66022273
+GB,2021-06-16,Deaths,9,,
+GB,2021-06-17,Cases,10809,United Kingdom,66022273
+GB,2021-06-17,Deaths,19,,
+GB,2021-06-18,Cases,10270,United Kingdom,66022273
+GB,2021-06-18,Deaths,11,,
+GB,2021-06-19,Cases,10075,United Kingdom,66022273
+GB,2021-06-19,Deaths,14,,
+GB,2021-06-20,Cases,9072,United Kingdom,66022273
+GB,2021-06-20,Deaths,6,,
+GB,2021-06-21,Cases,10467,United Kingdom,66022273
+GB,2021-06-21,Deaths,5,,
+GB,2021-06-22,Cases,11481,United Kingdom,66022273
+GB,2021-06-22,Deaths,27,,
+GB,2021-06-23,Cases,15882,United Kingdom,66022273
+GB,2021-06-23,Deaths,19,,
+GB,2021-06-24,Cases,16702,United Kingdom,66022273
+GB,2021-06-24,Deaths,21,,
+GB,2021-06-25,Cases,15296,United Kingdom,66022273
+GB,2021-06-25,Deaths,18,,
+GB,2021-06-26,Cases,17943,United Kingdom,66022273
+GB,2021-06-26,Deaths,23,,
+GB,2021-06-27,Cases,14623,United Kingdom,66022273
+GB,2021-06-27,Deaths,11,,
+GB,2021-06-28,Cases,22644,United Kingdom,66022273
+GB,2021-06-28,Deaths,3,,
+GB,2021-06-29,Cases,20223,United Kingdom,66022273
+GB,2021-06-29,Deaths,23,,
+GB,2021-06-30,Cases,25606,United Kingdom,66022273
+GB,2021-06-30,Deaths,14,,
+GB,2021-07-01,Cases,27556,United Kingdom,66022273
+GB,2021-07-01,Deaths,22,,
+GB,2021-07-02,Cases,26706,United Kingdom,66022273
+GB,2021-07-02,Deaths,27,,
+GB,2021-07-03,Cases,24447,United Kingdom,66022273
+GB,2021-07-03,Deaths,18,,
+GB,2021-07-04,Cases,23818,United Kingdom,66022273
+GB,2021-07-04,Deaths,15,,
+GB,2021-07-05,Cases,27100,United Kingdom,66022273
+GB,2021-07-05,Deaths,9,,
+GB,2021-07-06,Cases,28334,United Kingdom,66022273
+GB,2021-07-06,Deaths,37,,
+GB,2021-07-07,Cases,32048,United Kingdom,66022273
+GB,2021-07-07,Deaths,33,,
+GB,2021-07-08,Cases,31977,United Kingdom,66022273
+GB,2021-07-08,Deaths,35,,
+GB,2021-07-09,Cases,35200,United Kingdom,66022273
+GB,2021-07-09,Deaths,29,,
+GB,2021-07-10,Cases,31800,United Kingdom,66022273
+GB,2021-07-10,Deaths,34,,
+GB,2021-07-11,Cases,31352,United Kingdom,66022273
+GB,2021-07-11,Deaths,26,,
+GB,2021-07-12,Cases,33998,United Kingdom,66022273
+GB,2021-07-12,Deaths,6,,
+GB,2021-07-13,Cases,36216,United Kingdom,66022273
+GB,2021-07-13,Deaths,50,,
+GB,2021-07-14,Cases,41748,United Kingdom,66022273
+GB,2021-07-14,Deaths,49,,
+GB,2021-07-15,Cases,47891,United Kingdom,66022273
+GB,2021-07-15,Deaths,63,,
+GB,2021-07-16,Cases,51273,United Kingdom,66022273
+GB,2021-07-16,Deaths,49,,
+GB,2021-07-17,Cases,53969,United Kingdom,66022273
+GB,2021-07-17,Deaths,41,,
+GB,2021-07-18,Cases,47599,United Kingdom,66022273
+GB,2021-07-18,Deaths,25,,
+GB,2021-07-19,Cases,39538,United Kingdom,66022273
+GB,2021-07-19,Deaths,19,,
+GB,2021-07-20,Cases,46125,United Kingdom,66022273
+GB,2021-07-20,Deaths,96,,
+GB,2021-07-21,Cases,43404,United Kingdom,66022273
+GB,2021-07-21,Deaths,73,,
+GB,2021-07-22,Cases,39315,United Kingdom,66022273
+GB,2021-07-22,Deaths,84,,
+GB,2021-07-23,Cases,35654,United Kingdom,66022273
+GB,2021-07-23,Deaths,64,,
+GB,2021-07-24,Cases,31285,United Kingdom,66022273
+GB,2021-07-24,Deaths,86,,
+GB,2021-07-25,Cases,28652,United Kingdom,66022273
+GB,2021-07-25,Deaths,28,,
+GB,2021-07-26,Cases,24386,United Kingdom,66022273
+GB,2021-07-26,Deaths,14,,
+GB,2021-07-27,Cases,23228,United Kingdom,66022273
+GB,2021-07-27,Deaths,131,,
+GB,2021-07-28,Cases,25402,United Kingdom,66022273
+GB,2021-07-28,Deaths,127,,
+GB,2021-07-29,Cases,30633,United Kingdom,66022273
+GB,2021-07-29,Deaths,85,,
+GB,2021-07-30,Cases,29213,United Kingdom,66022273
+GB,2021-07-30,Deaths,68,,
+GB,2021-07-31,Cases,25754,United Kingdom,66022273
+GB,2021-07-31,Deaths,71,,
+GB,2021-08-01,Cases,24139,United Kingdom,66022273
+GB,2021-08-01,Deaths,65,,
+GB,2021-08-02,Cases,21687,United Kingdom,66022273
+GB,2021-08-02,Deaths,24,,
+GB,2021-08-03,Cases,21466,United Kingdom,66022273
+GB,2021-08-03,Deaths,138,,
+GB,2021-08-04,Cases,28936,United Kingdom,66022273
+GB,2021-08-04,Deaths,119,,
+GB,2021-08-05,Cases,29825,United Kingdom,66022273
+GB,2021-08-05,Deaths,86,,
+GB,2021-08-06,Cases,31442,United Kingdom,66022273
+GB,2021-08-06,Deaths,92,,
+GB,2021-08-07,Cases,28229,United Kingdom,66022273
+GB,2021-08-07,Deaths,103,,
+GB,2021-08-08,Cases,27110,United Kingdom,66022273
+GB,2021-08-08,Deaths,39,,
+GB,2021-08-09,Cases,24881,United Kingdom,66022273
+GB,2021-08-09,Deaths,37,,
+GB,2021-08-10,Cases,23297,United Kingdom,66022273
+GB,2021-08-10,Deaths,146,,
+GB,2021-08-11,Cases,29260,United Kingdom,66022273
+GB,2021-08-11,Deaths,104,,
+GB,2021-08-12,Cases,32706,United Kingdom,66022273
+GB,2021-08-12,Deaths,94,,
+GB,2021-08-13,Cases,32362,United Kingdom,66022273
+GB,2021-08-13,Deaths,100,,
+GB,2021-08-14,Cases,29143,United Kingdom,66022273
+GB,2021-08-14,Deaths,93,,
+GB,2021-08-15,Cases,26426,United Kingdom,66022273
+GB,2021-08-15,Deaths,59,,
+GB,2021-08-16,Cases,28176,United Kingdom,66022273
+GB,2021-08-16,Deaths,26,,
+GB,2021-08-17,Cases,26628,United Kingdom,66022273
+GB,2021-08-17,Deaths,170,,
+GB,2021-08-18,Cases,33646,United Kingdom,66022273
+GB,2021-08-18,Deaths,111,,
+GB,2021-08-19,Cases,36273,United Kingdom,66022273
+GB,2021-08-19,Deaths,113,,
+GB,2021-08-20,Cases,36987,United Kingdom,66022273
+GB,2021-08-20,Deaths,114,,
+GB,2021-08-21,Cases,31783,United Kingdom,66022273
+GB,2021-08-21,Deaths,104,,
+GB,2021-08-22,Cases,31976,United Kingdom,66022273
+GB,2021-08-22,Deaths,49,,
+GB,2021-08-23,Cases,31675,United Kingdom,66022273
+GB,2021-08-23,Deaths,40,,
+GB,2021-08-24,Cases,30619,United Kingdom,66022273
+GB,2021-08-24,Deaths,174,,
+GB,2021-08-25,Cases,35547,United Kingdom,66022273
+GB,2021-08-25,Deaths,149,,
+GB,2021-08-26,Cases,37962,United Kingdom,66022273
+GB,2021-08-26,Deaths,140,,
+GB,2021-08-27,Cases,37690,United Kingdom,66022273
+GB,2021-08-27,Deaths,100,,
+GB,2021-08-28,Cases,32087,United Kingdom,66022273
+GB,2021-08-28,Deaths,133,,
+GB,2021-08-29,Cases,32937,United Kingdom,66022273
+GB,2021-08-29,Deaths,61,,
+GB,2021-08-30,Cases,26227,United Kingdom,66022273
+GB,2021-08-30,Deaths,48,,
+GB,2021-08-31,Cases,31931,United Kingdom,66022273
+GB,2021-08-31,Deaths,50,,
+GB,2021-09-01,Cases,35493,United Kingdom,66022273
+GB,2021-09-01,Deaths,207,,
+GB,2021-09-02,Cases,37830,United Kingdom,66022273
+GB,2021-09-02,Deaths,178,,
+GB,2021-09-03,Cases,42065,United Kingdom,66022273
+GB,2021-09-03,Deaths,121,,
+GB,2021-09-04,Cases,36642,United Kingdom,66022273
+GB,2021-09-04,Deaths,120,,
+GB,2021-09-05,Cases,36515,United Kingdom,66022273
+GB,2021-09-05,Deaths,68,,
+GB,2021-09-06,Cases,40801,United Kingdom,66022273
+GB,2021-09-06,Deaths,45,,
+GB,2021-09-07,Cases,37179,United Kingdom,66022273
+GB,2021-09-07,Deaths,209,,
+GB,2021-09-08,Cases,38486,United Kingdom,66022273
+GB,2021-09-08,Deaths,191,,
+GB,2021-09-09,Cases,37480,United Kingdom,66022273
+GB,2021-09-09,Deaths,167,,
+GB,2021-09-10,Cases,36734,United Kingdom,66022273
+GB,2021-09-10,Deaths,147,,
+GB,2021-09-11,Cases,28856,United Kingdom,66022273
+GB,2021-09-11,Deaths,156,,
+GB,2021-09-12,Cases,28614,United Kingdom,66022273
+GB,2021-09-12,Deaths,56,,
+GB,2021-09-13,Cases,30283,United Kingdom,66022273
+GB,2021-09-13,Deaths,61,,
+GB,2021-09-14,Cases,26251,United Kingdom,66022273
+GB,2021-09-14,Deaths,185,,
+GB,2021-09-15,Cases,29873,United Kingdom,66022273
+GB,2021-09-15,Deaths,201,,
+GB,2021-09-16,Cases,26326,United Kingdom,66022273
+GB,2021-09-16,Deaths,158,,
+GB,2021-09-17,Cases,32292,United Kingdom,66022273
+GB,2021-09-17,Deaths,178,,
+GB,2021-09-18,Cases,29438,United Kingdom,66022273
+GB,2021-09-18,Deaths,164,,
+GB,2021-09-19,Cases,29007,United Kingdom,66022273
+GB,2021-09-19,Deaths,56,,
+GB,2021-09-20,Cases,35702,United Kingdom,66022273
+GB,2021-09-20,Deaths,49,,
+GB,2021-09-21,Cases,31095,United Kingdom,66022273
+GB,2021-09-21,Deaths,203,,
+GB,2021-09-22,Cases,33560,United Kingdom,66022273
+GB,2021-09-22,Deaths,166,,
+GB,2021-09-23,Cases,35764,United Kingdom,66022273
+GB,2021-09-23,Deaths,182,,
+GB,2021-09-24,Cases,35620,United Kingdom,66022273
+GB,2021-09-24,Deaths,180,,
+GB,2021-09-25,Cases,29746,United Kingdom,66022273
+GB,2021-09-25,Deaths,122,,
+GB,2021-09-26,Cases,32997,United Kingdom,66022273
+GB,2021-09-26,Deaths,63,,
+GB,2021-09-27,Cases,37485,United Kingdom,66022273
+GB,2021-09-27,Deaths,40,,
+GB,2021-09-28,Cases,34520,United Kingdom,66022273
+GB,2021-09-28,Deaths,167,,
+GB,2021-09-29,Cases,35059,United Kingdom,66022273
+GB,2021-09-29,Deaths,150,,
+GB,2021-09-30,Cases,35742,United Kingdom,66022273
+GB,2021-09-30,Deaths,137,,
+GB,2021-10-01,Cases,34589,United Kingdom,66022273
+GB,2021-10-01,Deaths,127,,
+GB,2021-10-02,Cases,29389,United Kingdom,66022273
+GB,2021-10-02,Deaths,121,,
+GB,2021-10-03,Cases,29666,United Kingdom,66022273
+GB,2021-10-03,Deaths,43,,
+GB,2021-10-04,Cases,34256,United Kingdom,66022273
+GB,2021-10-04,Deaths,33,,
+GB,2021-10-05,Cases,33049,United Kingdom,66022273
+GB,2021-10-05,Deaths,166,,
+GB,2021-10-06,Cases,38675,United Kingdom,66022273
+GB,2021-10-06,Deaths,143,,
+GB,2021-10-07,Cases,39730,United Kingdom,66022273
+GB,2021-10-07,Deaths,122,,
+GB,2021-10-08,Cases,34910,United Kingdom,66022273
+GB,2021-10-08,Deaths,124,,
+GB,2021-10-09,Cases,39413,United Kingdom,66022273
+GB,2021-10-09,Deaths,156,,
+GB,2021-10-10,Cases,33593,United Kingdom,66022273
+GB,2021-10-10,Deaths,38,,
+GB,2021-10-11,Cases,39463,United Kingdom,66022273
+GB,2021-10-11,Deaths,28,,
+GB,2021-10-12,Cases,37668,United Kingdom,66022273
+GB,2021-10-12,Deaths,181,,
+GB,2021-10-13,Cases,41446,United Kingdom,66022273
+GB,2021-10-13,Deaths,136,,
+GB,2021-10-14,Cases,44556,United Kingdom,66022273
+GB,2021-10-14,Deaths,157,,
+GB,2021-10-15,Cases,44212,United Kingdom,66022273
+GB,2021-10-15,Deaths,142,,
+GB,2021-10-16,Cases,42818,United Kingdom,66022273
+GB,2021-10-16,Deaths,148,,
+GB,2021-10-17,Cases,44696,United Kingdom,66022273
+GB,2021-10-17,Deaths,57,,
+GB,2021-10-18,Cases,48703,United Kingdom,66022273
+GB,2021-10-18,Deaths,45,,
+GB,2021-10-19,Cases,43324,United Kingdom,66022273
+GB,2021-10-19,Deaths,223,,
+GB,2021-10-20,Cases,48545,United Kingdom,66022273
+GB,2021-10-20,Deaths,179,,
+GB,2021-10-21,Cases,51484,United Kingdom,66022273
+GB,2021-10-21,Deaths,115,,
+GB,2021-10-22,Cases,48728,United Kingdom,66022273
+GB,2021-10-22,Deaths,180,,
+GB,2021-10-23,Cases,44985,United Kingdom,66022273
+GB,2021-10-23,Deaths,135,,
+GB,2021-10-24,Cases,38740,United Kingdom,66022273
+GB,2021-10-24,Deaths,72,,
+GB,2021-10-25,Cases,36100,United Kingdom,66022273
+GB,2021-10-25,Deaths,38,,
+GB,2021-10-26,Cases,43453,United Kingdom,66022273
+GB,2021-10-26,Deaths,263,,
+GB,2021-10-27,Cases,43922,United Kingdom,66022273
+GB,2021-10-27,Deaths,207,,
+GB,2021-10-28,Cases,39006,United Kingdom,66022273
+GB,2021-10-28,Deaths,165,,
+GB,2021-10-29,Cases,43081,United Kingdom,66022273
+GB,2021-10-29,Deaths,186,,
+GB,2021-10-30,Cases,40726,United Kingdom,66022273
+GB,2021-10-30,Deaths,166,,
+GB,2021-10-31,Cases,37667,United Kingdom,66022273
+GB,2021-10-31,Deaths,74,,
+GB,2021-11-01,Cases,39682,United Kingdom,66022273
+GB,2021-11-01,Deaths,40,,
+GB,2021-11-02,Cases,33546,United Kingdom,66022273
+GB,2021-11-02,Deaths,292,,
+GB,2021-11-03,Cases,40803,United Kingdom,66022273
+GB,2021-11-03,Deaths,217,,
+GB,2021-11-04,Cases,36559,United Kingdom,66022273
+GB,2021-11-04,Deaths,214,,
+GB,2021-11-05,Cases,33697,United Kingdom,66022273
+GB,2021-11-05,Deaths,193,,
+GB,2021-11-06,Cases,30150,United Kingdom,66022273
+GB,2021-11-06,Deaths,155,,
+GB,2021-11-07,Cases,29843,United Kingdom,66022273
+GB,2021-11-07,Deaths,62,,
+GB,2021-11-08,Cases,31982,United Kingdom,66022273
+GB,2021-11-08,Deaths,57,,
+GB,2021-11-09,Cases,32785,United Kingdom,66022273
+GB,2021-11-09,Deaths,262,,
+GB,2021-11-10,Cases,39325,United Kingdom,66022273
+GB,2021-11-10,Deaths,214,,
+GB,2021-11-11,Cases,42401,United Kingdom,66022273
+GB,2021-11-11,Deaths,195,,
+GB,2021-11-12,Cases,38900,United Kingdom,66022273
+GB,2021-11-12,Deaths,145,,
+GB,2021-11-13,Cases,37669,United Kingdom,66022273
+GB,2021-11-13,Deaths,157,,
+GB,2021-11-14,Cases,36128,United Kingdom,66022273
+GB,2021-11-14,Deaths,63,,
+GB,2021-11-15,Cases,39270,United Kingdom,66022273
+GB,2021-11-15,Deaths,47,,
+GB,2021-11-16,Cases,36821,United Kingdom,66022273
+GB,2021-11-16,Deaths,214,,
+GB,2021-11-17,Cases,37868,United Kingdom,66022273
+GB,2021-11-17,Deaths,201,,
+GB,2021-11-18,Cases,46858,United Kingdom,66022273
+GB,2021-11-18,Deaths,199,,
+GB,2021-11-19,Cases,44237,United Kingdom,66022273
+GB,2021-11-19,Deaths,157,,
+GB,2021-11-20,Cases,39881,United Kingdom,66022273
+GB,2021-11-20,Deaths,150,,
+GB,2021-11-21,Cases,39458,United Kingdom,66022273
+GB,2021-11-21,Deaths,61,,
+GB,2021-11-22,Cases,44434,United Kingdom,66022273
+GB,2021-11-22,Deaths,45,,
+GB,2021-11-23,Cases,42482,United Kingdom,66022273
+GB,2021-11-23,Deaths,165,,
+GB,2021-11-24,Cases,42435,United Kingdom,66022273
+GB,2021-11-24,Deaths,149,,
+GB,2021-11-25,Cases,46654,United Kingdom,66022273
+GB,2021-11-25,Deaths,147,,
+GB,2021-11-26,Cases,49344,United Kingdom,66022273
+GB,2021-11-26,Deaths,160,,
+GB,2021-11-27,Cases,39567,United Kingdom,66022273
+GB,2021-11-27,Deaths,131,,
+GB,2021-11-28,Cases,36507,United Kingdom,66022273
+GB,2021-11-28,Deaths,51,,
+GB,2021-11-29,Cases,42144,United Kingdom,66022273
+GB,2021-11-29,Deaths,35,,
+GB,2021-11-30,Cases,39713,United Kingdom,66022273
+GB,2021-11-30,Deaths,159,,
+GB,2021-12-01,Cases,47235,United Kingdom,66022273
+GB,2021-12-01,Deaths,171,,
+GB,2021-12-02,Cases,53067,United Kingdom,66022273
+GB,2021-12-02,Deaths,141,,
+GB,2021-12-03,Cases,50573,United Kingdom,66022273
+GB,2021-12-03,Deaths,143,,
+GB,2021-12-04,Cases,41457,United Kingdom,66022273
+GB,2021-12-04,Deaths,127,,
+GB,2021-12-05,Cases,43285,United Kingdom,66022273
+GB,2021-12-05,Deaths,54,,
+GB,2021-12-06,Cases,50850,United Kingdom,66022273
+GB,2021-12-06,Deaths,41,,
+GB,2021-12-07,Cases,45102,United Kingdom,66022273
+GB,2021-12-07,Deaths,180,,
+GB,2021-12-08,Cases,50617,United Kingdom,66022273
+GB,2021-12-08,Deaths,161,,
+GB,2021-12-09,Cases,50023,United Kingdom,66022273
+GB,2021-12-09,Deaths,148,,
+GB,2021-12-10,Cases,58184,United Kingdom,66022273
+GB,2021-12-10,Deaths,120,,
+GB,2021-12-11,Cases,52279,United Kingdom,66022273
+GB,2021-12-11,Deaths,132,,
+GB,2021-12-12,Cases,48071,United Kingdom,66022273
+GB,2021-12-12,Deaths,52,,
+GB,2021-12-13,Cases,53953,United Kingdom,66022273
+GB,2021-12-13,Deaths,38,,
+GB,2021-12-14,Cases,59077,United Kingdom,66022273
+GB,2021-12-14,Deaths,150,,
+GB,2021-12-15,Cases,77741,United Kingdom,66022273
+GB,2021-12-15,Deaths,164,,
+GB,2021-12-16,Cases,87565,United Kingdom,66022273
+GB,2021-12-16,Deaths,146,,
+GB,2021-12-17,Cases,92503,United Kingdom,66022273
+GB,2021-12-17,Deaths,111,,
+GB,2021-12-18,Cases,89074,United Kingdom,66022273
+GB,2021-12-18,Deaths,125,,
+GB,2021-12-19,Cases,81959,United Kingdom,66022273
+GB,2021-12-19,Deaths,45,,
+GB,2021-12-20,Cases,91734,United Kingdom,66022273
+GB,2021-12-20,Deaths,43,,
+GB,2021-12-21,Cases,89022,United Kingdom,66022273
+GB,2021-12-21,Deaths,172,,
+GB,2021-12-22,Cases,105330,United Kingdom,66022273
+GB,2021-12-22,Deaths,140,,
+GB,2021-12-23,Cases,122448,United Kingdom,66022273
+GB,2021-12-23,Deaths,147,,
+GB,2021-12-24,Cases,121371,United Kingdom,66022273
+GB,2021-12-24,Deaths,137,,
+GB,2021-12-25,Cases,121861,United Kingdom,66022273
+GB,2021-12-25,Deaths,0,,
+GB,2021-12-26,Cases,118945,United Kingdom,66022273
+GB,2021-12-26,Deaths,0,,
+GB,2021-12-27,Cases,107699,United Kingdom,66022273
+GB,2021-12-27,Deaths,146,,
+GB,2021-12-28,Cases,138025,United Kingdom,66022273
+GB,2021-12-28,Deaths,18,,
+GB,2021-12-29,Cases,182104,United Kingdom,66022273
+GB,2021-12-30,Cases,188124,United Kingdom,66022273
+GB,2021-12-31,Cases,189836,United Kingdom,66022273
+GB,2022-01-01,Cases,162572,United Kingdom,66022273

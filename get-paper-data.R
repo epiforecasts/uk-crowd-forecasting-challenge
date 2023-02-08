@@ -10,18 +10,98 @@ library(scoringutils)
 library(here)
 library(stringr)
 library(tidyr)
+library("gh")
+library("lubridate")
+library("readr")
+
 
 analysis_date <- Sys.Date()
 time_start <- as.Date("2021-05-24")
 time_stop <- as.Date("2021-08-16")
 
 ## -------------------------------------------------------------------------- ##  
-##                  Download and process Forecast Hub data                    ##
+##                                Download Hub data                           ##
 ## -------------------------------------------------------------------------- ##
 
 # ----------------------------- Renew Forecast Hub data ---------------------- #
 # bash fetch-data.sh
 
+
+# ------------------------------ Obtain data revisions ----------------------- #
+earliest_date <- NULL
+min_data <- as.Date("2021-03-08") ## earliest date to pot in data
+
+sources <-
+  c(Deaths = "JHU")
+
+target_variables <-
+  c(Deaths = "inc death")
+
+owner <- "epiforecasts"
+repo <- "covid19-forecast-hub-europe"
+path <- vapply(names(sources), function(x) {
+  paste("data-truth", sources[[x]],
+        paste0("truth_", sources[[x]], "-Incident ", x, ".csv"),
+        sep = "/")
+}, "")
+names(path) <- names(sources)
+
+data <- list()
+for (source in names(sources)) {
+  query <- "/repos/{owner}/{repo}/commits?path={path}"
+  if (!is.null(earliest_date)) {
+    query <- paste0(query, "&since={date}")
+  }
+  
+  commits <-
+    gh::gh(query,
+           owner = owner,
+           repo = repo,
+           path = path[source],
+           date = earliest_date,
+           .limit = Inf
+    )
+  
+  shas <- vapply(commits, "[[", "", "sha")
+  dates <- vapply(commits, function(x) x[["commit"]][["author"]][["date"]], "")
+  dates <- as_date(ymd_hms(dates))
+  
+  ## keep multiples of 7 since today
+  select_commits <- which(as.integer(max(dates) - dates) %% 7 == 0)
+  
+  data[[source]] <-
+    lapply(
+      select_commits,
+      function(id)
+        readr::read_csv(
+          URLencode(
+            paste("https://raw.githubusercontent.com", owner, repo,
+                  shas[id], path[source], sep = "/")),
+          show_col_types = FALSE) %>%
+        mutate(commit_date = dates[id])
+    )
+  # remove empty dataframes
+  if (class(data[[source]]) == "list") {
+    data[[source]] <- data[[source]][sapply(data[[source]], function(x) nrow(x)>0)]
+  }
+  
+  data[[source]] <- data[[source]] %>%
+    bind_rows() %>%
+    mutate(type = {{ source }})
+}
+
+data_revisions <- data |>
+  bind_rows() |>
+  filter(location == "GB") |>
+  filter(date >= "2021-01-01", 
+         date <= "2022-01-01") |>
+  mutate(target_end_date = ceiling_date(date, "week", week_start = 6)) |>
+  group_by(location, location_name, target_end_date, commit_date, type) %>%
+  mutate(weekly_value = sum(value), 
+         n = n()) |>
+  ungroup() 
+
+fwrite(data_revisions, file = "data/data-revisions-deaths.csv")
 
 # -------------------- Helper function to flag anomalies --------------------- #
 # function to filter out forecast anomalies based on the Forecast Hub anomalies file
@@ -86,6 +166,7 @@ clean_forecasts <- function(forecasts) {
 
 
 
+
 # ---------------load truth data using the covidHubutils package ------------- #
 if (file.exists("data/weekly-truth.csv")) {
   truth <- fread("data/weekly-truth.csv")
@@ -115,6 +196,39 @@ if (file.exists("data/weekly-truth.csv")) {
   fwrite(truth, "data/weekly-truth.csv")
   fwrite(daily_truth, "data/daily-truth.csv")
 }
+
+
+# --------- create version of the truth data without revisions --------------- #
+daily_truth_original <- data_revisions |>
+  filter(commit_date <= "2022-01-01") |>
+  select(location, target_end_date = date, 
+         target_type = type, true_value = value) |>
+  unique() |>
+  rbind(daily_truth |>
+          filter(target_type == "Cases"), fill = TRUE) |>
+  arrange(target_end_date, target_type)
+
+fwrite(daily_truth_original, "data/daily-truth-original.csv")
+
+weekly_truth_original <- data_revisions |>
+  filter(commit_date <= "2022-01-01") |>
+  filter(n == 7) |>
+  select(location, target_end_date, target_type = type, 
+         true_value = weekly_value) |>
+  unique() |>
+  arrange(target_end_date) |>
+  rbind(weekly_truth |>
+          filter(target_type == "Cases"), 
+        fill = TRUE) |>
+  arrange(target_end_date, target_type) |>
+  mutate(target_end_date = as.character(target_end_date)) |>
+  select(-status) |>
+  flag_anomalies() |>
+  mutate(target_end_date = as.Date(target_end_date)) 
+
+fwrite(weekly_truth_original, "data/weekly-truth-original.csv")
+
+
 
 
 

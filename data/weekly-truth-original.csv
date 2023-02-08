@@ -1,0 +1,105 @@
+location,target_end_date,target_type,true_value,location_name,population,status
+GB,2021-01-02,Cases,343784,United Kingdom,66022273,ok
+GB,2021-01-09,Cases,417620,United Kingdom,66022273,ok
+GB,2021-01-09,Deaths,5708,,,ok
+GB,2021-01-16,Cases,339952,United Kingdom,66022273,ok
+GB,2021-01-16,Deaths,7462,,,ok
+GB,2021-01-23,Cases,260098,United Kingdom,66022273,ok
+GB,2021-01-23,Deaths,8686,,,ok
+GB,2021-01-30,Cases,178629,United Kingdom,66022273,ok
+GB,2021-01-30,Deaths,8390,,,ok
+GB,2021-02-06,Cases,133747,United Kingdom,66022273,ok
+GB,2021-02-06,Deaths,6893,,,ok
+GB,2021-02-13,Cases,97271,United Kingdom,66022273,ok
+GB,2021-02-13,Deaths,5023,,,ok
+GB,2021-02-20,Cases,78569,United Kingdom,66022273,ok
+GB,2021-02-20,Deaths,3633,,,ok
+GB,2021-02-27,Cases,64844,United Kingdom,66022273,ok
+GB,2021-02-27,Deaths,2495,,,ok
+GB,2021-03-06,Cases,42824,United Kingdom,66022273,ok
+GB,2021-03-06,Deaths,1846,,,ok
+GB,2021-03-13,Cases,40477,United Kingdom,66022273,ok
+GB,2021-03-13,Deaths,1082,,,ok
+GB,2021-03-20,Cases,37451,United Kingdom,66022273,ok
+GB,2021-03-20,Deaths,683,,,anomaly
+GB,2021-03-27,Cases,37909,United Kingdom,66022273,ok
+GB,2021-03-27,Deaths,489,,,anomaly
+GB,2021-04-03,Cases,27911,United Kingdom,66022273,ok
+GB,2021-04-03,Deaths,301,,,anomaly
+GB,2021-04-10,Cases,10954,United Kingdom,66022273,ok
+GB,2021-04-10,Deaths,224,,,anomaly
+GB,2021-04-17,Cases,17893,United Kingdom,66022273,ok
+GB,2021-04-17,Deaths,185,,,anomaly
+GB,2021-04-24,Cases,17232,United Kingdom,66022273,ok
+GB,2021-04-24,Deaths,160,,,anomaly
+GB,2021-05-01,Cases,15360,United Kingdom,66022273,ok
+GB,2021-05-01,Deaths,132,,,anomaly
+GB,2021-05-08,Cases,14560,United Kingdom,66022273,ok
+GB,2021-05-08,Deaths,81,,,anomaly
+GB,2021-05-15,Cases,15761,United Kingdom,66022273,ok
+GB,2021-05-15,Deaths,70,,,anomaly
+GB,2021-05-22,Cases,11595,United Kingdom,66022273,ok
+GB,2021-05-22,Deaths,42,,,anomaly
+GB,2021-05-29,Cases,20499,United Kingdom,66022273,ok
+GB,2021-05-29,Deaths,58,,,anomaly
+GB,2021-06-05,Cases,30724,United Kingdom,66022273,ok
+GB,2021-06-05,Deaths,55,,,anomaly
+GB,2021-06-12,Cases,46825,United Kingdom,66022273,ok
+GB,2021-06-12,Deaths,61,,,anomaly
+GB,2021-06-19,Cases,62474,United Kingdom,66022273,ok
+GB,2021-06-19,Deaths,72,,,anomaly
+GB,2021-06-26,Cases,96843,United Kingdom,66022273,ok
+GB,2021-06-26,Deaths,110,,,anomaly
+GB,2021-07-03,Cases,161805,United Kingdom,66022273,ok
+GB,2021-07-03,Deaths,123,,,anomaly
+GB,2021-07-10,Cases,210277,United Kingdom,66022273,ok
+GB,2021-07-10,Deaths,176,,,anomaly
+GB,2021-07-17,Cases,296447,United Kingdom,66022273,ok
+GB,2021-07-17,Deaths,277,,,anomaly
+GB,2021-07-24,Cases,282920,United Kingdom,66022273,ok
+GB,2021-07-24,Deaths,402,,,anomaly
+GB,2021-07-31,Cases,187268,United Kingdom,66022273,ok
+GB,2021-07-31,Deaths,539,,,anomaly
+GB,2021-08-07,Cases,185724,United Kingdom,66022273,ok
+GB,2021-08-07,Deaths,595,,,anomaly
+GB,2021-08-14,Cases,198759,United Kingdom,66022273,ok
+GB,2021-08-14,Deaths,623,,,anomaly
+GB,2021-08-21,Cases,219919,United Kingdom,66022273,ok
+GB,2021-08-21,Deaths,686,,,anomaly
+GB,2021-08-28,Cases,237556,United Kingdom,66022273,ok
+GB,2021-08-28,Deaths,756,,,anomaly
+GB,2021-09-04,Cases,243125,United Kingdom,66022273,ok
+GB,2021-09-04,Deaths,798,,,anomaly
+GB,2021-09-11,Cases,256051,United Kingdom,66022273,ok
+GB,2021-09-11,Deaths,947,,,anomaly
+GB,2021-09-18,Cases,203077,United Kingdom,66022273,ok
+GB,2021-09-18,Deaths,995,,,anomaly
+GB,2021-09-25,Cases,230494,United Kingdom,66022273,ok
+GB,2021-09-25,Deaths,1000,,,ok
+GB,2021-10-02,Cases,239781,United Kingdom,66022273,ok
+GB,2021-10-02,Deaths,806,,,anomaly
+GB,2021-10-09,Cases,249699,United Kingdom,66022273,ok
+GB,2021-10-09,Deaths,752,,,anomaly
+GB,2021-10-16,Cases,283756,United Kingdom,66022273,ok
+GB,2021-10-16,Deaths,838,,,anomaly
+GB,2021-10-23,Cases,330465,United Kingdom,66022273,ok
+GB,2021-10-23,Deaths,947,,,anomaly
+GB,2021-10-30,Cases,285028,United Kingdom,66022273,ok
+GB,2021-10-30,Deaths,1066,,,anomaly
+GB,2021-11-06,Cases,252104,United Kingdom,66022273,ok
+GB,2021-11-06,Deaths,1196,,,ok
+GB,2021-11-13,Cases,252905,United Kingdom,66022273,ok
+GB,2021-11-13,Deaths,1090,,,ok
+GB,2021-11-20,Cases,281063,United Kingdom,66022273,ok
+GB,2021-11-20,Deaths,1038,,,ok
+GB,2021-11-27,Cases,304374,United Kingdom,66022273,ok
+GB,2021-11-27,Deaths,877,,,anomaly
+GB,2021-12-04,Cases,310696,United Kingdom,66022273,ok
+GB,2021-12-04,Deaths,831,,,anomaly
+GB,2021-12-11,Cases,350340,United Kingdom,66022273,ok
+GB,2021-12-11,Deaths,831,,,anomaly
+GB,2021-12-18,Cases,507984,United Kingdom,66022273,ok
+GB,2021-12-18,Deaths,793,,,anomaly
+GB,2021-12-25,Cases,733725,United Kingdom,66022273,ok
+GB,2021-12-25,Deaths,809,,,anomaly
+GB,2022-01-01,Cases,1087305,United Kingdom,66022273,ok

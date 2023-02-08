@@ -37,13 +37,17 @@ scores <- fread("data/all-scores-crowd-forecasts.csv") |>
                                  levels = c("Cases - natural", "Deaths - natural", 
                                             "Cases - sqrt", "Deaths - sqrt", 
                                             "Cases - log", "Deaths - log")))
-weekly_truth <- fread("data/weekly-truth.csv")
-daily_truth <- fread("data/daily-truth.csv")
+weekly_truth_revised <- fread("data/weekly-truth.csv")
+daily_truth_revised <- fread("data/daily-truth.csv")
+weekly_truth <- fread("data/weekly-truth-original.csv")
+daily_truth <- fread("data/daily-truth-original.csv")
+
+
 ensemble_inclusions <- fread("data/ensemble-inclusions.csv")
+data_revisions <- fread("data/data-revisions-deaths.csv")
 
 time_start <- as.Date("2021-05-24")
-time_stop <- as.Date("2021-08-16")
-
+time_stop <- as.Date("2021-08-16") + 4 * 7 - 2
 
 models_all <- forecasts$model |> unique() |> sort()
 models_all <- models_all[!models_all %in% c("", "EpiExpert-ensemble")]
@@ -72,7 +76,8 @@ label_fn <- function(x) {
 
 
 ```{r}
-weekly_truth |>
+plot_data <- function(weekly_truth, daily_truth) {
+  weekly_truth |>
   ggplot(aes(x = target_end_date, y = true_value)) +
   annotate("rect", xmin = time_start, xmax = time_stop, ymin = 0, ymax = Inf,
            fill = "darkolivegreen3", alpha = .1) + 
@@ -88,7 +93,46 @@ weekly_truth |>
   theme_scoringutils() + 
   scale_colour_manual(values = c("red", "black")) + 
   labs(y = "Observed value", x = "Date", color = "Data status")
+}
+
+plot_data_revised <- plot_data(weekly_truth_revised, daily_truth_revised)
+plot_data <- plot_data(weekly_truth, daily_truth)
+
+ggsave("output/figures/plot-data-revised.png", plot = plot_data_revised, 
+       width = 7, height = 5)
+
+ggsave("output/figures/plot-data.png", plot = plot_data, 
+       width = 7, height = 3.5)
+
 ```
+
+Show data revisions
+
+```{r}
+
+plot_weekly_revisions <- weekly_truth |>
+  rbind(weekly_truth_revised) |>
+  filter(target_type == "Deaths") |>
+  select(target_end_date, true_value, target_type) |>
+  group_by(target_end_date, target_type) |>
+  mutate(diff = c(NA, diff(true_value))) |>
+  filter(!is.na(diff)) |>
+  ggplot(aes(x = target_end_date, y = diff)) + 
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey80") + 
+  geom_line() + 
+  geom_point(size = 0.7) + 
+  facet_wrap(~ target_type, ncol = 1, scale = "free_y") +
+  labs(y = "Difference in data", x = "Date") + 
+  coord_cartesian(ylim = c(-500, 500)) + 
+  theme_scoringutils()
+
+ggsave("output/figures/data-revisions.png", plot = plot_weekly_revisions, 
+       width = 7, height = 2.5)
+
+```
+
+
+
 
 
 
@@ -208,7 +252,6 @@ comparison_plot(scores |>
 ## Weekly participation
 
 ```{r}
-
 available <- function(forecasts, filter, name) {
   forecasts |>
     filter(model %in% filter) |>
@@ -218,36 +261,45 @@ available <- function(forecasts, filter, name) {
 }
 
 
-## Number of forecasts
+## Number of forecasts and ensemble members
 avail <- 
   available(forecasts, filter = models_direct, name = "Direct") |>
-  rbind(available(forecasts, filter = models_rt, name = "Rt"))
+  rbind(available(forecasts, filter = models_rt, name = "Rt")) |>
+  mutate(group = "Human forecast")
 
-plot_num_forecasters <- avail |>
-  ggplot(aes(x = forecast_date, y = `Number forecasts`, 
-             fill = type)) +
-  geom_bar(stat = "identity", color = "white") + 
-  facet_wrap(~ target_type) + 
-  labs(x = "Forecast date", fill = "Forecast method") + 
-  theme_scoringutils() 
-
-ggsave("output/figures/num-forecasters-week.png", plot = plot_num_forecasters, 
-       width = 7, height = 3)
-
-
-## Number of Hub ensemble members
-plot_ensemble_members <- ensemble_inclusions |>
+avail_ensemble <- ensemble_inclusions |>
   mutate(prediction = 1, true_value = 1) |>
   avail_forecasts(by = c("forecast_date", "target_type"), 
                     collapse = c("horizon", "quantile", "target_end_date")) |>
-  ggplot(aes(x = forecast_date, y = `Number forecasts`)) +
-  geom_bar(stat = "identity", fill = "grey60", color = "white") + 
-  facet_wrap(~ target_type) + 
-  labs(x = "Forecast date", fill = "Forecast method") + 
-  theme_scoringutils() 
+  mutate(group = "Forecast Hub")
 
-ggsave("output/figures/num-ensemble-members.png", plot = plot_ensemble_members, 
-       width = 7, height = 3)
+
+plot_number_forecasters <- avail |>
+  pivot_wider(names_from = type, values_from = `Number forecasts`) |>
+  mutate(Rt = Direct + Rt) |>
+  pivot_longer(cols = c(Direct, Rt), names_to = "type",
+               values_to = "Number forecasts") |>
+  as.data.table() |>
+  rbind(avail_ensemble, fill = TRUE) |>
+  ggplot(aes(x = forecast_date, y = `Number forecasts`, 
+             group = group,
+             fill = group, 
+             alpha = type)) +
+  geom_bar(stat = "identity", 
+           color = "white",
+           linewidth = 0.2,
+           width = 5,
+           position = position_dodge(width = 5)) + 
+  facet_wrap(~ target_type) + 
+  scale_alpha_manual(values = c(1, 0.5), na.translate = FALSE) + 
+  labs(x = "Forecast date", fill = "Forecast type", 
+       alpha = "Forecast method") + 
+  theme_scoringutils() +
+  theme(legend.position = "bottom", 
+        legend.box="vertical", legend.margin = margin()) 
+
+ggsave("output/figures/num-forecasters.png", plot = plot_number_forecasters, 
+       width = 7, height = 3.5)
 
 ## number of unique participants
 unique_participants <- gsub("\ \\(Rt\\)", "", models_human) |> unique()
@@ -505,6 +557,14 @@ ggsave("output/figures/scores-and-forecasts.png", plot = p_scores_and_pred,
 
 
 
+```{r}
+forecasts$forecast_date |>
+  unique()
+
+
+forecasts$target_end_date |>
+  unique()
+```
 
 
 
