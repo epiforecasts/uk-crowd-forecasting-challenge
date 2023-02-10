@@ -1,0 +1,21 @@
+\begin{table}[!h]
+
+\caption{Performance for two-week-ahead forecasts \label{tab:scores}}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{llcccc}
+\toprule
+Model & Target & WIS & WIS (log scale) & Coverage 50\% & Coverage 90\%\\
+\midrule
+EuroCOVIDhub-ensemble & Cases & 38000 & 0.25 & 0.38 & 0.69\\
+EuroCOVIDhub-ensemble & Deaths & 38 & 0.13 & 0.77 & 1.00\\
+crowd-direct & Cases & 39000 & 0.24 & 0.31 & 0.69\\
+crowd-direct & Deaths & 34 & 0.13 & 0.54 & 0.85\\
+\addlinespace
+crowd-ensemble & Cases & 40000 & 0.22 & 0.38 & 0.69\\
+crowd-ensemble & Deaths & 40 & 0.12 & 0.54 & 0.77\\
+crowd-rt & Cases & 46000 & 0.23 & 0.46 & 0.62\\
+crowd-rt & Deaths & 80 & 0.25 & 0.15 & 0.46\\
+\bottomrule
+\end{tabular}}
+\end{table}

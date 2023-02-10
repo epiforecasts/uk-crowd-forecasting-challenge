@@ -1,0 +1,16 @@
+\begin{table}[!h]
+
+\caption{Performance for two-week-ahead forecasts \label{tab:scores}}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{llcccc}
+\toprule
+Model & Target & WIS & WIS (log scale) & Coverage 50\% & Coverage 90\%\\
+\midrule
+Direct & Cases & 38000 & 0.25 & 0.54 & 0.69\\
+Rt & Cases & 43000 & 0.23 & 0.38 & 0.77\\
+Direct & Deaths & 46 & 0.15 & 0.54 & 0.77\\
+Rt & Deaths & 78 & 0.25 & 0.15 & 0.46\\
+\bottomrule
+\end{tabular}}
+\end{table}
