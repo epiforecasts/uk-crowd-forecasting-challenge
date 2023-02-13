@@ -202,7 +202,7 @@ clean_forecasts <- function(forecasts) {
     mutate(horizon = as.numeric(substring(target, 1, 1))) |>
     filter(type == "quantile") |>
     select(location, forecast_date, quantile, prediction, 
-           horizon, model, target_end_date, target, target_type) |>
+           horizon, model, target_end_date, target, target_type, expert) |>
     filter(forecast_date >= "2021-05-24", 
            forecast_date <= "2021-08-16") |>
     filter(model != "EpiNow2") |>
@@ -313,6 +313,7 @@ if (file.exists("data/forecast-data.csv")) {
       "EpiNow2"
     )
   ) |>
+    mutate(expert = NA) |>
     clean_forecasts()
   
   root_dirs <- c(here::here("data", "crowd-direct-forecast", "processed-forecast-data"),
