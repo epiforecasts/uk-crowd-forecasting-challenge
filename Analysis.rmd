@@ -30,6 +30,8 @@ colors <- RColorBrewer::brewer.pal(n = 9, name = "Set1")
 ```
 
 
+# Define Helper Functions, Load Data
+
 ```{r}
 
 add_type_and_scale <- function(data) {
@@ -67,6 +69,18 @@ models_non_human <- c("crowd-ensemble", "crowd-direct", "crowd-rt",
 models_human <- models_all[!(models_all %in% models_non_human)]
 models_rt <- models_human[grepl("(Rt)", models_human)]
 models_direct <- models_human[!grepl("(Rt)", models_human)]
+models_expert <- forecasts |>
+  filter(expert) |>
+  pull(model) |> unique() |> sort()
+
+update_expert_status <- function(data) {
+  data |>
+    mutate(expert = ifelse(
+      model %in% models_expert | model %in% paste(models_expert, "(Rt)"), 
+      TRUE, 
+      FALSE
+    ))
+}
 
 
 label_fn <- function(x) {
@@ -85,12 +99,17 @@ label_fn <- function(x) {
 
 ```
 
+# Figure SI.1: Data and data revisions
+data revisions: https://github.com/CSSEGISandData/COVID-19/issues/6021
+https://coronavirus.data.gov.uk/details/whats-new 
+https://coronavirus.data.gov.uk/details/whats-new/record/965a7923-dacf-42ed-abb9-3a972dbf1835
 
 ```{r}
 plot_data <- function(weekly_truth, daily_truth) {
   weekly_truth |>
+    mutate(status = str_to_title(status)) |>
   ggplot(aes(x = target_end_date, y = true_value)) +
-  annotate("rect", xmin = time_start, xmax = time_stop, ymin = 0, ymax = Inf,
+  annotate("rect", xmin = time_start, xmax = time_stop, ymin = -Inf, ymax = Inf,
            fill = "darkolivegreen3", alpha = .1) + 
   geom_line() + 
   geom_point(size = 0.8, aes(color = status)) + 
@@ -103,25 +122,17 @@ plot_data <- function(weekly_truth, daily_truth) {
   scale_y_continuous(labels = label_fn) +
   theme_scoringutils() + 
   scale_colour_manual(values = c("red", "black")) + 
-  labs(y = "Observed value", x = "Date", color = "Data status")
+  labs(y = "Original data", x = "Date", color = "Data status")
 }
 
-plot_data_revised <- plot_data(weekly_truth_revised, daily_truth_revised)
-plot_data <- plot_data(weekly_truth, daily_truth)
+p_data_revised <- plot_data(weekly_truth_revised |>
+                                 filter(target_type == "Deaths"), 
+                               daily_truth_revised |>
+                                 filter(target_type == "Deaths")) + 
+  ylab("Revised data")
+p_data <- plot_data(weekly_truth, daily_truth)
 
-ggsave("output/figures/plot-data-revised.png", plot = plot_data_revised, 
-       width = 7, height = 5)
-
-ggsave("output/figures/plot-data.png", plot = plot_data, 
-       width = 7, height = 3.5)
-
-```
-
-Show data revisions
-
-```{r}
-
-plot_weekly_revisions <- weekly_truth |>
+p_weekly_revisions <- weekly_truth |>
   rbind(weekly_truth_revised) |>
   filter(target_type == "Deaths") |>
   select(target_end_date, true_value, target_type) |>
@@ -129,136 +140,31 @@ plot_weekly_revisions <- weekly_truth |>
   mutate(diff = c(NA, diff(true_value))) |>
   filter(!is.na(diff)) |>
   ggplot(aes(x = target_end_date, y = diff)) + 
+  annotate("rect", xmin = time_start, xmax = time_stop, ymin = -Inf, ymax = Inf,
+           fill = "darkolivegreen3", alpha = .1) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "grey80") + 
   geom_line() + 
   geom_point(size = 0.7) + 
   facet_wrap(~ target_type, ncol = 1, scale = "free_y") +
-  labs(y = "Difference in data", x = "Date") + 
+  labs(y = "Weekly data revisions", x = "Date") + 
   coord_cartesian(ylim = c(-500, 500)) + 
   theme_scoringutils()
 
-ggsave("output/figures/data-revisions.png", plot = plot_weekly_revisions, 
-       width = 7, height = 2.5)
+p_all_data <- p_data / 
+  p_data_revised / 
+  p_weekly_revisions +
+  plot_annotation(tag_levels = "A") + 
+  plot_layout(guides = "collect", heights = c(2.2, 1, 1)) & 
+  theme(legend.position = "bottom")
 
+p_all_data
+
+ggsave("output/figures/plot-data.png", plot = p_all_data, 
+       width = 7, height = 8)
 ```
 
 
-
-Participant forecasts 
-```{r}
-models <- forecasts$model |> unique()
-
-horizon_0 <- weekly_truth |>
-  filter(target_end_date >= "2021-04-01") |>
-  mutate(prediction = true_value, 
-         forecast_date = target_end_date + 2, 
-         horizon = 0, 
-         quantile = 0.5, 
-         model = list(models)) |>
-  tidyr::unnest(cols = model)
-  
-plot_df <- forecasts |>
-  filter(quantile == 0.5) |>
-  rbind(horizon_0) |>
-  filter(target_end_date >= "2021-04-01", 
-         target_end_date <= "2021-10-01") |>
-  filter(!(model %in% c("crowd-rt", "EpiExpert-ensemble"))) |>
-  filter(!(grepl("(Rt)", model))) |>
-  mutate(colouring = ifelse(model == "crowd-ensemble", 
-                            "Crowd ensemble", 
-                            "individual particpant")) 
-
-plot_participant_forecasts <- plot_df |>
-  ggplot(aes(x = target_end_date)) +
-  geom_line(aes(y = prediction, group = interaction(forecast_date, model), 
-                color = "Individual participant"), 
-            linewidth = .1) + 
-  geom_line(data = filter(plot_df, model == "crowd-ensemble"), 
-            aes(y = prediction, group = interaction(forecast_date, model), 
-                color = "Crowd ensemble"),
-            linewidth = .4) + 
-  geom_line(aes(y = true_value),
-            linewidth = .4, color = "black") + 
-  geom_point(aes(y = true_value),
-             size = .5, color = "black") + 
-  scale_color_manual(values = c(colors[1], "grey70")) + 
-  facet_wrap(~ target_type, scale = "free_y", ncol = 1) + 
-  labs(x = "Date", y = "Median forecast and observed values", color = "Forecaster") + 
-  theme_scoringutils()
-
-ggsave("output/figures/participant-forecasts.png", plot = plot_participant_forecasts, 
-       width = 7, height = 5)
-```
-
-
-Median forecasts ensemble
-```{r}
-
-forecasts |>
-  filter(quantile == 0.5) |>
-  rbind(horizon_0) |>
-  filter(target_end_date >= "2021-04-01", 
-         target_end_date <= "2021-10-01") |>
-  filter((model %in% c("crowd-ensemble", "EuroCOVIDhub-ensemble"))) |>
-  ggplot(aes(x = target_end_date)) +
-  geom_line(aes(y = prediction, group = interaction(forecast_date, model), 
-                color = model), 
-            linewidth = .4) + 
-  geom_line(aes(y = true_value),
-            linewidth = .4, color = "black") + 
-  geom_point(aes(y = true_value),
-             size = .5, color = "black") + 
-  scale_color_manual(values = colors[1:2]) +
-  facet_wrap(~ target_type, scale = "free_y", ncol = 1) + 
-  labs(x = "Date", y = "Median forecast and observed values", color = "Forecaster") + 
-  theme_scoringutils()
-```
-
-```{r}
-
-comparison_plot <- function(scores, models = c("crowd-direct", "EuroCOVIDhub-ensemble")) {
-  mean_wis <- scores |>
-  filter(scale %in% c("log", "natural")) |>
-  filter(model %in% models) |>
-  summarise_scores(by = c("model", "scale", "target_type", "type_and_scale")) |>
-  summarise_scores(by = c("model", "scale", "target_type", "type_and_scale"),
-                   fun = signif, digits = 3) |>
-  mutate(wis_mean = paste("Mean:", label_fn(interval_score)))
-
-scores |>
-  filter(scale %in% c("log", "natural")) |>
-  filter(model %in% models) |>
-  arrange(scale, target_type, model) |>
-  ggplot(aes(y = interval_score, x = model)) + 
-  geom_violin(aes(fill = model), color = NA,
-         alpha = 0.2) + 
-  geom_boxplot(alpha = 0.5) + 
-  scale_fill_brewer(palette = "Set1", name = "Forecast target") + 
-  
-  geom_text(data = mean_wis, 
-            aes(label = wis_mean, y = -Inf), 
-            vjust   = -1) + 
-  facet_wrap(~ type_and_scale, scale = "free") + 
-  scale_y_continuous(labels = label_fn, 
-                     expand = expansion(mult = c(0.15, 0.05))) + 
-  labs(y = "Weighted interval score", x = "Forecaster") + 
-  theme_scoringutils() + 
-  theme(legend.position = "None")
-}
-
-comparison_plot(scores, 
-                models = c("crowd-direct", "EuroCOVIDhub-ensemble"))
-
-comparison_plot(scores |>
-                  filter(horizon == 2), 
-                models = c("crowd-direct", "crowd-rt", "crowd-ensemble"))
-
-
-
-```
-
-
-## Weekly participation
+# Figure SI.4: Weekly participation humans and hub ensemble
 
 ```{r}
 available <- function(forecasts, filter, name) {
@@ -278,10 +184,11 @@ avail <-
 
 avail_ensemble <- ensemble_inclusions |>
   mutate(prediction = 1, true_value = 1) |>
+  filter(forecast_date <= "2021-08-16") |>
+  unique() |>
   avail_forecasts(by = c("forecast_date", "target_type"), 
                     collapse = c("horizon", "quantile", "target_end_date")) |>
   mutate(group = "Forecast Hub")
-
 
 plot_number_forecasters <- avail |>
   pivot_wider(names_from = type, values_from = `Number forecasts`) |>
@@ -391,7 +298,7 @@ plot_performance <- function(scores) {
       summarise_scores(by = c("model", "target_type", "range", "horizon")) |>
       ggplot(aes(x = horizon, y = coverage, color = model)) + 
       geom_line(show.legend = FALSE) + 
-      geom_point(show.legend = FALSE) + 
+      geom_point(show.legend = FALSE, size = 0.7) + 
       geom_hline(yintercept = filter_range / 100, 
                  linetype = "dashed", colour = "grey80") + 
       facet_wrap(~ target_type, ncol = 2) + 
@@ -418,7 +325,7 @@ p_performance <- plot_performance(
   filter(scores, model %in% models_non_human))
 
 ggsave("output/figures/performance.png", plot = p_performance, 
-       width = 7, height = 8)
+       width = 7, height = 6)
 
 
 ```
@@ -498,7 +405,7 @@ p_comparison_direct_rt_individual <- plot_rt_direct_individual(scores_forecasts_
 
 ggsave("output/figures/comparison-direct-rt-individual.png", 
        plot = p_comparison_direct_rt_individual, 
-       width = 7, height = 5)
+       width = 7, height = 4)
 
 p_comparison_direct_rt_individual_reivsed <- plot_rt_direct_individual(scores_forecasts_comparison_revised)
 
@@ -585,6 +492,7 @@ make_performance_table <- function(scores) {
     pivot_wider(names_from = scale, values_from = interval_score) |>
     select(model, target_type, natural, log, coverage_50, coverage_90) |>
     mutate(across(c(where(is.numeric)), signif, digits = 2)) |>
+    arrange(target_type, model) |>
     kable(format = "latex", booktabs = TRUE, 
           align = c("l", "l", rep("c", 4)),
           caption = "Performance for two-week-ahead forecasts \\label{tab:scores}",
@@ -748,6 +656,123 @@ ggsave("output/figures/scores-and-forecasts-rt-comparison.png",
 ```
 
 
+## Look at expert forecasts
+
+# ensemble of experts and non-experts
+
+```{r}
+
+create_expert_ensemble <- function(forecasts) {
+  
+  forecasts_expert_ensemble <- forecasts |>
+    filter(model %in% models_human) |>
+    update_expert_status() |>
+    group_by(target_type, horizon, expert, quantile, true_value, forecast_date, target_end_date) |>
+    summarise(prediction = median(prediction), 
+              n = n()) |>
+    mutate(model = ifelse(expert, "Expert", "Non-Expert")) |>
+    as.data.table()
+  
+  scores_expert_ensemble <- forecasts_expert_ensemble |>
+    mutate(method = model) |>
+    score_and_add_log()
+  
+  return(list(forecasts = forecasts_expert_ensemble, 
+              scores = scores_expert_ensemble))
+}
+
+expert_ensemble <- create_expert_ensemble(filter(forecasts))
+
+# plot with number of experts and non-experts every week
+expert_ensemble$forecasts |>
+  filter(horizon == 2) |>
+  group_by(model, forecast_date, target_type) |>
+  summarise(n = unique(n)) |>
+  ggplot(aes(x = forecast_date, y = n, colour = model)) + 
+  geom_line() + 
+  geom_point() + 
+  theme_scoringutils() + 
+  facet_wrap(~ target_type)
+
+
+expert_ensemble$scores |>
+   make_performance_table() 
+
+p_scores_expert <- plot_performance(expert_ensemble$scores)
+ggsave("output/figures/performance-expert.png", 
+       plot = p_scores_expert, 
+       width = 7, height = 6)
+
+
+expert_ensemble_direct <- forecasts |>
+  filter(model %in% models_direct) |>
+  create_expert_ensemble()
+
+expert_ensemble_direct$scores |>
+   make_performance_table() 
+
+p_scores_expert_direct <- plot_performance(expert_ensemble_direct$scores)
+ggsave("output/figures/performance-expert-direct.png", 
+       plot = p_scores_expert_direct, 
+       width = 7, height = 6)
+
+
+
+
+
+
+# plot_scores_and_pred(
+#   forecasts_expert_ensemble,
+#   scores_expert_ensemble
+# )
+
+
+```
+
+
+
+```{r}
+scores_df <- scores  |>
+  update_expert_status() |>
+  mutate(expert = ifelse(expert, "Expert", "Non-Expert")) |>
+  filter(model %in% models_human) |>
+  filter(horizon == 2) |>
+  summarise_scores() 
+
+mean_wis <- scores_df |>
+  group_by(scale, expert, target_type, type_and_scale) |>
+  summarise(wis_mean = signif(median(interval_score), 3)) |>
+  mutate(wis_mean = paste("Mean:", label_fn(wis_mean)))
+  
+scores_df |>   
+  ggplot(aes(x = expert, y = interval_score)) +
+  geom_violin(alpha = 0.2) + 
+  geom_boxplot(alpha = 0.5) + 
+  # scale_fill_brewer(palette = "Set1", name = "Forecast target") + 
+  geom_text(data = mean_wis, 
+            aes(label = unique(wis_mean), y = -Inf), 
+            vjust   = -1) + 
+  facet_wrap(~ type_and_scale, scale = "free_y") + 
+  scale_y_continuous(labels = label_fn, 
+                     expand = expansion(mult = c(0.15, 0.05))) + 
+  theme_scoringutils()
+
+
+scores_df |>
+  summarise_scores(by = c("expert", "target_type", "scale", "horizon")) |>
+  rename(model = expert) |>
+  make_performance_table()
+
+```
+
+
+
+
+
+
+
+
+
 
 ```{r}
 forecasts$forecast_date |>
@@ -777,5 +802,137 @@ Interesting questions
 
 Methods
 - Hub ensemble switched from mean to median on 2021-07-19
-- did we do do mean or median? 
-- how did we end up with the crowd ensemble
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Parking lot
+Median forecasts for a 1:4 horizon
+```{r}
+models <- forecasts$model |> unique()
+
+horizon_0 <- weekly_truth |>
+  filter(target_end_date >= "2021-04-01") |>
+  mutate(prediction = true_value, 
+         forecast_date = target_end_date + 2, 
+         horizon = 0, 
+         quantile = 0.5, 
+         model = list(models)) |>
+  tidyr::unnest(cols = model)
+  
+plot_df <- forecasts |>
+  filter(quantile == 0.5) |>
+  rbind(horizon_0, fill = TRUE) |>
+  filter(target_end_date >= "2021-04-01", 
+         target_end_date <= "2021-10-01") |>
+  filter(!(model %in% c("crowd-rt", "EpiExpert-ensemble"))) |>
+  filter(!(grepl("(Rt)", model))) |>
+  mutate(colouring = ifelse(model == "crowd-ensemble", 
+                            "Crowd ensemble", 
+                            "individual particpant")) 
+
+plot_participant_forecasts <- plot_df |>
+  ggplot(aes(x = target_end_date)) +
+  geom_line(aes(y = prediction, group = interaction(forecast_date, model), 
+                color = "Individual participant"), 
+            linewidth = .1) + 
+  geom_line(data = filter(plot_df, model == "crowd-ensemble"), 
+            aes(y = prediction, group = interaction(forecast_date, model), 
+                color = "Crowd ensemble"),
+            linewidth = .4) + 
+  geom_line(aes(y = true_value),
+            linewidth = .4, color = "black") + 
+  geom_point(aes(y = true_value),
+             size = .5, color = "black") + 
+  scale_color_manual(values = c(colors[1], "grey70")) + 
+  facet_wrap(~ target_type, scale = "free_y", ncol = 1) + 
+  labs(x = "Date", y = "Median forecast and observed values", color = "Forecaster") + 
+  theme_scoringutils()
+
+ggsave("output/figures/participant-forecasts.png", plot = plot_participant_forecasts, 
+       width = 7, height = 5)
+```
+
+Median forecasts combined human ensemble and Forecast Hub ensemble 1:4 horizon
+```{r}
+forecasts |>
+  filter(quantile == 0.5) |>
+  rbind(horizon_0, fill = TRUE) |>
+  filter(target_end_date >= "2021-04-01", 
+         target_end_date <= "2021-10-01") |>
+  filter((model %in% c("crowd-ensemble", "EuroCOVIDhub-ensemble"))) |>
+  ggplot(aes(x = target_end_date)) +
+  geom_line(aes(y = prediction, group = interaction(forecast_date, model), 
+                color = model), 
+            linewidth = .4) + 
+  geom_line(aes(y = true_value),
+            linewidth = .4, color = "black") + 
+  geom_point(aes(y = true_value),
+             size = .5, color = "black") + 
+  scale_color_manual(values = colors[1:2]) +
+  facet_wrap(~ target_type, scale = "free_y", ncol = 1) + 
+  labs(x = "Date", y = "Median forecast and observed values", color = "Forecaster") + 
+  theme_scoringutils()
+```
+
+
+
+## Violin plot to compare scores
+
+```{r}
+comparison_plot <- function(scores, models = c("crowd-direct", "EuroCOVIDhub-ensemble")) {
+  mean_wis <- scores |>
+  filter(scale %in% c("log", "natural")) |>
+  filter(model %in% models) |>
+  summarise_scores(by = c("model", "scale", "target_type", "type_and_scale")) |>
+  summarise_scores(by = c("model", "scale", "target_type", "type_and_scale"),
+                   fun = signif, digits = 3) |>
+  mutate(wis_mean = paste("Mean:", label_fn(interval_score)))
+
+scores |>
+  filter(scale %in% c("log", "natural")) |>
+  filter(model %in% models) |>
+  arrange(scale, target_type, model) |>
+  ggplot(aes(y = interval_score, x = model)) + 
+  geom_violin(aes(fill = model), color = NA,
+         alpha = 0.2) + 
+  geom_boxplot(alpha = 0.5) + 
+  scale_fill_brewer(palette = "Set1", name = "Forecast target") + 
+  
+  geom_text(data = mean_wis, 
+            aes(label = wis_mean, y = -Inf), 
+            vjust   = -1) + 
+  facet_wrap(~ type_and_scale, scale = "free") + 
+  scale_y_continuous(labels = label_fn, 
+                     expand = expansion(mult = c(0.15, 0.05))) + 
+  labs(y = "Weighted interval score", x = "Forecaster") + 
+  theme_scoringutils() + 
+  theme(legend.position = "None")
+}
+
+comparison_plot(scores, 
+                models = c("crowd-direct", "EuroCOVIDhub-ensemble"))
+
+comparison_plot(scores |>
+                  filter(horizon == 2), 
+                models = c("crowd-direct", "crowd-rt", "crowd-ensemble"))
+
+
+
+```
+
