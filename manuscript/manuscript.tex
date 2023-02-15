@@ -22,8 +22,8 @@
 
 \begin{document}
 
-\title{Wellcome Open Research Article Template}
-\titlenote{The title should be detailed enough for someone to know whether the article would be of interest to them, but also concise. Please ensure the broadness and claims within the title are appropriate to the content of the article itself.}
+\title{Human Judgement Forecasting of COVID-19 in the UK}
+%\titlenote{The title should be detailed enough for someone to know whether the article would be of interest to them, but also concise. Please ensure the broadness and claims within the title are appropriate to the content of the article itself.}
 
 
 \author[1, 2, 3]{Anonymous Alpaca}
@@ -69,20 +69,20 @@ Human judgement forecasting, COVID-19, infectious disease,
 \section*{Introduction}
 
 Infectious disease modelling and forecasting has attracted wide-spread attention during the COVID-19 pandemic and helped inform decision making in public health organisations and governments \cite{cramerEvaluationIndividualEnsemble2021, venkatramananUtilityHumanJudgment2022}. 
-% Beginining in March 2020, forecasts for different COVID-19 targets have been systematically collated by Forecast Hubs in the US \citep{cramerEvaluationIndividualEnsemble2021}, Germany and Poland \citep{bracherShorttermForecastingCOVID192021, bracherNationalSubnationalShortterm2021}, and Europe \citep{sherrattPredictivePerformanceMultimodel2022a}. 
+% Beginning in March 2020, forecasts for different COVID-19 targets have been systematically collated by Forecast Hubs in the US \citep{cramerEvaluationIndividualEnsemble2021}, Germany and Poland \citep{bracherShorttermForecastingCOVID192021, bracherNationalSubnationalShortterm2021}, and Europe \citep{sherrattPredictivePerformanceMultimodel2022a}. 
 Most forecasts were based on computational models of COVID-19, but some authors also explored human judgement forecasting as an alternative \cite{recchiaHowWellDid2021, mcandrewExpertJudgmentModel2022, bosseComparingHumanModelbased2022, mcandrewChimericForecastingCombining2022}. 
 
-Past research found that in the context of infectious disease forecasting, human judgement forecasts could achieve predictive performance broadly comparable to forecasts generated based on mathematical modelling, in particular when forecasting incident cases. \citet{farrowHumanJudgmentApproach2017} found that an aggregate of human predictions outperformed computational models when predicting the 2014/15 and 2015/16 flu season in the US. However, a comparable approach performed slightly worse than computtional models at predicting the 2014/15 outbreak of chikungunya in the Americas. 
+Past research found that in the context of infectious disease forecasting, human judgement forecasts could achieve predictive performance broadly comparable to forecasts generated based on mathematical modelling, in particular when forecasting incident cases. \citet{farrowHumanJudgmentApproach2017} found that an aggregate of human predictions outperformed computational models when predicting the 2014/15 and 2015/16 flu season in the US. However, a comparable approach performed slightly worse than computational models at predicting the 2014/15 outbreak of chikungunya in the Americas. 
 \citet{bosseComparingHumanModelbased2022} found an ensemble of human forecasters to outperform an ensemble of computational models when predicting cases of COVID-19 in Germany, but performing worse when predicting incident deaths. Similarly, \citet{mcandrewChimericForecastingCombining2022} reported an ensemble of human forecasters to perform comparably to an ensemble of computational models when predicting incident cases, and worse when predicting incident deaths. \citet{farrowHumanJudgmentApproach2017} and in particular \citet{bosseComparingHumanModelbased2022} struggled to recruit a large number of participants (numbers of active forecasters ranged from 22 to 61 in \citet{mcandrewChimericForecastingCombining2022}, 7 to 24 in \citet{farrowHumanJudgmentApproach2017}, and 4 to 10 in \citet{bosseComparingHumanModelbased2022}). 
 
 In some situations, human judgement forecasting has clear advantages relative to computational models. Humans can very quickly provide forecasts, even in situations where data is sparse and lots of parameters are unknown. In addition, humans are able to answer a broad set of question (such as for example the likelihood that a given actor will take some specified action) or can take factors into account that are hard to encode in a computational model. On the other hand, human judgement forecasting is difficult to scale due to the time and effort required, and humans may be at a disadvantage at tasks that require complex computations. 
 
 
-% Beginining in March 2020, forecasts for different COVID-19 targets have been systematically collated by Forecast Hubs in the US \citep{cramerEvaluationIndividualEnsemble2021}, Germany and Poland \citep{bracherShorttermForecastingCOVID192021, bracherNationalSubnationalShortterm2021}, and Europe \citep{sherrattPredictivePerformanceMultimodel2022a}. 
+% Beginning in March 2020, forecasts for different COVID-19 targets have been systematically collated by Forecast Hubs in the US \citep{cramerEvaluationIndividualEnsemble2021}, Germany and Poland \citep{bracherShorttermForecastingCOVID192021, bracherNationalSubnationalShortterm2021}, and Europe \citep{sherrattPredictivePerformanceMultimodel2022a}. 
 
-Methods that aim to combine human judgement and mathematical modelling are therefore appealing. One straightforward way is to combine separate human judgement and computational model forecasts with the goal of improving predictive performance \citep{mcandrewChimericForecastingCombining2022}. \cite{farrowHumanJudgmentApproach2017, bosseComparingHumanModelbased2022} and others suggested additional possibilities in the context of infectious diseases that may also help reduce the amount of human effort required. One approach is to use human forecasts, for example of relevant disease paremeters, as an input to computational modelling. Another approach is to use mathematical modelling as an input to human judgement, for example by giving experts the option to make post-hoc adjustements to model outputs. \citet{bosseComparingHumanModelbased2022} proposed to ask human forecasters to predict the effective reproduction number $R_t$ (the average number of people an infected person would infect in turn) and to feed this forecast into a mathematical model in order to obtain forecasts for case and death numbers. 
+Methods that aim to combine human judgement and mathematical modelling are therefore appealing. One straightforward way is to combine separate human judgement and computational model forecasts with the goal of improving predictive performance \citep{mcandrewChimericForecastingCombining2022}. \cite{farrowHumanJudgmentApproach2017, bosseComparingHumanModelbased2022} and others suggested additional possibilities in the context of infectious diseases that may also help reduce the amount of human effort required. One approach is to use human forecasts, for example of relevant disease parameters, as an input to computational modelling. Another approach is to use mathematical modelling as an input to human judgement, for example by giving experts the option to make post-hoc adjustments to model outputs. \citet{bosseComparingHumanModelbased2022} proposed to ask human forecasters to predict the effective reproduction number $R_t$ (the average number of people an infected person would infect in turn) and to feed this forecast into a mathematical model in order to obtain forecasts for case and death numbers. 
 
-This paper represents a follow-up study to \citet{bosseComparingHumanModelbased2022} in the United Kingdom with forecasts made over the course of thirteen weeks between May and August 2021. Forecasts were elicited from experts and laypeople as part of a public forecasting tournament, the "UK Crowd Forecasting Challenge" using a web application. All forecasts were submitted to the European COVID-19 Forecast Hub, one of several Forecast Hubs that have been systematically collating forecasts of different COVID-19 forecast targets in the US \citep{cramerEvaluationIndividualEnsemble2021}, German and Poland \citep{bracherShorttermForecastingCOVID192021, bracherNationalSubnationalShortterm2021}, and Europe \citep{sherrattPredictivePerformanceMultimodel2022a}. This study aims to investigate whether the original findings in \citet{bosseComparingHumanModelbased2022} with respect to forecaster performance replicate in a different country and with an increased number of participants. In addition, it explores the approach proposed in \citet{bosseComparingHumanModelbased2022} to ask participants for a forecast of the effective reproduction number $R_t$ which is then translated into a forecast of cases and deaths using a mathematical model. 
+This paper represents a follow-up study to \citet{bosseComparingHumanModelbased2022} in the United Kingdom with forecasts made over the course of thirteen weeks between May and August 2021. Forecasts were elicited from experts and laypeople as part of a public forecasting tournament, the "UK Crowd Forecasting Challenge" using a web application. All forecasts were submitted to the European COVID-19 Forecast Hub, one of several Forecast Hubs that have been systematically collating forecasts of different COVID-19 forecast targets in the US \citep{cramerEvaluationIndividualEnsemble2021}, Germany and Poland \citep{bracherShorttermForecastingCOVID192021, bracherNationalSubnationalShortterm2021}, and Europe \citep{sherrattPredictivePerformanceMultimodel2022a}. This study aims to investigate whether the original findings in \citet{bosseComparingHumanModelbased2022} with respect to forecaster performance replicate in a different country and with an increased number of participants. In addition, it explores the approach proposed in \citet{bosseComparingHumanModelbased2022} to ask participants for a forecast of the effective reproduction number $R_t$ which is then translated into a forecast of cases and deaths using a mathematical model. 
 
 % Define the terms model, forecaster, crowd forecast, ensemble. 
 
@@ -94,10 +94,9 @@ This study has been approved by the London School of Hygiene \& Tropical Medicin
 \subsection*{Interaction with the European Forecast Hub}
 
 The European COVID-19 Forecast Hub \cite{sherrattPredictivePerformanceMultimodel2022a} elicits predictions for various COVID-19 related forecast targets from different research groups every week. Forecasts had to be submitted every Monday 23.59pm GMT. Forecasts are made for incident weekly reported numbers of cases of and deaths from COVID-19 on a national level for various European countries over a one to four week forecast horizon. While forecasts were submitted on Mondays, weeks were defined as epiweeks. ending on a Saturday and starting on Sunday. Forecast horizons were therefore in fact 5, 12, 19 and 26 days. Submissions to the European Forecast Hub follow a quantile-based format with 23 quantiles of each output measure at levels 0.01, 0.025, 0.05, 0.10, 0.15,…, 0.95, 0.975, 0.99.
-Every week, forecast submitted to the hub were automatically checked for conformity with the required forecasta and all eligible forecasts combined into different ensembles. Until the 12th of July 2021 the default Hub ensemble shown on all official Forecast Hub visualisiations (https://covid19forecasthub.eu/) was a mean-ensemble (i.e., the $\alpha$-quantile of the ensemble is given by the mean of all submitted $\alpha$-quantiles). From the 29th of July on, the default Forecast Hub ensemble became a median-ensemble. The number of models included in the Forecast Hub ensemble is shown in Figure \ref{fig:num-forecasters}. 
+Every week, forecast submitted to the hub were automatically checked for conformity with the required forecasts and all eligible forecasts combined into different ensembles. Until the 12th of July 2021 the default Hub ensemble shown on all official Forecast Hub visualisiations (https://covid19forecasthub.eu/) was a mean-ensemble (i.e., the $\alpha$-quantile of the ensemble is given by the mean of all submitted $\alpha$-quantiles). From the 29th of July on, the default Forecast Hub ensemble became a median-ensemble. The number of models included in the Forecast Hub ensemble is shown in Figure \ref{fig:num-forecasters} in the SI. 
 
-Ground-truth data on daily reported test positive cases and deaths linked to COVID-19 were provided by European Forecast Hub and sourced from the Johns Hopkins University. Data were subject to reporting artifacts and revisions. The Forecast Hubs marks data as anomalous if in subsequent updates data is changed by more than 5 percent. THIS IS THE CASE FOR ALL DEATH FORECASTS... CAN WE CHECK THIS? 
-See Figure MAKE FIGURE WITH DATA AND UPDATES. 
+Ground-truth data on daily reported test positive cases and deaths linked to COVID-19 were provided by European Forecast Hub and sourced from the Johns Hopkins University (JHU). Data were subject to reporting artifacts and revisions. All data points are marked as anomalous by the European Forecast Hub if in subsequent updates data is changed by more than 5 percent. In August 2022 JHU switched the data source for their death numbers from "deaths within 28 days of a positive COVID test" to "Deaths with COVID-19 on the death certificate" and revised all their past data to guarantee consistency. The 2021 UK ground truth death data as it was made available through the European Forecast Hub in 2021 is therefore substantially different and on average lower than the data available as of early 2023. The data and revisions are displayed in Figure \ref{fig:plot-data}. If not otherwise stated, all results are derived based on the original data available in 2021. 
 
 \subsection*{Human judgement forecasts}
 
@@ -105,12 +104,14 @@ Forecasts of incident cases and deaths linked to COVID-19 in the UK were elicite
 
 The web application offered participants two different ways of making a forecast called 'direct' (or 'classical') and 'Rt' forecast. To make a 'direct' forecast (as described in more detail \cite{bosseComparingHumanModelbased2022}), participants selected a predictive distribution (by default a log-normal distribution) and adjusted the median and width of the distribution to change the central estimate and uncertainty. In addition to information about past observations, participants could see various metrics and data sourced from Our World in Data \citep{owidcoronavirus}. Figure \ref{fig:screenshot-classical} shows a screenshot of the forecast interface for direct forecasts. 
 
+When signing up, we asked participants to self-identify as "experts", asking them to tick a box if they worked in infectious disease modelling or had professional experience in any related field. 
+
 SAM TO THE RESCUE
 
-In addition, we implemented a second forecasting method ('Rt forecasts'), where we asked participants to make a forecast of the effective reproduction number $R_t$. This forecast was then translated into forecasts of cases using the renewal equation \citep{fraserEstimatingIndividualHousehold2007} as implemented in the \textsf{R} package \texttt{EpiNow2} \citep{epinow2}, APPENDIX INFO?. In order to obtain forecasts for deaths, we convolved predicted infections as implied by the $R_t$ forecast over data-based delay distributions \cite{epinow2, sherrattExploringSurveillanceData2021, abbottEstimatingTimevaryingReproduction2020a} to model the time between infection and report date. As $R_t$-estimates up to two weeks prior to the forecast data were deemed uncertain, we also asked participants to submit an estimate of $R_t$ for the two weeks prior to the current forecast date. Participants were therefore asked to estimate / predict four $R_t$ values, four of them in the future. Upon pressing a button participants could see a preview of the evolution of cases implied by their current $R_t$ forecast. However, due to the high computational complexity and necessary waiting times, participants could not preview the death forecast implied by their current input for $R_t$. Figure \ref{fig:screenshot-rt} shows a screenshot of the forecast interface for $R_t$ forecasts. 
+In addition, we implemented a second forecasting method ('Rt forecasts'), where we asked participants to make a forecast of the effective reproduction number $R_t$. This forecast was then translated into forecasts of cases using the renewal equation \citep{fraserEstimatingIndividualHousehold2007} as implemented in the \textsf{R} package \texttt{EpiNow2} \citep{epinow2}, APPENDIX INFO?. In order to obtain forecasts for deaths, we convolved predicted infections as implied by the $R_t$ forecast over data-based delay distributions \cite{epinow2, sherrattExploringSurveillanceData2021, abbottEstimatingTimevaryingReproduction2020a} to model the time between infection and report date. As $R_t$-estimates up to two weeks prior to the forecast data were deemed uncertain, we also asked participants to submit an estimate of $R_t$ for the two weeks prior to the current forecast date. Participants were therefore asked to estimate/predict six $R_t$ values, four of them in the future. Upon pressing a button, participants could see a preview of the evolution of cases implied by their current $R_t$ forecast. However, due to the high computational complexity and necessary waiting times, participants could not preview the death forecast implied by their current input for $R_t$. Figure \ref{fig:screenshot-rt} shows a screenshot of the forecast interface for $R_t$ forecasts. 
 
 Every week, we submitted an ensemble of individual forecasts ("crowd forecast") to the European Forecast Hub. In contrast to the ensemble of human forecasts described in \citet{bosseComparingHumanModelbased2022}, we used the quantile-wise median, rather than the quantile-wise mean to combine predictions. %, following suggestions made in CITATION. 
-We submitted three different ensembles: The first one, "epiforecasts-EpiExpert\_direct" (here called "Crowd direct") was a quantile-wise median ensemble of all the direct forecasts. "epiforecasts-EpiExpert\_Rt" (here called "Crowd Rt" was a median ensemble of all forecasts made through the $R_t$ interface. "epiforecasts-EpiExpert" (here called "Crowd combined") was a median ensemble of all forecasts together, meaning that a participant could enter the the median ensemble twice if she had submitted both a direct and an $R_t$ forecast. Before creating the ensemble, we deleted forecasts that were clearly the result of a user or software error (such as forecasts that were zero everywhere).
+We submitted three different ensembles to the Hub: The first one, "epiforecasts-EpiExpert\_direct" (here called "Crowd direct") was a quantile-wise median ensemble of all the direct forecasts. "epiforecasts-EpiExpert\_Rt" (here called "Crowd Rt" was a median ensemble of all forecasts made through the $R_t$ interface. "epiforecasts-EpiExpert" (here called "Crowd combined") was a median ensemble of all forecasts together. A participant could enter the "Crowd combined" ensemble twice if she had submitted both a direct and an $R_t$ forecast. Before creating the ensemble, we deleted forecasts that were clearly the result of a user or software error (such as forecasts that were zero everywhere).
 
 \subsection*{EpiNow2?}
 
@@ -123,55 +124,62 @@ SAM TO THE RESCUE, RELEVANT PART OF OLD PAPER PASTED HERE AND COMMENTED OUT. DO 
 
 \subsection*{The UK Crowd Forecasting Challenge}
 
-In order to boost participation compared to our last crowd forecasting study in Germany and Poland \citep{bosseComparingHumanModelbased2022}, we announced an official tournament, the "UK Crowd Forecasting Challenge". Participants were asked to submit weekly predictions for reported cases and deaths linked to COVID-19 in the United Kingdom one to four weeks into the future. Everynone who had submitted a forecast for targets in the UK during the tournament period from the 24th of May 2021 to the 16th of August 2021 was deemed a participant and eligible for a prize. The first prize was 100 GBP, second prize 50 GBP and third prize 25 GBP. For the purpose of the tournament ranking, participants who did not submit a forecast in a given week where assigned the median score of all other participants who submitted a forecast that week. The UK crowd forecasting challenge was announced over Twitter and our networks. 
+In order to boost participation compared to our last crowd forecasting study in Germany and Poland \citep{bosseComparingHumanModelbased2022}, we announced an official tournament, the "UK Crowd Forecasting Challenge". Participants were asked to submit weekly predictions for reported cases and deaths linked to COVID-19 in the United Kingdom one to four weeks into the future. Everyone who had submitted a forecast for targets in the UK during the tournament period from the 24th of May 2021 to the 16th of August 2021 was deemed a participant and eligible for a prize. The first prize was 100 GBP, second prize 50 GBP and third prize 25 GBP. Participant performance was determined using the mean weighted interval score (WIS) on the log scale (see details in the next Section, %\ref{sec:analysis}), 
+averaged across forecast dates, horizons and forecast targets. For the purpose of the tournament ranking, participants who did not submit a forecast in a given week were assigned the median score of all other participants who submitted a forecast that week. The UK crowd forecasting challenge was announced over Twitter and our networks. 
 % (e.g. https://www.voice-global.org/public/opportunities/archived/uk-covid-19-crowd-forecasting-challenge/)
-In addition, we created a project website, \url{https://crowdforecastr.org}, made weekly posts on Twitter and sent participants who had registered on the online application weekly emails with a reminder and a summary of their past performance. A public leaderboard was available on our website \url{https://epiforecasts.io}. Participants could choose to make a direct forecast as well as an $R_t$ forecast and were eligible for prizes twice. Weekly forecasts had to be submitted between Sunday 12pm and Monday 8pm UK time. 
+In addition, we created a project website, \url{https://crowdforecastr.org}, made weekly posts on Twitter and sent participants who had registered on the online application weekly emails with a reminder and a summary of their past performance. A public leaderboard was available on our website \url{https://epiforecasts.io}. Participants could choose to make a direct forecast as well as an $R_t$ forecast and were counted as two separate forecasters and eligible for prizes twice. Weekly forecasts had to be submitted between Sunday 12pm and Monday 8pm UK time. 
 
 
 \subsection*{Analysis}
+\label{sec:analysis}
 
-Our analysis of the data largely follows the one outlined in \citet{bosseComparingHumanModelbased2022}. If not otherwise stated, we present results for two-week-ahead forecasts, following the practice adopted by the COVID-19 Forecast Hubs that found poor predictive performance beyond this horizon [15]. We analysed all forecasts together separated by forecasting forecast target (cases or deaths). In addition, we compared the performance of the direct vs. $R_t$ forecasting approach using instances where we had both a direct forecasts and an $R_t$ forecast from the same person. Those forecasts were combined using a quantile-wise median separately for direct and $R_t$ forecasts such that we obtained a modified direct human ensemble and a modified $R_t$ ensemble that included corresponding forecasts from the same forecaster. 
+Our analysis of the data largely follows the one outlined in \citet{bosseComparingHumanModelbased2022}. If not otherwise stated, we present results for two-week-ahead forecasts, following the practice adopted by the COVID-19 Forecast Hubs, which found predictive performance to be poor and unreliable beyond this horizon \cite{cramerEvaluationIndividualEnsemble2021, sherrattPredictivePerformanceMultimodel2022a, bracherShorttermForecastingCOVID192021}. We analysed all forecasts stratified by forecast target (cases or deaths), forecast horizon, and forecast approach. We compared the performance of the direct vs. $R_t$ forecasting approach using instances where we had both a direct forecasts and an $R_t$ forecast from the same person. 
 
-We scored forecasts using the weighted interval score (WIS, formulas given in the SI in Section \ref{sec:wis}) \cite{bracherEvaluatingEpidemicForecasts2021} and used the empirical coverage of all central 50\% and 90\% prediction intervals to measure probabilistic callibration. The WIS is proper scoring rule (with smaller values implying better performance). A forecaster, in expectation, optimises her score by providing a predictive distribution $F$ that is equal to the data-generating distribution $G$ and is therefore incentivised to report her true belief. The WIS can be seen as a generalisation of the absolute error to predictive distribution in a quantile-based format and represents an approximation of the continuous ranked probability score (CRPS). The WIS can be decomposed into three separate penalty components: forecast spread (i.e. uncertainty of forecasts), over-prediction and under-prediction. Empirical coverage means the percentage of observations falling inside any given prediction interval (e.g. the cumulative percentage of observed values that fall inside all 50\% prediction intervals). It represents a measure of probabilistic calibration \citep{gneitingProbabilisticForecastsCalibration2007}. Forecasts were evaluated using the \texttt{scoringutils} \citep{bosseEvaluatingForecastsScoringutils2022} package in \textsf{R}.
+For self-reported "experts" and "non-experts", a simple comparison of scores would be confounded by individual differences in participation and the timing of individual forecasts. We therefore compared the performance of self-reported "experts" vs. "non-experts" by creating and evaluating two modified median ensembles, one including only "experts" and the other only "non-experts".
 
-\citet{bosseTransformationForecastsEvaluating2023} recently suggested to transform forecasts and observations using the natural logarithm prior prior to applying the WIS in order to better reflect the exponential nature of the underlying disease process. We therefore also compute WIS values after transforming all forecasts and observations using the function $f\colon x \to \log (x + 1)$. In the following, we refer to WIS scores obtained without a transformation as "scores on the natural scale", and WIS values obtained after log-transforming forecasts and observations as "scores on the log scale". 
+% Those forecasts were combined using a quantile-wise median separately for direct and $R_t$ forecasts such that we obtained a modified direct human ensemble and a modified $R_t$ ensemble that included only corresponding forecasts from the same forecaster. 
+
+We scored forecasts using the weighted interval score (WIS, formulas given in the SI) %in Section \ref{sec:wis}) 
+\cite{bracherEvaluatingEpidemicForecasts2021} and used the empirical coverage of all central 50\% and 90\% prediction intervals to measure probabilistic calibration. The WIS is a proper scoring rule (with smaller values implying better performance). A forecaster, in expectation, optimises her score by providing a predictive distribution $F$ that is equal to the data-generating distribution $G$, and is therefore incentivised to report her true belief. The WIS can be understood as an approximation of the continuous ranked probability score (CRPS) for forecasts in a quantile-based format, which itself represents a generalisation of the absolute error to predictive distributions. The WIS can be decomposed into three separate penalty components: forecast dispersion (i.e. uncertainty of forecasts), over-prediction and under-prediction. Empirical coverage refers to the percentage of observations falling inside any given prediction interval (e.g. the cumulative percentage of observed values that fall inside all 50\% prediction intervals). It represents a measure of probabilistic calibration \citep{gneitingProbabilisticForecastsCalibration2007}. Forecasts were evaluated using the \texttt{scoringutils} \citep{bosseEvaluatingForecastsScoringutils2022} package in \textsf{R}.
+
+\citet{bosseTransformationForecastsEvaluating2023} suggested to transform forecasts and observations using the natural logarithm prior prior to applying the WIS in order to better reflect the exponential nature of the underlying disease process. We therefore also compute WIS values after transforming all forecasts and observations using the function $f\colon x \to \log (x + 1)$. In the following, we refer to WIS scores obtained without a transformation as "scores on the natural scale", and WIS values obtained after log-transforming forecasts and observations as "scores on the log scale". 
 
 \section*{Results}
 
 \subsection*{Crowd forecast participation}
 
-A total number of 90 participants submitted forecasts (more precisely, forecasts were submitted from 90 different accounts, some of them anonymous). The median number of unique participants in any given week was 17, the minimum was 6 and the maximum was 51. With respect to the number of submissions from an individual participant, we observed similar patterns as \cite{bosseComparingHumanModelbased2022}: An individual forecaster participated on average in 2.6 weeks out of 13. The median number of submissions was one, meaning that most forecasters dropped out after their first submission. Only five participants submitted a forecast in ten or more weeks and only two submitted a forecast in all thirteen weeks, one of whom is an author on this study. The number of direct forecasts was higher than the number of $R_t$ forecasts in all weeks (see Figure \ref{fig:num-forecasters}). 
+A total number of 90 participants submitted forecasts (more precisely, forecasts were submitted from 90 different accounts, some of them anonymous). Out of 90 participants, 21 self-identified as "experts", i.e. stated they had professional experience in infectious disease modelling or a related field. 
 
-% X of those self-identified as ‘expert’ in either forecasting or epidemiology. 
+The median number of unique participants in any given week was 17, the minimum was 6 and the maximum was 51 (compared to 6, 2, and 10 in \cite{bosseComparingHumanModelbased2022}). With respect to the number of submissions from an individual participant, we observed similar patterns as \cite{bosseComparingHumanModelbased2022}: An individual forecaster participated on average in 2.6 weeks out of 13. The median number of submissions from a single individual was one, meaning that most forecasters dropped out after their first submission. Only five participants submitted a forecast in ten or more weeks and only two submitted a forecast in all thirteen weeks, one of whom is an author on this study. The number of direct forecasts was higher than the number of $R_t$ forecasts in all weeks (see Figure \ref{fig:num-forecasters}). 
 
-\begin{figure}[H]
+\begin{figure*}
 \centering
 \includegraphics[width=0.99\textwidth]{../output/figures/scores-and-forecasts.png}
-\caption{\bf{Test}}
-\label{fig:forecasts-scores}
-\end{figure}
+\caption{\bf{Forecasts and corresponding WIS for 2-week ahead forecasts of cases and deaths from COVID-19 in the UK.} A: 50\% prediction intervals (coloured bars) and observed values (black line and points) for cases and deaths on the natural scale. B: Corresponding WIS values, decomposed into dispersion, overprediction and underprediction. C: 50\% prediction intervals on the log scale, i.e. after applying the natural logarithm to all forecasts and observations. D: Corresponding WIS on the log scale, i.e. the WIS applied to the log-transformed forecasts and observations.} 
+\label{fig:forecasts-scores} 
+\end{figure*}
 
 
-\begin{figure}[H]
+\begin{figure*}
 \centering
 \includegraphics[width=0.99\textwidth]{../output/figures/performance.png}
-\caption{\bf{Test}}
+\caption{\bf{Predictive performance across forecast horizons.} A-D: WIS stratified by forecast horizon for cases and deaths on the natural and log scale. E, F: Empirical coverage of the 50\% and 90\% prediction intervals stratified by forecast horizon and target type.}
 \label{fig:performance}
-\end{figure}
+\end{figure*}
 
 \subsection*{Case forecasts}
 
-For two-week-ahead-forecasts of incident cases, the Forecast Hub ensemble outperformed all crowd forecasting ensembles as measured by the weighted interval score (WIS). On the natural scale, the WIS as a measure of the absolute distance between forecast and observation increases or decreases with the magnitude of the forecast target \cite{bosseTransformationForecastsEvaluating2023, bracherEvaluatingEpidemicForecasts2021}. Average scores are therefore dominated by performance around the peak when cases were highest, in particular by forecasts made on the 19th of July for the 31st of July \ref{fig:forecasts-scores}.$R_t$ forecasts tended to be higher than both the direct forecasts and the Forecast Hub ensemble, especially around the peak, and therefore showed the poorest performance in terms of WIS on the natural scale (see Figure \ref{fig:performance} and Table \ref{tab:scores}). When looking at WIS values on the log scale,
+For two-week-ahead-forecasts of incident cases, the Forecast Hub ensemble outperformed all crowd forecasting ensembles as measured by the WIS on the natural scale (see Figure \ref{fig:performance} and Table \ref{tab:scores}). On the natural scale, the WIS as a measure of the absolute distance between forecast and observation increases or decreases with the magnitude of the forecast target \cite{bosseTransformationForecastsEvaluating2023, bracherEvaluatingEpidemicForecasts2021}. Average scores are therefore dominated by performance around the peak when cases were highest, in particular by forecasts made on the 19th of July for the 31st of July (see Figure \ref{fig:forecasts-scores}). $R_t$ forecasts tended to be higher than both the direct forecasts and the Forecast Hub ensemble, especially around the peak, and therefore showed the poorest performance in terms of WIS on the natural scale (see Figure \ref{fig:performance} and Table \ref{tab:scores}). When looking at WIS values on the log scale,
 %(that is, when log-transforming forecasts and observations prior to applying the WIS), 
-scores are more equally distributed across the study period and more weight is given to forecasts in June and July which underpredicted the extent to which case number would rise. On the log scale, all human forecast ensembles performed sligthly better than the Forecast Hub ensemble. Similarly to what was observed previously for case forecasts \citep{bosseComparingHumanModelbased2022, sherrattPredictivePerformanceMultimodel2022a}, all forecasting approaches exhibited underdispersion, meaning that forecasts on average were too narrow and not uncertain enough, with empirical coverage below nominal coverage. This was the case most severely for the $R_t$ forecasts. 
+scores are more equally distributed across the study period and more weight is given to forecasts in June and July which underpredicted the extent to which case number would rise. On the log scale, all human forecast ensembles performed slightly better than the Forecast Hub ensemble. Similarly to what was observed previously for case forecasts \citep{bosseComparingHumanModelbased2022, sherrattPredictivePerformanceMultimodel2022a}, all forecasting approaches exhibited underdispersion, meaning that forecasts on average were too narrow and not uncertain enough, with empirical coverage below nominal coverage. Underdispersion was most severe for the $R_t$ forecasts. 
 
 \input performance-table.tex
 
-
 \subsection*{Death forecasts} 
 
-In terms of the WIS on the natural scale, direct human forecasts performed best, while $R_t$ forecasts performed significantly worse than all other approaches (see Figure \ref{fig:performance}B and Table \ref{tab:scores}). From June to the end of July, $R_t$ forecasts overpredicted deaths and were noticeable higher than other forecasts, whereas in August $R_t$ forecasts underpredicted deaths and were substantially lower than other forecasts. On the natural scale, the highest scores were concentrated towards the end of the study period, where death incidences were highest, while on the log scale, scores were more evenly distributed across the study period. On the log scale, direct human forecasts, the combined crowd ensemble and the Forecast Hub ensemble showed comparable performance, while $R_t$ forecasts performed again significantly worse. Note that the picture changes when looking at the revised data which was corrected upwards compared to the original data(DO WE WANT TO DO THAT? IS THAT MEANINGFUL?) (see Figure \ref{fig:data-revisions}). For the revised data, direct forecasts performed significantly worse than both the Forecast Hub ensemble and the $R_t$ forecasts on the log scale, while still performing better than the $R_t$ forecasts on the natural scale (see Table \ref{tab:scores-revised}). 
-%For revised data: On the natural scale, the largest scores occured at the end of the study period when deaths were highest. On the log scale, however, underprediction in June and July when death incidences were lower, received more weight and direct crowd forecast outperformed $R_t$ forecasts. 
+In terms of the WIS on the natural scale, direct human forecasts performed best, while $R_t$ forecasts performed significantly worse than all other approaches (see Figure \ref{fig:performance} and Table \ref{tab:scores}). From June to the end of July, $R_t$ forecasts overpredicted deaths and were noticeable higher than other forecasts, whereas in August $R_t$ forecasts underpredicted deaths and were substantially lower than other forecasts (see Figure \ref{fig:forecasts-scores}). On the natural scale, the highest scores were concentrated towards the end of the study period, where death incidences were highest, while on the log scale, scores were more evenly distributed across the study period. On the log scale, direct human forecasts, the combined crowd ensemble and the Forecast Hub ensemble showed comparable performance, while $R_t$ forecasts performed again significantly worse. 
+%Note that the picture changes when looking at the revised data which was corrected upwards compared to the original data(DO WE WANT TO DO THAT? IS THAT MEANINGFUL?) (see Figure \ref{fig:data-revisions}). For the revised data, direct forecasts performed significantly worse than both the Forecast Hub ensemble and the $R_t$ forecasts on the log scale, while still performing better than the $R_t$ forecasts on the natural scale (see Table \ref{tab:scores-revised}). 
+%For revised data: On the natural scale, the largest scores occurred at the end of the study period when deaths were highest. On the log scale, however, underprediction in June and July when death incidences were lower, received more weight and direct crowd forecast outperformed $R_t$ forecasts. 
 $R_t$ forecasts show strong underdispersion with empirical coverage of the 50\% prediction intervals being close to zero and smaller than 50\% for the 90\% prediction intervals (see Figure \ref{fig:performance} and Table \ref{tab:scores}). The Forecast Hub ensemble was overdispersed with empirical coverage exceeding nominal coverage, and for the direct human forecasts, empirical coverage was close to nominal coverage. 
 
 % For data revision: deaths seems broadly comparable for all human forecasts, whereas the Forecast Hub ensemble displays noticeably better coverage for deaths than for cases (Figure \ref{fig:performance}E, F). 
@@ -181,41 +189,57 @@ $R_t$ forecasts show strong underdispersion with empirical coverage of the 50\% 
 
 \subsection*{Rt forecasts}
 
-\begin{figure}[H]
+\begin{figure*}
 \centering
 \includegraphics[width=0.99\textwidth]{../output/figures/comparison-direct-rt-individual.png}
-\caption{\bf{Change in WIS for forecasters making either direct or $R_t$ forecasts. The absolute level for a given forecaster compared to others is not meaningful as forecasters differ in the amounts of forecasts they have submitted.}}
+\caption{\bf{Comparison of predictive performance of individual forecasters using either the direct forecasting or $R_t$ interface}. Comparisons are based only on those instances where forecasters have submitted a prediction using both interfaces. The absolute level for a given forecaster relative to others is not meaningful as forecasters differ in the amounts of forecasts they have submitted and when.}
 \label{fig:comparison-direct-rt-individual}
-\end{figure}
+\end{figure*}
 
-For cases, where participants could observe the case forecast implied their $R_t$ forecast, predictive performance was broadly comparable between direct and $R_t$ forecasts for most forecasters (see Figure \ref{comparison-direct-rt-individual}). For deaths, predictive performance was significantly worse for most forecasters, suggesting that the convolution from latent infections implied by the $R_t$ forecasts to deaths did not work well. IMPORTANTLY THOUGH, THE PICTURE DOES LOOK DIFFERNT WHEN LOOKING AT THE REVISED DATA. When looking at an ensemble including only those data points where a single forecaster has submitted both a direct and an $R_t$ forecast, we found a similar picture. Performance for cases was broadly comparable, with direct forecasts slighly better than $R_t$ forecasts on the natural scale and slightly worse on the log scale. On the log scale, the ensemble of $R_t$ forecasts performed significantly worse than the ensemble of corresponding direct forecasts both on the natural and on the log scale. 
+For cases, where participants could observe the case forecast implied by their $R_t$ forecast, predictive performance was similar between corresponding direct and $R_t$ forecasts for most forecasters who had submitted both (see Figure \ref{fig:comparison-direct-rt-individual}). For deaths, predictive performance of their $R_t$ forecasts was significantly worse than their corresponding direct forecasts for most forecasters, suggesting that the convolution from latent infections implied by the $R_t$ forecasts to deaths did not capture the relationship between cases and deaths accurately. This inadequacy may be related to the change in the case fatality ratio over the course of the study period due to the rise of the Delta variant starting in May 2021 in the UK.  
+%IMPORTANTLY THOUGH, THE PICTURE DOES LOOK DIFFERNT WHEN LOOKING AT THE REVISED DATA. 
 
+% When looking at an ensemble including only those data points where a single forecaster has submitted both a direct and an $R_t$ forecast, we found a similar picture. Performance for cases was broadly comparable, with direct forecasts slightly better than $R_t$ forecasts on the natural scale and slightly worse on the log scale. On the log scale, the ensemble of $R_t$ forecasts performed significantly worse than the ensemble of corresponding direct forecasts both on the natural and on the log scale. 
+
+\subsection*{Experts and Non-Experts}
+
+A comparison of "experts" and "non-experts" (self-reported experience in infectious disease modelling or a related field) showed broadly comparable performance, both on the natural and the log scale (see Figure \ref{fig:performance-experts}). Precise results were susceptible to whether or not $R_t$ forecasts were included, with performance of "experts" on deaths being slightly worse than performance of "non-experts" when only looking at direct forecasts. 
+
+% As a direct comparison of individual scores between "experts" and "non-experts" is biased by missing forecasts, 
 
 \section*{Discussion}
-The discussion should include the implications of the article results in view of prior work in this field.
+% The discussion should include the implications of the article results in view of prior work in this field.
 
-- hard to draw conclusions, performance changes depending on how you look at the data. Different horizons look different. 
-- headline result not supported? 
-- still some evidence that forecasting deaths is easier for computers
-- 
+% \paragraph{Summary}
 
-- Rt forecasting worked reasonably well. The interface was a bit clunky. Required more expertise. But a potential way to reduce the workload. 
+In this paper, we presented a follow-up study to \cite{bosseComparingHumanModelbased2022}, analysing human judgement forecasts of cases of and deaths from COVID-19 in the United Kingdom submitted to the European COVID-19 Forecast Hub between the 24th of May and the 16th of August 2021. Human judgement forecasts were generated using two different forecasting approaches, a) direct forecasts of cases and deahts and b) forecasts of the effective reproduction number $R_t$ which were mapped to cases using the renewal equation and convolved over a delay distribution to obtain deaths. We found that human judgement forecasts of case numbers, regardless of how they were obtained, showed performance broadly comparable to the ensemble of all forecasts submitted to the European Forecast Hub. For deaths, performance of direct human forecasts was comparable to that of the Forecast Hub ensemble, while $R_t$ forecasts performed significantly worse. Model rankings were not always robust, but sometimes changed depending on how forecasts are evaluated. For example, model rankings could differ when focusing on a different forecast horizon, or analysing WIS values on the natural scale vs. on the log scale (i.e. after log-transforming both forecasts and observations). 
 
-- interesting that combining Rt and direct forecasts for cases improved performance. 
+% \paragraph{Literature context}
 
+In their original study conducted in Germany and Poland, \citet{bosseComparingHumanModelbased2022} found that humans outperformed an ensemble of computational models when predicting cases, but not when predicting deaths. They hypothesised that computational models might have an advantage over human forecsters when predicting deaths, benefitting from the ability to model the delays and exact epidemiological relationships between different leading and lagged indicators. \citet{mcandrewChimericForecastingCombining2022} similarly found that humans performed comparably to an ensemble of computational models for cases, but not for predictions of deaths of COVID-19. We could not replicate these findings, and found that in terms of the WIS on the natural scale, direct human forecasts were slightly worse than the Forecast Hub ensemble for cases, and slightly better for deaths (although results for greater forecast horizons differ). Looking at scores on the log scale suggests overall comparable performance of the Hub ensemble and the our direct human forecasts on both cases and deaths. Relatively good performance of direct human judgement forecasts for death forecasts compared to previous studies may be related to the rise of the Delta variant in the UK starting in the beginning of May. The Delta variant had a higher case fatality ratio (CFR) than previous variants CITATION. Humans may have found it easier than computational models to adapt to the fact that the relationship between cases and deaths continuously changed during the study period. 
 
-Limitations
-- The tournament setting may have distorted results as people were more eager to participate
-- ensemble was better
+% \paragraph{Effort to recruit participants}. 
+
+Just like \citet{bosseComparingHumanModelbased2022} and \citet{farrowHumanJudgmentApproach2017}, this study struggled to recruit a large number of participants. Focused public outreach efforts such as creating a dedicated website, anouncing an official tournament, providing a public leaderboard, sending weekly emails with details on past performance and weekly announcements on Twitter, did noticeably increase participation compared to the previous study in Germany and Poland. Nevertheless, particaption was still relatively low and most forecasters only submitted a single forecast. \citet{mcandrewChimericForecastingCombining2022} had a higher number of participants, suggesting that making use of existing forecasting platforms such as Metaculus or Good Judgement Open that provide access to a more elegant user interface and a large existing user base may be helpful in recruting a larger number of participants. 
+
+% \paragraph{Expertise}
+
+In our study, an ensemble of only self-reported "experts" did not outperform "non-experts", and even performed worse when looking only at direct forecasts of deaths (but comparably when including $R_t$ forecasts). Past expert forecasts of COVID-19 \cite{recchiaHowWellDid2021} had found predictions from experts to outperform those of non-experts. Our results should be taken with care in light of low sample sizes, and given that expert status was self-reported. Furthermore, we only asked for professional involvement in a field related to infectious disease modelling, not specifically for familiarity with modelling of COVID-19 in the UK, and only offered participants a binary choice. 
+
+% \paragraph{Rt forecasting}
+
+This study explored a novel method of forecasting infectious diseases that combines a human forecast of the effective reproduction number $R_t$ with epidemiological modelling to map the $R_t$ forecast to a forecast of cases and deaths. One appeal of this approach is that the forecaster only needs to provide one quantity that directly represents what she believes about the force of the epidemic in the future. Computational modelling would then take care of dealing with details such as reporting delays, generation intervals, or the relationship between different indicators. This could help reduce cognitive load, at least for forecasters who have an intuitive understanding of $R_t$. Anecdotally, forecasters familiar to the authors reported high satisfaction with the forecasting experience. In our study, $R_t$ forecasts of cases were comparable to direct forecasts. However, given that forecasters could simulate cases in the app, it is also possible that forecasters were in reality just forecasting cases and merely updated their $R_t$ forecast so they would obtain the desired case forecast. 
+$R_t$ forecasts of deaths (which forecasters could not see in the app) were noticeably worse than direct forecasts of deaths. \textbf{SAM TO THE RESCUE} The relationship between infections and deaths used to map from $R_t$ to deaths was automatically estimated from past data, and forecasters had no way of adjusting it. The rise of the Delta variant with a subsequent gradual change in the case fatality ratio (CFR) may have affected $R_t$ forecasts, as the changing CFR was not directly accounted for and estimated distributions from past data only slowly updated to new circumstances. One potential solution for this would be to allow humans to adjust the CFR and other model parameters manually as part of their forecast. 
+
+% \paragraph{Susceptibility of results}
+
+Overall, results of our study should be taken with some caution due to a number of important limitations. Firstly, our study was restricted to one location and to a relatively short period of thirteen weeks. Secondly, there are many confounding factors that can influence results. These include for example the fact that different participants made forecasts at different points in time and that subgroups of interest (e.g. "experts", or $R_t$ forecasts) had different numbers of forecasters. In addition, there are many researcher degrees of freedom that influence results, for example how indidual forecasts are combined to an ensemble and how forecasts are evaluated. Prizes to the human forecasters, for example were paid out based on the combined WIS on the log scale across all horizons and forecast targets. Had we chosen to instead measure WIS on the natural scale, rankings and payouts would have been different. 
 
 
 \section*{Conclusions}
-Please state what you think are the main conclusions that can be realistically drawn from the findings in the paper, taking care not to make claims that cannot be supported.
+% Please state what you think are the main conclusions that can be realistically drawn from the findings in the paper, taking care not to make claims that cannot be supported.
 
-Seems that a model of human forecasters is alright. Combining human and model based output is still interesting. 
-interface difficult
-
-
+Overall, the results of our study seem broadly consistent with previous studies on human judgement forecasting of COVID-19 and suggest that human crowd ensembles can produce forecasts that are on par with those of an ensemble of computational models. Our findings don't suggest that humans are necessarily at a general disadvantage compared to computational models at predicting death numbers, but evidence in both ways is limited. Combining human judgement and epidemiological modelling by mapping $R_t$ forecasts to case and death numbers has not yielded competitive forecasts for deaths. However, the approach has appealing properties and better results are likely achievable. More research is required to obtain a better understanding of the role of subject matter expertise in infectious disease forecasting. Our results underline that it is difficult to evaluate forecast performance devoid of context that helps inform what a good or a bad forecast is. Different ways to look at the data let different forecasts appear good or bad. Forecast evaluation therefore either needs to be clearly informed by the needs of forecast consumers to determine what a good forecast is, or it needs a broad array of perspectives to provide a wholistic picture. 
 
 
 
@@ -255,54 +279,78 @@ Acknowledgement to all forecasters
 
 
 
-% =================================== Appendix =============================== %
-
-
-\appendix
-\section*{Supplementary information}
-% \renewcommand{\thefigure}{SI.\arabic{figure}}
-% \setcounter{figure}{0}
-% \renewcommand{\thetable}{SI.\arabic{table}} \setcounter{table}{0}
-
-
-\subsection*{Weighted interval score}
-label{sec:wis}
-The weighted interval score (smaller values are better) is a proper scoring rule for quantile forecasts. It converges to the continuos ranked probability score (which itself is a generalisation of the absolute error to probabilistic forecasts) for an increasing number of intervals. The score can be decomposed into a dispersion (uncertainty) component and penalties for over- and underprediction. For a single interval, the score is computed as 
-  $$IS_\alpha(F,y) = (u-l) + \frac{2}{\alpha} \cdot (l-y) \cdot 1(y \leq l) + \frac{2}{\alpha} \cdot (y-u) \cdot 1(y \geq u), $$ 
-  where $1()$ is the indicator function, $y$ is the true value, and $l$ and $u$ are the $\frac{\alpha}{2}$ and $1 - \frac{\alpha}{2}$ quantiles of the predictive distribution $F$, i.e. the lower and upper bound of a single prediction interval. For a set of $K$ prediction intervals and the median $m$, the score is computed as a weighted sum, 
-  $$WIS = \frac{1}{K + 0.5} \cdot \left( w_0 \cdot |y - m| + \sum_{k = 1}^{K} w_k \cdot IS_{\alpha}(F, y) \right), $$
-  where $w_k$ is a weight for every interval. Usually, $w_k = \frac{\alpha_k}{2}$ and $w_0 = 0.5$. 
-  
-  
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.99\textwidth]{../output/figures/screenshot-crowd-classical.png}
-\caption{\bf{Screenshot of the direct forecasting interface.}}
-\label{fig:screenshot-classical}
-\end{figure}
-
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.99\textwidth]{../output/figures/screenshot-crowd-rt-app.png}
-\caption{\bf{Screenshot of the $R_t$ forecasting interface.}}
-\label{fig:screenshot-rt}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.99\textwidth]{../output/figures/num-forecasters.png}
-\caption{\bf{Number of forecasts across the study period.}}
-\label{fig:num-forecasters}
-\end{figure}
-
-
+% ================================= References =============================== %
 \clearpage
 
 {\small\bibliographystyle{unsrtnat}
 \bibliography{software, uk-forecasting-challenge}}
 
 \bigskip
+\clearpage
+
+% =================================== Appendix =============================== %
+
+% Make sure that Appendix tables and Figures are separate
+% https://tex.stackexchange.com/questions/520193/is-it-possible-to-except-figures-in-the-appendix-from-being-repositioned-by-endf
+\processdelayedfloats
+\csname efloat@restorefloats\endcsname
+
+\appendix
+\section*{Supplementary information}
+\renewcommand{\thefigure}{SI.\arabic{figure}}
+\setcounter{figure}{0}
+\renewcommand{\thetable}{SI.\arabic{table}} \setcounter{table}{0}
+
+
+\subsection*{Weighted interval score}
+\label{sec:wis}
+
+The weighted interval score (smaller values are better) is a proper scoring rule for quantile forecasts. It converges to the continuous ranked probability score (which itself is a generalisation of the absolute error to probabilistic forecasts) for an increasing number of intervals. The score can be decomposed into a dispersion (uncertainty) component and penalties for over- and underprediction. For a single interval, the score is computed as 
+  $$IS_\alpha(F,y) = (u-l) + \frac{2}{\alpha} \cdot (l-y) \cdot 1(y \leq l) + \frac{2}{\alpha} \cdot (y-u) \cdot 1(y \geq u), $$ 
+  where $1()$ is the indicator function, $y$ is the true value, and $l$ and $u$ are the $\frac{\alpha}{2}$ and $1 - \frac{\alpha}{2}$ quantiles of the predictive distribution $F$, i.e. the lower and upper bound of a single prediction interval. For a set of $K$ prediction intervals and the median $m$, the score is computed as a weighted sum, 
+  $$WIS = \frac{1}{K + 0.5} \cdot \left( w_0 \cdot |y - m| + \sum_{k = 1}^{K} w_k \cdot IS_{\alpha}(F, y) \right), $$
+  where $w_k$ is a weight for every interval. Usually, $w_k = \frac{\alpha_k}{2}$ and $w_0 = 0.5$. 
+  
+
+\input SI/epinow2.tex
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.99\textwidth]{../output/figures/plot-data.png}
+\caption{\bf{Observed cases and deaths of COVID-19 in the UK}. A: Observed daily (bars) and weekly (black lines and points) numbers of cases and deaths as available through the European Forecast Hub when the study concluded in 2021. Daily numbers were multiplied by seven in order to appear on the same scale as weekly numbers. Red dots represent days for which the original data and the revised data disagreed by more than five percent. B: Revised data available as of February 14 2023. In August, Johns Hopkins University that provided the data switched the data stream for their death forecasts to reflect the number of death certificates that mentioned COVID-19 rather than the number of people who died within 28 days of a positive test. C: Difference between the original and revised weekly death numbers.}
+\label{fig:plot-data}
+\end{figure*}
+
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.99\textwidth]{../output/figures/screenshot-crowd-classical.png}
+\caption{\bf{Screenshot of the direct forecasting interface.}}
+\label{fig:screenshot-classical}
+\end{figure*}
+
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.99\textwidth]{../output/figures/screenshot-crowd-rt-app.png}
+\caption{\bf{Screenshot of the $R_t$ forecasting interface.}}
+\label{fig:screenshot-rt}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.99\textwidth]{../output/figures/num-forecasters.png}
+\caption{\bf{Number of forecasts across the study period.}}
+\label{fig:num-forecasters}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.99\textwidth]{../output/figures/performance-expert.png}
+\caption{\bf{Predictive performance of self-reported "experts" and "non-experts" across forecast horizons.} Forecasts from "experts" and "non-experts" were combined to two separate median ensembles, including both direct and $R_t$ forecasts. A-D: WIS stratified by forecast horizon for cases and deaths on the natural and log scale. E, F: Empirical coverage of the 50\% and 90\% prediction intervals stratified by forecast horizon and target type.}
+\label{fig:performance-experts}
+\end{figure*}
+
 
 % See this guide for more information on BibTeX:
 % http://libguides.mit.edu/content.php?pid=55482&sid=406343
