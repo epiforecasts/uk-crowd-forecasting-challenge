@@ -107,10 +107,10 @@
 % \tableofcontents
 % }
 % \hypertarget{text-s1.-further-details-on-the-semi-mechanistic-forecasting-models}{%
-% \subsection{Text S1. Further details on the semi-mechanistic forecasting models}\label{text-s1.-further-details-on-the-semi-mechanistic-forecasting-models}}
+% \subsection*{Text S1. Further details on the semi-mechanistic forecasting models}\label{text-s1.-further-details-on-the-semi-mechanistic-forecasting-models}}
 
 \hypertarget{renewal-equation-model}{%
-\subsubsection{Renewal equation model}\label{renewal-equation-model}}
+\subsubsection*{Renewal equation model}\label{renewal-equation-model}}
 
 The model was initialised prior to the first observed data point by assuming constant exponential growth for the mean of assumed delays from infection to case report.
 
@@ -197,7 +197,7 @@ with the following priors,
 with \(\alpha\), \(\mu\), \(\sigma\), and \(\phi\) truncated to be greater than 0 and with \(\xi\) normalised such that \(\sum_{\tau = 0}^{30} \xi(\tau | \mu, \sigma) = 1\).
 
 \hypertarget{model-fitting}{%
-\subsubsection{Model fitting}\label{model-fitting}}
+\subsubsection*{Model fitting}\label{model-fitting}}
 
 Both models were implemented using the \texttt{EpiNow2} R package (version 1.3.3) (Abbott, Hellewell, et al. 2020). Each forecast target was fitted independently for each model using Markov-chain Monte Carlo (MCMC) in stan (Stan Development Team 2020). A minimum of 4 chains were used with a warmup of 250 samples for the renewal equation-based model and 1000 samples for the convolution model. 2000 samples total post warmup were used for the renewal equation model and 4000 samples for the convolution model. Different settings were chosen for each model to optimise compute time contingent on convergence. Convergence was assessed using the R hat diagnostic (Stan Development Team 2020). For the convolution model forecast the case forecast from the renewal equation model was used in place of observed cases beyond the forecast horizon using 1000 posterior samples. 12 weeks of data was used for both models though only 3 weeks of data were included in the likelihood for the convolution model.
 
