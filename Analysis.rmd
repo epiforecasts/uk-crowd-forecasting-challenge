@@ -26,7 +26,6 @@ library(tidyr)
 library(forcats)
 
 colors <- RColorBrewer::brewer.pal(n = 9, name = "Set1")
-
 ```
 
 
