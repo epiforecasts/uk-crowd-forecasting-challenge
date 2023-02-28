@@ -477,13 +477,28 @@ scores |>
 
 
 
+```{r}
+scores_standardised <- scores |>
+  filter(scale %in% c("log", "natural")) |>
+  filter(model %in% models_non_human) |>
+  summarise_scores(by = c("model", "target_type", "scale", "horizon", "forecast_date")) |>
+  filter(horizon == 2) |>
+  group_by(target_type, scale) |>
+  mutate(interval_score = (interval_score - mean(interval_score)) / sd(interval_score)) |>
+  group_by(model, target_type, scale) |>
+  summarise(mean = mean(interval_score)) |>
+  pivot_wider(names_from = scale, values_from = mean, names_prefix = "stand_") |>
+  arrange(target_type, model)
+```
+
+
 
 
 
 Table with performance
 
 ```{r, performance-table}
-make_performance_table <- function(scores) {
+make_performance_table <- function(scores, standardised_scores) {
   scores |>
     filter(scale %in% c("log", "natural")) |>
     summarise_scores(by = c("model", "target_type", "scale", "horizon")) |>
@@ -491,8 +506,12 @@ make_performance_table <- function(scores) {
     select(model, target_type, scale, interval_score, coverage_50, coverage_90) |>
     pivot_wider(names_from = scale, values_from = interval_score) |>
     select(model, target_type, natural, log, coverage_50, coverage_90) |>
+    inner_join(standardised_scores) |>
     mutate(across(c(where(is.numeric)), signif, digits = 2)) |>
     arrange(target_type, model) |>
+    mutate(natural = paste0(natural, " (", stand_natural, ")"), 
+           log = paste0(log, " (", stand_log, ")")) |>
+    select(-stand_log, -stand_natural) |>
     kable(format = "latex", booktabs = TRUE, 
           align = c("l", "l", rep("c", 4)),
           caption = "Performance for two-week-ahead forecasts \\label{tab:scores}",
@@ -503,10 +522,10 @@ make_performance_table <- function(scores) {
                                     "hold_position")) 
 }
 
-
 scores |>
   filter(model %in% models_non_human) |>
-  make_performance_table() |>
+  make_performance_table(standardised_scores = scores_standardised) %>%
+  gsub("\\{table\\}", "\\{table\\*\\}", x = .) |>
   cat(file = 'manuscript/performance-table.tex')
 
 scores_revised |>
