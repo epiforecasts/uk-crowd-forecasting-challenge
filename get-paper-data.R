@@ -192,8 +192,8 @@ flag_anomalies <- function(data, analysis_date = Sys.Date()) {
 }
 
 # -------------------- helper function to clean forecasts -------------------- #
-clean_forecasts <- function(forecasts) {
-  forecasts |>
+clean_forecasts <- function(forecasts, filter_epinow2 = TRUE) {
+  out <- forecasts |>
     mutate(target_type = ifelse(grepl("death", target), "Deaths", "Cases")) |>
     mutate(forecast_date := calc_submission_due_date(forecast_date)) |>
     mutate(target_end_date = as.character(target_end_date)) |>
@@ -205,8 +205,14 @@ clean_forecasts <- function(forecasts) {
            horizon, model, target_end_date, target, target_type, expert) |>
     filter(forecast_date >= "2021-05-24", 
            forecast_date <= "2021-08-16") |>
-    filter(model != "EpiNow2") |>
     select(-target)
+  
+  if (filter_epinow2) {
+    out <- out |> 
+      filter(model != "EpiNow2")
+  }
+  
+  return(out)
 }
 
 
@@ -298,6 +304,14 @@ load_forecasts <- function(directories,
 if (file.exists("data/forecast-data.csv")) {
   data <- fread("data/forecast-data.csv")
 } else {
+  
+  epinow2_data <- 
+    load_forecasts(directories = here("data", "submissions", "rt-forecasts"), 
+                   model_names = "EpiNow2") |>
+    mutate(expert = NA) |>
+    clean_forecasts(filter_epinow2 = FALSE)
+  
+  fwrite(epinow2_data, file = "data/epinow2-forecasts.csv")
   
   forecasts <- load_forecasts(
     directories = c(

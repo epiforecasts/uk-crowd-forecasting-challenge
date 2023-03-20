@@ -217,6 +217,16 @@ plot_number_forecasters <- avail |>
 ggsave("output/figures/num-forecasters.png", plot = plot_number_forecasters, 
        width = 7, height = 3.5)
 
+avail |> 
+  group_by(target_type, type) |>
+  summarise(
+    mean = mean(`Number forecasts`), 
+    median = median(`Number forecasts`), 
+    min = min(`Number forecasts`), 
+    max = max(`Number forecasts`)
+  )
+  
+
 ## number of unique participants
 unique_participants <- gsub("\ \\(Rt\\)", "", models_human) |> unique()
 length(unique_participants)
@@ -267,7 +277,9 @@ plot_performance <- function(scores) {
     df |>
       filter(scale == scale_filter) |>
       filter(target_type == type_filter) |>
-      ggplot(aes(x = reorder(Model, (interval_score)), y = value, fill = Model, 
+      ggplot(aes(x = Model, 
+                 # x = reorder(Model, (interval_score)), 
+                 y = value, fill = Model, 
                  group = Model, alpha = `WIS components`)) + 
       scale_alpha_manual(values = c(1, 0.1, 0.6)) +
       # scale_fill_manual(values = vals) + 
@@ -278,6 +290,7 @@ plot_performance <- function(scores) {
       facet_wrap(~ horizon, ncol = 4, 
                  strip.position = "bottom") + 
       theme_scoringutils() + 
+      scale_y_continuous(label = label_fn) +
       # theme(axis.text.x = element_blank()) + 
       theme(axis.text.x = element_blank(),
             axis.line.x = element_blank(), 
@@ -326,6 +339,9 @@ p_performance <- plot_performance(
 
 ggsave("output/figures/performance.png", plot = p_performance, 
        width = 7, height = 6)
+
+
+scores$model |> unique()
 
 
 ```
@@ -494,6 +510,26 @@ scores_summarised <- scores |>
 
 
 
+# Sinificance and bootstrap analysis
+
+```{r}
+scores |>
+  filter(model %in% models_non_human) |>
+  filter(horizon == 2) |>
+  summarise_scores() |>
+  select(model, forecast_date, type_and_scale, interval_score) |>
+  pivot_wider(names_from = model, values_from = interval_score) |>
+  group_by(type_and_scale) |>
+  summarise(p1 = wilcox.test(`EuroCOVIDhub-ensemble`,`crowd-direct`, paired = TRUE)$p.value, 
+            p2 = wilcox.test(`EuroCOVIDhub-ensemble`,`crowd-ensemble`, paired = TRUE)$p.value, 
+            p3 = wilcox.test(`EuroCOVIDhub-ensemble`,`crowd-rt`, paired = TRUE)$p.value)
+
+
+wilcox.test(1:20, 2:21) |> str()
+
+```
+
+
 
 
 Table with performance
@@ -550,6 +586,12 @@ scores |>
 #   cat(file = 'manuscript/performance-table-comparison-rt.tex')
 
 ```
+
+```{r}
+epinow2_data |>
+  score()
+```
+
 
 
 
