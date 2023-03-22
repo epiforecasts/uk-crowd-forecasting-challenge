@@ -585,6 +585,8 @@ scores |>
   cat(file = 'manuscript/performance-table-horizon-4.tex')
 
 
+
+
 # scores_revised |>
 #   filter(model %in% models_non_human) |>
 #   make_performance_table() |>
@@ -777,8 +779,38 @@ expert_ensemble$forecasts |>
   facet_wrap(~ target_type)
 
 
+expert_scores_summarised <- expert_ensemble$scores |>
+  filter(scale %in% c("log", "natural")) |>
+  summarise_scores(by = c("model", "target_type", "scale", "horizon", "forecast_date")) |>
+  group_by(target_type, scale, horizon) |>
+  # mutate(interval_score = (interval_score - mean(interval_score)) / sd(interval_score)) |>
+  group_by(model, target_type, scale, horizon) |>
+  summarise(mean = mean(interval_score), 
+            sd = sd(interval_score)) |>
+  pivot_wider(id_cols = c(model, target_type, horizon), 
+              names_from = scale, values_from = c(mean, sd), names_prefix = "stand_") |>
+  arrange(target_type, model)
+
+
 expert_ensemble$scores |>
-   make_performance_table() 
+   make_performance_table(
+     scores_summarised = expert_scores_summarised,
+    cap = "Performance for two-week-ahead forecasts of experts and non-experts. Standard deviations are given in brackets. \\label{tab:scores-experts}"
+    ) %>%
+  gsub("\\{table\\}", "\\{table\\*\\}", x = .) |>
+  cat(file = 'manuscript/performance-table-experts.tex')
+
+expert_ensemble$scores |>
+   make_performance_table(
+     scores_summarised = expert_scores_summarised,
+    cap = "Performance for four-week-ahead forecasts of experts and non-experts. Standard deviations are given in brackets. \\label{tab:scores-experts-4}"
+    ) %>%
+  gsub("\\{table\\}", "\\{table\\*\\}", x = .) |>
+  cat(file = 'manuscript/performance-table-experts-4.tex')
+
+
+
+
 
 p_scores_expert <- plot_performance(expert_ensemble$scores)
 ggsave("output/figures/performance-expert.png", 
