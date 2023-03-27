@@ -31,8 +31,6 @@ library(forcats)
 colors <- RColorBrewer::brewer.pal(n = 9, name = "Set1")
 
 
-
-
 # Helper functions
 # ==============================================================================
 
@@ -69,6 +67,11 @@ models_all <- models_all[!models_all %in% c("", "EpiExpert-ensemble")]
 models_non_human <- c("crowd-ensemble", "crowd-direct", "crowd-rt",
                       "EuroCOVIDhub-ensemble")
 models_human <- models_all[!(models_all %in% models_non_human)]
+models_non_human <- factor(models_non_human, 
+                           levels = c("EuroCOVIDhub-ensemble", 
+                                      "crowd-ensemble", 
+                                      "crowd-direct", 
+                                      "crowd-rt"))
 models_rt <- models_human[grepl("(Rt)", models_human)]
 models_direct <- models_human[!grepl("(Rt)", models_human)]
 models_expert <- forecasts |>
@@ -215,8 +218,12 @@ make_performance_table <- function(
     # mutate(interval_score = paste0(interval_score, " (", relative, "), sd: ", wis_sd)) |>
     # select(-relative, -wis_sd) |>
     pivot_wider(names_from = scale, values_from = c(interval_score, wis_sd, relative)) |>
+    mutate(model = factor(model, labels = levels(models_non_human))) |>
     arrange(target_type, model) |>
-    select(model, target_type, interval_score_natural, relative_natural, wis_sd_natural, interval_score_log, relative_log, wis_sd_log, coverage_50, coverage_90) |>
+    select(model, target_type, 
+           interval_score_natural, relative_natural, wis_sd_natural, 
+           interval_score_log, relative_log, wis_sd_log, 
+           coverage_50, coverage_90) |>
     kable(format = "latex", booktabs = TRUE, 
           align = c("l", "l", rep("c", 4)),
           caption = cap,
@@ -225,7 +232,7 @@ make_performance_table <- function(
                         "Coverage 50%", "Coverage 90%")) |> 
     kable_styling(latex_options = c("scale_down", 
                                     "hold_position")) |>
-    add_header_above(c(" " = 2, "WIS" = 3, "WIS - log scale" = 3, " " = 2)) 
+    add_header_above(c(" " = 2, "WIS - natural" = 3, "WIS - log scale" = 3, " " = 2)) 
 }
 
 scores |>
@@ -329,8 +336,10 @@ plot_performance <- function(scores) {
   return(p_performance)
 }
 
-p_performance <- plot_performance(
-  filter(scores, model %in% models_non_human))
+p_performance <- scores |>
+  filter(model %in% models_non_human) |>
+  mutate(model = factor(model, labels = levels(models_non_human))) |>
+  plot_performance()
 
 ggsave("output/figures/performance.png", plot = p_performance, 
        width = 7, height = 6)
@@ -450,8 +459,10 @@ plot_scores_and_pred <- function(forecasts, scores) {
 }
 
 p_scores_and_pred <- plot_scores_and_pred(
-  filter(forecasts, model %in% models_non_human),
-  filter(scores, model %in% models_non_human)
+  filter(forecasts, model %in% models_non_human) |>
+    mutate(model = factor(model, labels = levels(models_non_human))),
+  filter(scores, model %in% models_non_human) |>
+    mutate(model = factor(model, labels = levels(models_non_human)))
 )
 
 ggsave("output/figures/scores-and-forecasts.png", plot = p_scores_and_pred, 
