@@ -3,19 +3,21 @@
 \caption{Performance for four-week-ahead forecasts. Standard deviations are given in brackets. \label{tab:scores-4}}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{llcccc}
+\begin{tabular}[t]{llccccllcc}
 \toprule
-Model & Target & WIS & WIS (log scale) & Coverage 50\% & Coverage 90\%\\
+\multicolumn{2}{c}{ } & \multicolumn{3}{c}{WIS} & \multicolumn{3}{c}{WIS - log scale} & \multicolumn{2}{c}{ } \\
+\cmidrule(l{3pt}r{3pt}){3-5} \cmidrule(l{3pt}r{3pt}){6-8}
+Model & Target & abs. & rel. & sd & abs. & rel. & sd & Coverage 50\% & Coverage 90\%\\
 \midrule
-EuroCOVIDhub-ensemble & Cases & 82k (75k) & 0.45 (0.3) & 0.23 & 0.62\\
-crowd-direct & Cases & 100k (130k) & 0.47 (0.41) & 0.31 & 0.62\\
-crowd-ensemble & Cases & 98k (120k) & 0.45 (0.35) & 0.23 & 0.62\\
-crowd-rt & Cases & 110k (120k) & 0.47 (0.33) & 0.23 & 0.46\\
+EuroCOVIDhub-ensemble & Cases & 82k & 1 & 75k & 0.45 & 1 & 0.3 & 0.23 & 0.62\\
+crowd-direct & Cases & 100k & 1.2 & 130k & 0.47 & 1.1 & 0.41 & 0.31 & 0.62\\
+crowd-ensemble & Cases & 98k & 1.2 & 120k & 0.45 & 1 & 0.35 & 0.23 & 0.62\\
+crowd-rt & Cases & 110k & 1.3 & 120k & 0.47 & 1.1 & 0.33 & 0.23 & 0.46\\
 \addlinespace
-EuroCOVIDhub-ensemble & Deaths & 85 (60) & 0.21 (0.08) & 0.77 & 0.92\\
-crowd-direct & Deaths & 88 (81) & 0.22 (0.14) & 0.38 & 0.77\\
-crowd-ensemble & Deaths & 98 (100) & 0.19 (0.13) & 0.54 & 0.77\\
-crowd-rt & Deaths & 150 (110) & 0.31 (0.17) & 0.15 & 0.46\\
+EuroCOVIDhub-ensemble & Deaths & 85 & 1 & 60 & 0.21 & 1 & 0.08 & 0.77 & 0.92\\
+crowd-direct & Deaths & 88 & 1 & 81 & 0.22 & 1.1 & 0.14 & 0.38 & 0.77\\
+crowd-ensemble & Deaths & 98 & 1.2 & 100 & 0.19 & 0.95 & 0.13 & 0.54 & 0.77\\
+crowd-rt & Deaths & 150 & 1.8 & 110 & 0.31 & 1.5 & 0.17 & 0.15 & 0.46\\
 \bottomrule
 \end{tabular}}
 \end{table*}
