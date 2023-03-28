@@ -194,12 +194,15 @@ make_performance_table <- function(
     scores, 
     hor = 2, 
     model_filter = models_non_human,
+    baseline = "EuroCOVIDhub-ensemble",
     cap = "Performance for two-week-ahead forecasts \\label{tab:scores}"
 ) {
   df <- scores |>
     filter(scale %in% c("log", "natural"), 
            model %in% model_filter, 
            horizon %in% hor)
+  
+  n_linesep <- length(unique(df$model))
   
   sd <- df |>
     summarise_scores(by = c("model", "target_type", "scale", "horizon"), 
@@ -212,13 +215,12 @@ make_performance_table <- function(
     select(model, target_type, scale, interval_score, coverage_50, coverage_90, horizon) |>
     inner_join(sd) |>
     group_by(target_type, scale) |>
-    mutate(relative = interval_score / interval_score[model == "EuroCOVIDhub-ensemble"]) |>
+    mutate(relative = interval_score / interval_score[model == baseline]) |>
     mutate(across(c(where(is.numeric)), \(x) round(signif(x, digits = 3), digits = 2))) |>
     mutate(across(c(where(is.numeric)), \(x) label_fn(x))) |> 
     # mutate(interval_score = paste0(interval_score, " (", relative, "), sd: ", wis_sd)) |>
     # select(-relative, -wis_sd) |>
     pivot_wider(names_from = scale, values_from = c(interval_score, wis_sd, relative)) |>
-    mutate(model = factor(model, levels = levels(models_non_human))) |>
     arrange(target_type, model) |>
     select(model, target_type, 
            interval_score_natural, relative_natural, wis_sd_natural, 
@@ -227,7 +229,7 @@ make_performance_table <- function(
     kable(format = "latex", booktabs = TRUE, 
           align = c("l", "l", rep("c", 4)),
           caption = cap,
-          linesep = c('', '', '', '\\addlinespace'),
+          linesep = c(rep('', (n_linesep - 1)), '\\addlinespace'),
           col.names = c("Model", "Target", "abs.", "rel.", "sd", "abs.", "rel.", "sd", 
                         "Coverage 50%", "Coverage 90%")) |> 
     kable_styling(latex_options = c("scale_down", 
@@ -237,6 +239,7 @@ make_performance_table <- function(
 
 scores |>
   filter(model %in% models_non_human) |>
+  mutate(model = factor(model, levels = levels(models_non_human))) |>
   make_performance_table(
     cap = "Performance for two-week-ahead forecasts. Values have been cut to three significant digits and rounded.  \\label{tab:scores}"
     ) %>%
@@ -245,6 +248,7 @@ scores |>
 
 scores |>
   filter(model %in% models_non_human) |>
+  mutate(model = factor(model, levels = levels(models_non_human))) |>
   make_performance_table(
     hor = 4, 
     cap = "Performance for four-week-ahead forecasts. Values have been cut to three significant digits and rounded \\label{tab:scores-4}"
@@ -763,9 +767,11 @@ expert_scores_summarised <- expert_ensemble$scores |>
 
 
 expert_ensemble$scores |>
-  rbind(filter(scores, model == "EuroCOVIDhub-ensemble"), fill = TRUE) |>
+  rbind(filter(scores, model == "crowd-ensemble"), fill = TRUE) |>
+  mutate(model = factor(model, levels = c("crowd-ensemble", "Expert", "Non-Expert"))) |>
    make_performance_table(
-     model_filter = c("Expert", "Non-Expert", "EuroCOVIDhub-ensemble"),
+     model_filter = c("Expert", "Non-Expert", "crowd-ensemble"),
+     baseline = "crowd-ensemble",
     cap = "Performance for two-week-ahead forecasts of experts and non-experts. Values have been cut to three significant digits and rounded. \\label{tab:scores-experts}"
     ) %>%
   gsub("\\{table\\}", "\\{table\\*\\}", x = .) |>
