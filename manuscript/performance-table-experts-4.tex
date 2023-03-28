@@ -1,16 +1,21 @@
 \begin{table*}[!h]
 
-\caption{Performance for four-week-ahead forecasts of experts and non-experts. Standard deviations are given in brackets. \label{tab:scores-experts-4}}
+\caption{Performance for four-week-ahead forecasts of experts and non-experts. Values have been cut to three significant digits and rounded. \label{tab:scores-experts-4}}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{llcccc}
+\begin{tabular}[t]{llccccllcc}
 \toprule
-Model & Target & WIS & WIS (log scale) & Coverage 50\% & Coverage 90\%\\
+\multicolumn{2}{c}{ } & \multicolumn{3}{c}{WIS - natural} & \multicolumn{3}{c}{WIS - log scale} & \multicolumn{2}{c}{ } \\
+\cmidrule(l{3pt}r{3pt}){3-5} \cmidrule(l{3pt}r{3pt}){6-8}
+Model & Target & abs. & rel. & sd & abs. & rel. & sd & Coverage 50\% & Coverage 90\%\\
 \midrule
-Expert & Cases & 43k (75k) & 0.24 (0.27) & 0.46 & 0.77\\
-Non-Expert & Cases & 43k (67k) & 0.26 (0.25) & 0.31 & 0.54\\
-Expert & Deaths & 41 (42) & 0.16 (0.15) & 0.54 & 0.77\\
-Non-Expert & Deaths & 46 (57) & 0.13 (0.083) & 0.46 & 0.77\\
+EuroCOVIDhub-ensemble & Cases & 38.2k & 1 & 55.6k & 0.25 & 1 & 0.22 & 0.38 & 0.69\\
+ & Cases & 42.7k & 1.12 & 74.9k & 0.24 & 0.98 & 0.28 & 0.46 & 0.77\\
+ & Cases & 43.1k & 1.13 & 67k & 0.26 & 1.04 & 0.25 & 0.31 & 0.54\\
+EuroCOVIDhub-ensemble & Deaths & 37.9 & 1 & 26.9 & 0.13 & 1 & 0.04 & 0.77 & 1\\
+\addlinespace
+ & Deaths & 41.2 & 1.09 & 41.8 & 0.16 & 1.25 & 0.15 & 0.54 & 0.77\\
+ & Deaths & 45.9 & 1.21 & 56.8 & 0.13 & 1.03 & 0.08 & 0.46 & 0.77\\
 \bottomrule
 \end{tabular}}
 \end{table*}

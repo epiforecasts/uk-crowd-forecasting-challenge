@@ -238,7 +238,7 @@ make_performance_table <- function(
 scores |>
   filter(model %in% models_non_human) |>
   make_performance_table(
-    cap = "Performance for two-week-ahead forecasts. Vallues have been cut to three significant digits and rounded.  \\label{tab:scores}"
+    cap = "Performance for two-week-ahead forecasts. Values have been cut to three significant digits and rounded.  \\label{tab:scores}"
     ) %>%
   gsub("\\{table\\}", "\\{table\\*\\}", x = .) |>
   cat(file = 'manuscript/performance-table.tex')
@@ -247,7 +247,7 @@ scores |>
   filter(model %in% models_non_human) |>
   make_performance_table(
     hor = 4, 
-    cap = "Performance for four-week-ahead forecasts. Vallues have been cut to three significant digits and rounded \\label{tab:scores-4}"
+    cap = "Performance for four-week-ahead forecasts. Values have been cut to three significant digits and rounded \\label{tab:scores-4}"
   ) %>%
   gsub("\\{table\\}", "\\{table\\*\\}", x = .) |>
   cat(file = 'manuscript/performance-table-horizon-4.tex')
@@ -763,28 +763,30 @@ expert_scores_summarised <- expert_ensemble$scores |>
 
 
 expert_ensemble$scores |>
+  rbind(filter(scores, model == "EuroCOVIDhub-ensemble"), fill = TRUE) |>
    make_performance_table(
-     scores_summarised = expert_scores_summarised,
-    cap = "Performance for two-week-ahead forecasts of experts and non-experts. Standard deviations are given in brackets. \\label{tab:scores-experts}"
+     model_filter = c("Expert", "Non-Expert", "EuroCOVIDhub-ensemble"),
+    cap = "Performance for two-week-ahead forecasts of experts and non-experts. Values have been cut to three significant digits and rounded. \\label{tab:scores-experts}"
     ) %>%
   gsub("\\{table\\}", "\\{table\\*\\}", x = .) |>
   cat(file = 'manuscript/performance-table-experts.tex')
 
 expert_ensemble$scores |>
+  rbind(filter(scores, model == "EuroCOVIDhub-ensemble"), fill = TRUE) |>
    make_performance_table(
-     scores_summarised = expert_scores_summarised,
-     hor = 4,
-     cap = "Performance for four-week-ahead forecasts of experts and non-experts. Standard deviations are given in brackets. \\label{tab:scores-experts-4}"
+     model_filter = c("Expert", "Non-Expert", "EuroCOVIDhub-ensemble"),
+     cap = "Performance for four-week-ahead forecasts of experts and non-experts. Values have been cut to three significant digits and rounded. \\label{tab:scores-experts-4}"
     ) %>%
   gsub("\\{table\\}", "\\{table\\*\\}", x = .) |>
   cat(file = 'manuscript/performance-table-experts-4.tex')
-
 
 
 p_scores_expert <- plot_performance(expert_ensemble$scores)
 ggsave("output/figures/performance-expert.png", 
        plot = p_scores_expert, 
        width = 7, height = 6)
+
+plot_ranks(expert_ensemble$scores)
 
 
 ```
@@ -802,8 +804,6 @@ ggsave("output/figures/performance-expert.png",
 
 plot_ranks <- function(scores, hor = 2) {
   scores |>
-    filter(model %in% models_non_human) |>
-    mutate(model = factor(model, levels = rev(levels(models_non_human)))) |>
     summarise_scores() |>
     select(model, target_type, horizon, forecast_date, interval_score, scale, type_and_scale) |>
     group_by(target_type, scale, horizon, forecast_date) |>
@@ -818,12 +818,18 @@ plot_ranks <- function(scores, hor = 2) {
     theme(legend.position = "right")
 }
 
-p_ranks <- plot_ranks(scores)
+p_ranks <- scores |>
+  filter(model %in% models_non_human) |>
+  mutate(model = factor(model, levels = rev(levels(models_non_human)))) |>
+  plot_ranks()
 ggsave("output/figures/performance-ranks.png", 
        plot = p_ranks, 
        width = 7, height = 3.4)
 
-p_ranks_4 <- plot_ranks(scores, hor = 4)
+p_ranks_4 <- scores |>
+  filter(model %in% models_non_human) |>
+  mutate(model = factor(model, levels = rev(levels(models_non_human)))) |>
+  plot_ranks(hor = 4)
 ggsave("output/figures/performance-ranks-4.png", 
        plot = p_ranks_4, 
        width = 7, height = 3.4)
