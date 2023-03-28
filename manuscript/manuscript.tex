@@ -173,6 +173,9 @@ The median number of unique participants in any given week was 17, the minimum w
 
 \input performance-table.tex
 
+\input performance-table-horizon-4.tex
+
+
 \begin{figure*}[ht]
 %\centering
 \includegraphics[width=0.99\textwidth]{../output/figures/performance.png}
@@ -189,7 +192,9 @@ The median number of unique participants in any given week was 17, the minimum w
 
 \subsection*{Case forecasts}
 
-Mean scores for the four forecasting approaches were close to each other, with a mean WIS for two-week-ahead-forecasts of incident cases on the natural scale (log scale) of 38k (0.25) for the Hub-ensemble, 39k (0.24) for the direct crowd forecasts, 40k (0.22) for the combined crowd forecast and 46k (0.23) for the $R_t$ forecasts (see Table \ref{tab:scores} and Figure \ref{fig:performance}). Differences in mean scores between the four were small compared to the standard deviations of the scores within each forecasting approach on the natural (56k, 67k, 69k, 75k) and on the log scale (0.22, 0.27, 0.25, 0.24). 
+Mean scores for the four forecasting approaches were close to each other, with a mean WIS relative to the Hub ensemble (=1) of 
+
+for two-week-ahead-forecasts of incident cases on the natural scale (log scale) of 38k (0.25) for the Hub-ensemble, 39k (0.24) for the direct crowd forecasts, 40k (0.22) for the combined crowd forecast and 46k (0.23) for the $R_t$ forecasts (see Table \ref{tab:scores} and Figure \ref{fig:performance}). Differences in mean scores between the four were small compared to the standard deviations of the scores within each forecasting approach on the natural (56k, 67k, 69k, 75k) and on the log scale (0.22, 0.27, 0.25, 0.24). 
 % Could add a sentence that scores were not significant using a paired wilcoxon mann whitney test. 
 On the natural scale, the Forecast Hub ensemble was ahead of the crowd forecasts (WIS two weeks ahead: 38k for the Hub ensemble and 40k for the combined human ensemble), with the difference gradually increasing with increasing forecast horizon (see Figure \ref{fig:performance}). On the log scale, the Forecast Hub ensemble was slightly worse than all crowd forecasting approaches at a two week forecast horizon, but again slightly ahead for forecasts four weeks into the future. 
 
@@ -331,7 +336,8 @@ The weighted interval score (smaller values are better) is a proper scoring rule
 
 \input SI/epinow2.tex
 
-\input performance-table-horizon-4.tex
+%table 4 weeks
+
 
 \input{manuscript/performance-table-experts}
 
