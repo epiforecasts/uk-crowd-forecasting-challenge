@@ -338,7 +338,7 @@ plot_performance <- function(scores) {
 
 p_performance <- scores |>
   filter(model %in% models_non_human) |>
-  mutate(model = factor(model, labels = levels(models_non_human))) |>
+  mutate(model = factor(model, levels = levels(models_non_human))) |>
   plot_performance()
 
 ggsave("output/figures/performance.png", plot = p_performance, 
@@ -460,9 +460,9 @@ plot_scores_and_pred <- function(forecasts, scores) {
 
 p_scores_and_pred <- plot_scores_and_pred(
   filter(forecasts, model %in% models_non_human) |>
-    mutate(model = factor(model, labels = levels(models_non_human))),
+    mutate(model = factor(model, levels = levels(models_non_human))),
   filter(scores, model %in% models_non_human) |>
-    mutate(model = factor(model, labels = levels(models_non_human)))
+    mutate(model = factor(model, levels = levels(models_non_human)))
 )
 
 ggsave("output/figures/scores-and-forecasts.png", plot = p_scores_and_pred, 
@@ -791,6 +791,46 @@ ggsave("output/figures/performance-expert.png",
 
 
 
+
+
+
+
+
+# Ranks
+
+```{r}
+
+plot_ranks <- function(scores, hor = 2) {
+  scores |>
+    filter(model %in% models_non_human) |>
+    mutate(model = factor(model, levels = rev(levels(models_non_human)))) |>
+    summarise_scores() |>
+    select(model, target_type, horizon, forecast_date, interval_score, scale, type_and_scale) |>
+    group_by(target_type, scale, horizon, forecast_date) |>
+    mutate(rank = rank(interval_score)) |>
+    filter(horizon == hor) |>
+    ggplot(aes(y = model, group = rank, fill = rank)) +
+    geom_bar(position = position_stack(), colour = "white", size = 0.03) + 
+    facet_wrap(~ type_and_scale) + 
+    scale_fill_continuous(trans='reverse') + 
+    theme_scoringutils() + 
+    labs(y = "", x = "Frequency", fill = "Rank") + 
+    theme(legend.position = "right")
+}
+
+p_ranks <- plot_ranks(scores)
+ggsave("output/figures/performance-ranks.png", 
+       plot = p_ranks, 
+       width = 7, height = 3.4)
+
+p_ranks_4 <- plot_ranks(scores, hor = 4)
+ggsave("output/figures/performance-ranks-4.png", 
+       plot = p_ranks_4, 
+       width = 7, height = 3.4)
+  
+
+
+```
 
 
 
