@@ -752,20 +752,6 @@ expert_ensemble$forecasts |>
   theme_scoringutils() + 
   facet_wrap(~ target_type)
 
-
-expert_scores_summarised <- expert_ensemble$scores |>
-  filter(scale %in% c("log", "natural")) |>
-  summarise_scores(by = c("model", "target_type", "scale", "horizon", "forecast_date")) |>
-  group_by(target_type, scale, horizon) |>
-  # mutate(interval_score = (interval_score - mean(interval_score)) / sd(interval_score)) |>
-  group_by(model, target_type, scale, horizon) |>
-  summarise(mean = mean(interval_score), 
-            sd = sd(interval_score)) |>
-  pivot_wider(id_cols = c(model, target_type, horizon), 
-              names_from = scale, values_from = c(mean, sd), names_prefix = "stand_") |>
-  arrange(target_type, model)
-
-
 expert_ensemble$scores |>
   rbind(filter(scores, model == "crowd-ensemble"), fill = TRUE) |>
   mutate(model = factor(model, levels = c("crowd-ensemble", "Expert", "Non-Expert"))) |>
@@ -778,9 +764,11 @@ expert_ensemble$scores |>
   cat(file = 'manuscript/performance-table-experts.tex')
 
 expert_ensemble$scores |>
-  rbind(filter(scores, model == "EuroCOVIDhub-ensemble"), fill = TRUE) |>
+  rbind(filter(scores, model == "crowd-ensemble"), fill = TRUE) |>
    make_performance_table(
-     model_filter = c("Expert", "Non-Expert", "EuroCOVIDhub-ensemble"),
+     model_filter = c("Expert", "Non-Expert", "crowd-ensemble"),
+     baseline = "crowd-ensemble",
+     hor = 4,
      cap = "Performance for four-week-ahead forecasts of experts and non-experts. Values have been cut to three significant digits and rounded. \\label{tab:scores-experts-4}"
     ) %>%
   gsub("\\{table\\}", "\\{table\\*\\}", x = .) |>
