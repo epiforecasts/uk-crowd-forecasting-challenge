@@ -251,6 +251,10 @@ For cases, where participants could observe the case forecast implied by their $
 
 \subsection*{Experts and Non-Experts}
 
+An median ensemble of two week ahead forecasts made only by "experts" or "non-experts" performed worse than the combined crowd example, both for cases and deaths and both on the log scale and on the natural scale (see Table \ref{tab:scores-experts}). 
+
+For cases two week ahead, "experts" achieved better scores than "non-experts" both on the log and on the natural scale. WIS values \textit{relative to the combined crowd ensemble} were 1.08 for "experts" and 1.14 for "non-experts" on the log scale and 1.03 for "experts" and 1.14 for "non-experts" on the natural scale.  
+
 A comparison of "experts" and "non-experts" (self-reported experience in infectious disease modelling or a related field) showed similar performance, both on the natural (WIS two weeks ahead: 43k for experts vs. 43k for non-experts for cases, 41 vs. 46 for deaths) and the log scale (0.24 vs. 0.26 for cases, 0.16 vs. 0.13 for deaths, see Figure \ref{fig:performance-experts}) and Table \ref{tab:scores-expert}. Precise results changed depending on whether or not direct forecasts, $R_t$ forecasts or both were scored. 
 
 % As a direct comparison of individual scores between "experts" and "non-experts" is biased by missing forecasts, 
