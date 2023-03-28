@@ -218,7 +218,7 @@ make_performance_table <- function(
     # mutate(interval_score = paste0(interval_score, " (", relative, "), sd: ", wis_sd)) |>
     # select(-relative, -wis_sd) |>
     pivot_wider(names_from = scale, values_from = c(interval_score, wis_sd, relative)) |>
-    mutate(model = factor(model, labels = levels(models_non_human))) |>
+    mutate(model = factor(model, levels = levels(models_non_human))) |>
     arrange(target_type, model) |>
     select(model, target_type, 
            interval_score_natural, relative_natural, wis_sd_natural, 
