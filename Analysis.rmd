@@ -213,7 +213,7 @@ make_performance_table <- function(
     inner_join(sd) |>
     group_by(target_type, scale) |>
     mutate(relative = interval_score / interval_score[model == "EuroCOVIDhub-ensemble"]) |>
-    mutate(across(c(where(is.numeric)), \(x) signif(x, digits = 2))) |>
+    mutate(across(c(where(is.numeric)), \(x) round(signif(x, digits = 3), digits = 2))) |>
     mutate(across(c(where(is.numeric)), \(x) label_fn(x))) |> 
     # mutate(interval_score = paste0(interval_score, " (", relative, "), sd: ", wis_sd)) |>
     # select(-relative, -wis_sd) |>
@@ -238,7 +238,7 @@ make_performance_table <- function(
 scores |>
   filter(model %in% models_non_human) |>
   make_performance_table(
-    cap = "Performance for two-week-ahead forecasts. Standard deviations are given in brackets. \\label{tab:scores}"
+    cap = "Performance for two-week-ahead forecasts. Vallues have been cut to three significant digits and rounded.  \\label{tab:scores}"
     ) %>%
   gsub("\\{table\\}", "\\{table\\*\\}", x = .) |>
   cat(file = 'manuscript/performance-table.tex')
@@ -247,7 +247,7 @@ scores |>
   filter(model %in% models_non_human) |>
   make_performance_table(
     hor = 4, 
-    cap = "Performance for four-week-ahead forecasts. Standard deviations are given in brackets. \\label{tab:scores-4}"
+    cap = "Performance for four-week-ahead forecasts. Vallues have been cut to three significant digits and rounded \\label{tab:scores-4}"
   ) %>%
   gsub("\\{table\\}", "\\{table\\*\\}", x = .) |>
   cat(file = 'manuscript/performance-table-horizon-4.tex')
