@@ -27,8 +27,10 @@ library(scales)
 library(dplyr)
 library(tidyr)
 library(forcats)
+library(scales)
 
 colors <- RColorBrewer::brewer.pal(n = 9, name = "Set1")
+colors <- hex <- hue_pal()(4)
 
 
 # Helper functions
@@ -100,6 +102,22 @@ label_fn <- function(x) {
                        paste0(x / 1e9, "b"))
          )
   )
+}
+
+# helper function to score forecasts both on the natural and on the log scale
+score_and_add_log <- function(forecasts) {
+  forecasts |>
+  mutate(scale = "natural") |>
+  rbind(forecasts |>
+          mutate(
+            scale = "log", 
+            true_value = log(true_value + 1), 
+            prediction = log(pmax(prediction, 0) + 1)
+          )) |>
+  score(metrics = c("interval_score", "coverage")) |>
+  add_coverage(by = c("target_type", "horizon", "method")) |>
+    add_type_and_scale() |>
+  as.data.table() 
 }
 
 ```
@@ -479,22 +497,6 @@ ggsave("output/figures/scores-and-forecasts.png", plot = p_scores_and_pred,
 ================================================================================
 
 ```{r}
-# helper function to score forecasts both on the natural and on the log scale
-score_and_add_log <- function(forecasts) {
-  forecasts |>
-  mutate(scale = "natural") |>
-  rbind(forecasts |>
-          mutate(
-            scale = "log", 
-            true_value = log(true_value + 1), 
-            prediction = log(pmax(prediction, 0) + 1)
-          )) |>
-  score(metrics = c("interval_score", "coverage")) |>
-  add_coverage(by = c("target_type", "horizon", "method")) |>
-    add_type_and_scale() |>
-  as.data.table() 
-}
-
 # helper function that filters the forecast data such that we only have 
 # forecasts left where a single person made a forecast both for direct and rt
 filter_comparison_rt_direct <- function(forecasts) {
@@ -568,7 +570,9 @@ available <- function(forecasts, filter, name) {
 }
 
 
-## Number of forecasts and ensemble members
+## Number of forecasts 
+# this gives the total with people being double counted if they submit both
+# Rt and direct forecasts
 avail <- 
   available(forecasts, filter = models_direct, name = "Direct") |>
   rbind(available(forecasts, filter = models_rt, name = "Rt")) |>
@@ -602,6 +606,7 @@ plot_number_forecasters <- avail |>
   scale_alpha_manual(values = c(1, 0.5), na.translate = FALSE) + 
   labs(x = "Forecast date", fill = "Forecast type", 
        alpha = "Forecast method") + 
+  scale_fill_manual(values = colors[1:2]) +
   theme_scoringutils() +
   theme(legend.position = "bottom", 
         legend.box="vertical", legend.margin = margin()) 
@@ -609,27 +614,19 @@ plot_number_forecasters <- avail |>
 ggsave("output/figures/num-forecasters.png", plot = plot_number_forecasters, 
        width = 7, height = 3.5)
 
-avail |> 
-  group_by(target_type, type) |>
-  summarise(
-    mean = mean(`Number forecasts`), 
-    median = median(`Number forecasts`), 
-    min = min(`Number forecasts`), 
-    max = max(`Number forecasts`)
-  )
-  
-## number of unique participants
+## overall number of unique participants
 unique_participants <- gsub("\ \\(Rt\\)", "", models_human) |> unique()
 length(unique_participants)
 
-## Number of unique participants in every week
+## overall number of experts
 forecasts |>
   filter(model %in% models_human) |>
+  update_expert_status() |>
   mutate(model = gsub("\ \\(Rt\\)", "", model)) |>
-  select(model, forecast_date) |>
-  group_by(forecast_date) |>
-  summarise(n = length(unique(model))) |>
-  summary()
+  select(model, expert) |>
+  unique() |>
+  group_by(expert) |>
+  summarise(n = length(unique(model)))
 
 ## number of times a forecaster submitted
 forecasts |>
@@ -639,6 +636,121 @@ forecasts |>
   group_by(model) |>
   summarise(n = length(unique(forecast_date))) |>
   summary()
+
+# helper function
+sum_number <- function(data) {
+  data |> 
+    mutate(n = n()) |>
+    summarise(
+      mean = mean(`n`), 
+      median = median(`n`), 
+      min = min(`n`), 
+      max = max(`n`)
+    )
+}
+
+nums <- forecasts |>
+  update_expert_status() |>
+  filter(model %in% models_human) |>
+  mutate(method = ifelse(grepl("(Rt)", model), "Rt", "direct")) |>
+  mutate(model = gsub("\ \\(Rt\\)", "", model)) |>
+  select(model, forecast_date, target_type, expert, method) |>
+  unique()
+
+# number of forecasts, (double counting participants who made a forecast for both Rt and direct)
+nums |>
+  group_by(target_type, forecast_date, method) |>
+  summarise(n = n()) |>
+  group_by(target_type, method) |>
+  summarise(
+    mean = mean(`n`), 
+    median = median(`n`), 
+    min = min(`n`), 
+    max = max(`n`)
+  )
+
+# unqiue forecasts for cases and deaths without double counting
+nums |>
+  select(-method) |>
+  unique() |>
+  group_by(forecast_date, target_type) |>
+  summarise(n = n()) |>
+  group_by(target_type) |>
+  summarise(
+    mean = mean(`n`), 
+    median = median(`n`), 
+    min = min(`n`), 
+    max = max(`n`)
+  )
+
+# unique participants every week (without double counting Rt and direct)
+nums |>
+  select(-method, -target_type) |>
+  unique() |>
+  group_by(forecast_date) |>
+  summarise(n = n()) |>
+  summarise(
+    mean = mean(`n`), 
+    median = median(`n`), 
+    min = min(`n`), 
+    max = max(`n`)
+  )
+
+# number of forecasts from experts and non-experts every week (allowing double counting)
+nums |>
+  group_by(forecast_date, target_type, expert) |>
+  summarise(n = n()) |>
+  group_by(target_type, expert) |>
+  summarise(
+    mean = mean(`n`), 
+    median = median(`n`), 
+    min = min(`n`), 
+    max = max(`n`)
+  )
+
+p_num_experts <- nums |>
+  mutate(expert = ifelse(expert, "Expert", "Non-Expert")) |>
+  group_by(target_type, forecast_date, expert, method) |>
+  summarise(n = n()) |>
+  pivot_wider(names_from = method, values_from = n) |>
+  mutate(Rt = Rt + direct) |>
+  pivot_longer(cols = c(Rt, direct), names_to = "method", values_to = "n") |>
+  ggplot(aes(x = forecast_date, y = n, 
+             group = expert,
+             fill = expert, 
+             alpha = method)) +
+  geom_bar(stat = "identity", 
+           color = "white",
+           linewidth = 0.2,
+           width = 5,
+           position = position_dodge(width = 5)) + 
+  facet_wrap(~ target_type) + 
+  scale_alpha_manual(values = c(1, 0.5), na.translate = FALSE) + 
+  labs(x = "Forecast date", fill = "Forecast type", 
+       alpha = "Forecast method") + 
+  theme_scoringutils() +
+  theme(legend.position = "bottom", 
+        legend.box="vertical", legend.margin = margin())
+
+ggsave("output/figures/num-forecasters-expert.png", plot = p_num_experts, 
+       width = 7, height = 3.5)
+
+
+
+
+# forecasts |> 
+#   update_expert_status() |>
+#   mutate(expert = ifelse(expert, "Expert", "Non-Expert")) |>
+#   filter(forecast_date == "2021-06-07", 
+#          model %in% models_human, horizon == 1, 
+#          quantile == 0.5) |> 
+#   mutate(method = ifelse(grepl("(Rt)", model), "Rt", "direct")) |>
+#   mutate(model = gsub("\ \\(Rt\\)", "", model)) |> 
+#   group_by(target_type, method, expert) |> 
+#   summarise(n = length(unique(model)))
+
+
+
 ```
 
 
