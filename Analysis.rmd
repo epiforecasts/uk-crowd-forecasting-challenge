@@ -126,6 +126,7 @@ score_and_add_log <- function(forecasts) {
 
 # Table 1: Performance
 ================================================================================
+- also includes Table SI.1
 
 ```{r, performance-table}
 scores_summarised <- scores |>
@@ -586,34 +587,6 @@ avail_ensemble <- ensemble_inclusions |>
                     collapse = c("horizon", "quantile", "target_end_date")) |>
   mutate(group = "Forecast Hub")
 
-plot_number_forecasters <- avail |>
-  pivot_wider(names_from = type, values_from = `Number forecasts`) |>
-  mutate(Rt = Direct + Rt) |>
-  pivot_longer(cols = c(Direct, Rt), names_to = "type",
-               values_to = "Number forecasts") |>
-  as.data.table() |>
-  rbind(avail_ensemble, fill = TRUE) |>
-  ggplot(aes(x = forecast_date, y = `Number forecasts`, 
-             group = group,
-             fill = group, 
-             alpha = type)) +
-  geom_bar(stat = "identity", 
-           color = "white",
-           linewidth = 0.2,
-           width = 5,
-           position = position_dodge(width = 5)) + 
-  facet_wrap(~ target_type) + 
-  scale_alpha_manual(values = c(1, 0.5), na.translate = FALSE) + 
-  labs(x = "Forecast date", fill = "Forecast type", 
-       alpha = "Forecast method") + 
-  scale_fill_manual(values = colors[1:2]) +
-  theme_scoringutils() +
-  theme(legend.position = "bottom", 
-        legend.box="vertical", legend.margin = margin()) 
-
-ggsave("output/figures/num-forecasters.png", plot = plot_number_forecasters, 
-       width = 7, height = 3.5)
-
 ## overall number of unique participants
 unique_participants <- gsub("\ \\(Rt\\)", "", models_human) |> unique()
 length(unique_participants)
@@ -708,17 +681,18 @@ nums |>
     max = max(`n`)
   )
 
-p_num_experts <- nums |>
-  mutate(expert = ifelse(expert, "Expert", "Non-Expert")) |>
-  group_by(target_type, forecast_date, expert, method) |>
-  summarise(n = n()) |>
-  pivot_wider(names_from = method, values_from = n) |>
-  mutate(Rt = Rt + direct) |>
-  pivot_longer(cols = c(Rt, direct), names_to = "method", values_to = "n") |>
-  ggplot(aes(x = forecast_date, y = n, 
-             group = expert,
-             fill = expert, 
-             alpha = method)) +
+
+plot_number_forecasters <- avail |>
+  pivot_wider(names_from = type, values_from = `Number forecasts`) |>
+  mutate(Rt = Direct + Rt) |>
+  pivot_longer(cols = c(Direct, Rt), names_to = "type",
+               values_to = "Number forecasts") |>
+  as.data.table() |>
+  rbind(avail_ensemble, fill = TRUE) |>
+  ggplot(aes(x = forecast_date, y = `Number forecasts`, 
+             group = group,
+             fill = group, 
+             alpha = type)) +
   geom_bar(stat = "identity", 
            color = "white",
            linewidth = 0.2,
@@ -728,15 +702,59 @@ p_num_experts <- nums |>
   scale_alpha_manual(values = c(1, 0.5), na.translate = FALSE) + 
   labs(x = "Forecast date", fill = "Forecast type", 
        alpha = "Forecast method") + 
+  scale_fill_manual(values = c(
+    "Expert" = "#984EA3", 
+    "Non-Expert" = "#377EB8", 
+    "Forecast Hub" = "#F8766D", 
+    "Human forecast" = "#7CAE00"), 
+    breaks = c("Expert", "Non-Expert", "Forecast Hub", "Human forecast")
+    ) +
   theme_scoringutils() +
   theme(legend.position = "bottom", 
-        legend.box="vertical", legend.margin = margin())
-
-ggsave("output/figures/num-forecasters-expert.png", plot = p_num_experts, 
-       width = 7, height = 3.5)
+        legend.box="vertical", legend.margin = margin()) 
 
 
+p_num_experts <- nums |>
+  mutate(expert = ifelse(expert, "Expert", "Non-Expert")) |>
+  group_by(target_type, forecast_date, expert, method) |>
+  mutate(method = ifelse(method == "direct", "Direct", "Rt")) |>
+  summarise(n = n()) |>
+  pivot_wider(names_from = method, values_from = n) |>
+  mutate(Rt = Rt + Direct) |>
+  pivot_longer(cols = c(Rt, Direct), names_to = "method", values_to = "n") |>
+  ggplot(aes(x = forecast_date, y = n, 
+             group = expert,
+             fill = expert, 
+             alpha = method)) +
+  geom_bar(stat = "identity", 
+           color = "white",
+           linewidth = 0.2,
+           width = 5,
+           position = position_dodge(width = 5)
+           ) + 
+  facet_wrap(~ target_type) + 
+  scale_alpha_manual(values = c(1, 0.5), na.translate = FALSE) + 
+  scale_fill_manual(values = c(
+    "Expert" = "#984EA3", 
+    "Non-Expert" = "#377EB8", 
+    "Forecast Hub" = "#F8766D", 
+    "Human forecast" = "#7CAE00"), 
+    breaks = c("Expert", "Non-Expert", "Forecast Hub", "Human forecast")
+    ) +
+  labs(x = "Forecast date", fill = "Forecast type", 
+       alpha = "Forecast method") + 
+  theme_scoringutils() +
+  theme(legend.position = "bottom", 
+        legend.box="vertical", legend.margin = margin()) + 
+  labs(y = "Number forecasts")
 
+p_nums <- plot_number_forecasters /
+  p_num_experts +
+  plot_annotation(tag_levels = "A") &
+  theme(legend.position = "right")
+
+ggsave("output/figures/num-forecasters.png", plot = p_nums, 
+       width = 7, height = 5)
 
 # forecasts |> 
 #   update_expert_status() |>
@@ -908,12 +926,15 @@ plot_ranks(expert_ensemble$scores)
 
 ```{r}
 
-plot_ranks <- function(scores, hor = 2) {
-  scores |>
-    summarise_scores() |>
-    select(model, target_type, horizon, forecast_date, interval_score, scale, type_and_scale) |>
-    group_by(target_type, scale, horizon, forecast_date) |>
-    mutate(rank = rank(interval_score)) |>
+ranks <- scores |>
+  filter(model %in% models_non_human) |>
+  summarise_scores() |>
+  select(model, target_type, horizon, forecast_date, interval_score, scale, type_and_scale) |>
+  group_by(target_type, scale, horizon, forecast_date) |>
+  mutate(rank = rank(interval_score)) 
+
+plot_ranks <- function(ranks, hor = 2) {
+  ranks |>
     filter(horizon == hor) |>
     ggplot(aes(y = model, group = rank, fill = rank)) +
     geom_bar(position = position_stack(), colour = "white", size = 0.03) + 
@@ -924,21 +945,38 @@ plot_ranks <- function(scores, hor = 2) {
     theme(legend.position = "right")
 }
 
-p_ranks <- scores |>
-  filter(model %in% models_non_human) |>
+p_ranks <- ranks |>
   mutate(model = factor(model, levels = rev(levels(models_non_human)))) |>
   plot_ranks()
 ggsave("output/figures/performance-ranks.png", 
        plot = p_ranks, 
        width = 7, height = 3.4)
 
-p_ranks_4 <- scores |>
-  filter(model %in% models_non_human) |>
+p_ranks_4 <- ranks |>
   mutate(model = factor(model, levels = rev(levels(models_non_human)))) |>
   plot_ranks(hor = 4)
 ggsave("output/figures/performance-ranks-4.png", 
        plot = p_ranks_4, 
        width = 7, height = 3.4)
+
+
+ranks |>
+  filter(horizon == 2) |>
+  mutate(model = factor(model, levels = (levels(models_non_human)))) |>
+  group_by(model, target_type, scale, rank) |>
+  summarise(n = n()) |>
+  mutate(rel = n() / 13) |>
+  pivot_wider(names_from = rank, values_from = c(n, rel)) |>
+  {\(.) {replace(.,is.na(.),0)}}() |>
+  mutate(n_1 = paste0(n_1, " (", round(rel_1, 2), ")"), 
+         n_2 = paste0(n_2, " (", round(rel_2, 2), ")"), 
+         n_3 = paste0(n_3, " (", round(rel_3, 2), ")"), 
+         n_4 = paste0(n_4, " (", round(rel_4, 2), ")")) |>
+  select(-c(rel_1, rel_2, rel_3, rel_4))
+  
+  
+
+
   
 
 
