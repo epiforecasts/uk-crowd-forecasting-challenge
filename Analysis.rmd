@@ -697,6 +697,40 @@ nums |>
     max = max(`n`)
   )
 
+# number of experts and non-experts who used Rt forecasts
+nums |>
+  group_by(forecast_date, target_type, expert, method) |>
+  summarise(n = n()) |>
+  group_by(target_type, expert, method) |>
+  summarise(
+    mean = mean(`n`), 
+    median = median(`n`), 
+    min = min(`n`), 
+    max = max(`n`)
+  )
+exp_method
+
+# proportion of experts and non-experts using Rt
+nums |>
+  group_by(forecast_date, target_type, expert, method) |>
+  summarise(n = n()) |>
+  #calculate proportion
+  group_by(forecast_date, target_type, expert) |>
+  mutate(n = n / sum(n)) |>
+  group_by(expert, method) |>
+  summarise(
+    mean = mean(`n`), 
+    median = median(`n`), 
+    min = min(`n`), 
+    max = max(`n`)
+  ) |>
+  filter(method == "Rt")
+
+
+
+
+
+
 
 plot_number_forecasters <- avail |>
   pivot_wider(names_from = type, values_from = `Number forecasts`) |>
