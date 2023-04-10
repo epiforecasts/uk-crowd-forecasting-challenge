@@ -127,86 +127,6 @@ score_and_add_log <- function(forecasts) {
 # Table 1: Performance
 ================================================================================
 - also includes Table SI.1
-
-```{r, performance-table}
-scores_summarised <- scores |>
-  filter(scale %in% c("log", "natural")) |>
-  filter(model %in% models_non_human) |>
-  summarise_scores(by = c("model", "target_type", "scale", "horizon", "forecast_date")) |>
-  group_by(target_type, scale, horizon) |>
-  # mutate(interval_score = (interval_score - mean(interval_score)) / sd(interval_score)) |>
-  group_by(model, target_type, scale, horizon) |>
-  summarise(mean = mean(interval_score), 
-            sd = sd(interval_score)) |>
-  pivot_wider(id_cols = c(model, target_type, horizon), 
-              names_from = scale, values_from = c(mean, sd), names_prefix = "stand_") |>
-  arrange(target_type, model)
-
-make_performance_table <- function(
-    scores, scores_summarised, 
-    hor = 2, 
-    cap = "Performance for two-week-ahead forecasts \\label{tab:scores}"
-) {
-  scores |>
-    filter(scale %in% c("log", "natural")) |>
-    summarise_scores(by = c("model", "target_type", "scale", "horizon")) |>
-    select(model, target_type, scale, interval_score, coverage_50, coverage_90, horizon) |>
-    pivot_wider(names_from = scale, values_from = interval_score) |>
-    select(model, target_type, natural, log, coverage_50, coverage_90, horizon) |>
-    inner_join(scores_summarised) |>
-    mutate(across(c(where(is.numeric)), \(x) signif(x, digits = 2))) |>
-    arrange(target_type, model) |>
-    mutate(natural = label_fn(natural), 
-           log = label_fn(log)) |>
-    mutate(natural = paste0(natural, " (", label_fn(sd_stand_natural), ")"), 
-           log = paste0(log, " (", label_fn(sd_stand_log), ")")) |>
-    filter(horizon == hor) |>
-    select(-mean_stand_log, -sd_stand_log, -mean_stand_natural, -sd_stand_natural, -horizon) |>
-    kable(format = "latex", booktabs = TRUE, 
-          align = c("l", "l", rep("c", 4)),
-          caption = cap,
-          linesep = c('', '', '', '\\addlinespace'),
-          col.names = c("Model", "Target", "WIS", "WIS (log scale)", 
-                        "Coverage 50%", "Coverage 90%")) |> 
-    kable_styling(latex_options = c("scale_down", 
-                                    "hold_position")) 
-}
-
-scores |>
-  filter(model %in% models_non_human) |>
-  make_performance_table(
-    scores_summarised = scores_summarised, 
-    cap = "Performance for two-week-ahead forecasts. Standard deviations are given in brackets. \\label{tab:scores}"
-    ) %>%
-  gsub("\\{table\\}", "\\{table\\*\\}", x = .) |>
-  cat(file = 'manuscript/performance-table.tex')
-
-scores |>
-  filter(model %in% models_non_human) |>
-  make_performance_table(
-    scores_summarised = scores_summarised, 
-    hor = 4, 
-    cap = "Performance for four-week-ahead forecasts. Standard deviations are given in brackets. \\label{tab:scores-4}"
-  ) %>%
-  gsub("\\{table\\}", "\\{table\\*\\}", x = .) |>
-  cat(file = 'manuscript/performance-table-horizon-4.tex')
-
-
-
-
-# scores_revised |>
-#   filter(model %in% models_non_human) |>
-#   make_performance_table() |>
-#   cat(file = 'manuscript/performance-table-revised.tex')
-# 
-# 
-# scores_comparable_ensemble |>
-#   make_performance_table() |>
-#   cat(file = 'manuscript/performance-table-comparison-rt.tex')
-
-```
-
-
 UPDATED VERSION
 ```{r, performance-table2}
 make_performance_table <- function(
@@ -370,7 +290,72 @@ ggsave("output/figures/performance.png", plot = p_performance,
 
 
 
-# Figure 2: Forecasts and corresponding WIS
+# Figure 2: Ranks for different models
+================================================================================
+
+
+```{r}
+
+ranks <- scores |>
+  filter(model %in% models_non_human) |>
+  summarise_scores() |>
+  select(model, target_type, horizon, forecast_date, interval_score, scale, type_and_scale) |>
+  group_by(target_type, scale, horizon, forecast_date) |>
+  mutate(rank = rank(interval_score)) 
+
+plot_ranks <- function(ranks, hor = 2) {
+  ranks |>
+    filter(horizon == hor) |>
+    ggplot(aes(y = model, group = rank, fill = rank)) +
+    geom_bar(position = position_stack(), colour = "white", size = 0.03) + 
+    facet_wrap(~ type_and_scale) + 
+    scale_fill_continuous(trans='reverse') + 
+    theme_scoringutils() + 
+    labs(y = "", x = "Frequency", fill = "Rank") + 
+    theme(legend.position = "right")
+}
+
+p_ranks <- ranks |>
+  mutate(model = factor(model, levels = rev(levels(models_non_human)))) |>
+  plot_ranks()
+ggsave("output/figures/performance-ranks.png", 
+       plot = p_ranks, 
+       width = 7, height = 3.4)
+
+p_ranks_4 <- ranks |>
+  mutate(model = factor(model, levels = rev(levels(models_non_human)))) |>
+  plot_ranks(hor = 4)
+ggsave("output/figures/performance-ranks-4.png", 
+       plot = p_ranks_4, 
+       width = 7, height = 3.4)
+
+
+ranks |>
+  filter(horizon == 2) |>
+  mutate(model = factor(model, levels = (levels(models_non_human)))) |>
+  group_by(model, target_type, scale, rank) |>
+  summarise(n = n()) |>
+  mutate(rel = n() / 13) |>
+  pivot_wider(names_from = rank, values_from = c(n, rel)) |>
+  {\(.) {replace(.,is.na(.),0)}}() |>
+  mutate(n_1 = paste0(n_1, " (", round(rel_1, 2), ")"), 
+         n_2 = paste0(n_2, " (", round(rel_2, 2), ")"), 
+         n_3 = paste0(n_3, " (", round(rel_3, 2), ")"), 
+         n_4 = paste0(n_4, " (", round(rel_4, 2), ")")) |>
+  select(-c(rel_1, rel_2, rel_3, rel_4))
+  
+  
+
+
+  
+
+
+```
+
+
+
+
+# Figure 3: Forecasts and corresponding WIS
 ================================================================================
 
 ```{r}
@@ -494,7 +479,7 @@ ggsave("output/figures/scores-and-forecasts.png", plot = p_scores_and_pred,
 
 
 
-# Figure 3: Comparison performance direct vs. Rt
+# Figure 4: Comparison performance direct vs. Rt
 ================================================================================
 
 ```{r}
@@ -512,10 +497,13 @@ filter_comparison_rt_direct <- function(forecasts) {
   group_by(forecast_date, target_type) |>
   filter(model %in% rt_name | rt_name %in% model) |>
   group_by(forecast_date, target_type, method) |>
-  select(target_end_date, target_type, forecast_date, horizon, model, method, true_value, prediction, quantile)
+  select(target_end_date, target_type, forecast_date, horizon, model, method, true_value, prediction, quantile, expert)
 }
 
-forecasts_comparison <- filter_comparison_rt_direct(forecasts)
+forecasts_comparison <- forecasts |> 
+  update_expert_status() |>
+  filter_comparison_rt_direct()
+  
 scores_forecasts_comparison <- score_and_add_log(forecasts_comparison)
 
 plot_rt_direct_individual <- function(scores) {
@@ -542,6 +530,34 @@ p_comparison_direct_rt_individual <- plot_rt_direct_individual(scores_forecasts_
 ggsave("output/figures/comparison-direct-rt-individual.png", 
        plot = p_comparison_direct_rt_individual, 
        width = 7, height = 4)
+
+
+
+
+# check whether there is a difference between experts and non-experts when using Rt / direct
+scores_forecasts_comparison |>
+  summarise_scores(by = c("type_and_scale", "method", "expert")) |>
+  filter(method == "rt") |>
+  arrange(type_and_scale, expert) |>
+  summarise_scores(fun = signif, digits = 2)
+
+
+scores_forecasts_comparison |> 
+  filter(horizon == 2) |>
+  mutate(name = gsub("\ \\(Rt\\)", "", model)) |>
+  summarise_scores(by = c("target_type","type_and_scale", "name", "method", "scale", "expert")) |>
+  arrange(target_type, name, method) |>
+  group_by(target_type, name, scale) |>
+  mutate(diff = rep(diff(interval_score), 2)) |>
+  mutate(improvement = ifelse(diff > 0, "Direct better", "Rt better")) |>
+  mutate(method = stringr::str_to_title(method)) |>
+  ggplot(aes(y = interval_score, x = method, group = name)) + 
+  geom_point(size = 0.5) + 
+  geom_line(aes(color = expert), linewidth = 0.3) + 
+  facet_wrap(~ type_and_scale, scale = "free_y") + 
+  labs(y = "WIS", x = "Forecasting method", color = "Expert status") + 
+  scale_y_continuous(labels = label_fn) + 
+  theme_scoringutils()
 ```
 
 
@@ -917,78 +933,6 @@ plot_ranks(expert_ensemble$scores)
 
 
 
-
-
-
-
-
-# Ranks
-
-```{r}
-
-ranks <- scores |>
-  filter(model %in% models_non_human) |>
-  summarise_scores() |>
-  select(model, target_type, horizon, forecast_date, interval_score, scale, type_and_scale) |>
-  group_by(target_type, scale, horizon, forecast_date) |>
-  mutate(rank = rank(interval_score)) 
-
-plot_ranks <- function(ranks, hor = 2) {
-  ranks |>
-    filter(horizon == hor) |>
-    ggplot(aes(y = model, group = rank, fill = rank)) +
-    geom_bar(position = position_stack(), colour = "white", size = 0.03) + 
-    facet_wrap(~ type_and_scale) + 
-    scale_fill_continuous(trans='reverse') + 
-    theme_scoringutils() + 
-    labs(y = "", x = "Frequency", fill = "Rank") + 
-    theme(legend.position = "right")
-}
-
-p_ranks <- ranks |>
-  mutate(model = factor(model, levels = rev(levels(models_non_human)))) |>
-  plot_ranks()
-ggsave("output/figures/performance-ranks.png", 
-       plot = p_ranks, 
-       width = 7, height = 3.4)
-
-p_ranks_4 <- ranks |>
-  mutate(model = factor(model, levels = rev(levels(models_non_human)))) |>
-  plot_ranks(hor = 4)
-ggsave("output/figures/performance-ranks-4.png", 
-       plot = p_ranks_4, 
-       width = 7, height = 3.4)
-
-
-ranks |>
-  filter(horizon == 2) |>
-  mutate(model = factor(model, levels = (levels(models_non_human)))) |>
-  group_by(model, target_type, scale, rank) |>
-  summarise(n = n()) |>
-  mutate(rel = n() / 13) |>
-  pivot_wider(names_from = rank, values_from = c(n, rel)) |>
-  {\(.) {replace(.,is.na(.),0)}}() |>
-  mutate(n_1 = paste0(n_1, " (", round(rel_1, 2), ")"), 
-         n_2 = paste0(n_2, " (", round(rel_2, 2), ")"), 
-         n_3 = paste0(n_3, " (", round(rel_3, 2), ")"), 
-         n_4 = paste0(n_4, " (", round(rel_4, 2), ")")) |>
-  select(-c(rel_1, rel_2, rel_3, rel_4))
-  
-  
-
-
-  
-
-
-```
-
-
-
-
-
-
-
-
 # Unused - Significance analysis
 # ============================================================================ #
 ```{r}
@@ -999,9 +943,8 @@ scores |>
   select(model, forecast_date, type_and_scale, interval_score) |>
   pivot_wider(names_from = model, values_from = interval_score) |>
   group_by(type_and_scale) |>
-  summarise(p1 = wilcox.test(`EuroCOVIDhub-ensemble`,`crowd-direct`, paired = TRUE)$p.value, 
-            p2 = wilcox.test(`EuroCOVIDhub-ensemble`,`crowd-ensemble`, paired = TRUE)$p.value, 
-            p3 = wilcox.test(`EuroCOVIDhub-ensemble`,`crowd-rt`, paired = TRUE)$p.value)
-
+  summarise("direct-vs-hub" = wilcox.test(`EuroCOVIDhub-ensemble`,`crowd-direct`, paired = TRUE)$p.value, 
+            "combined-vs-hub" = wilcox.test(`EuroCOVIDhub-ensemble`,`crowd-ensemble`, paired = TRUE)$p.value, 
+            "rt-vs-hub" = wilcox.test(`EuroCOVIDhub-ensemble`,`crowd-rt`, paired = TRUE)$p.value)
 
 
