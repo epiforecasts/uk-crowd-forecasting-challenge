@@ -295,7 +295,6 @@ ggsave("output/figures/performance.png", plot = p_performance,
 
 
 ```{r}
-
 ranks <- scores |>
   filter(model %in% models_non_human) |>
   summarise_scores() |>
@@ -343,12 +342,6 @@ ranks |>
          n_3 = paste0(n_3, " (", round(rel_3, 2), ")"), 
          n_4 = paste0(n_4, " (", round(rel_4, 2), ")")) |>
   select(-c(rel_1, rel_2, rel_3, rel_4))
-  
-  
-
-
-  
-
 
 ```
 
