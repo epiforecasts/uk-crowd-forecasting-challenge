@@ -162,9 +162,9 @@ and updated the reporting process as follows when forecasting deaths,
 
 \(\alpha\), \(\mu\), \(\sigma\), and \(\phi\) were truncated to be greater than 0 and with \(\xi\), and \(w\) normalised to sum to 1.
 
-The prior for the generation time was sourced from \cite{ganyaniEstimatingGenerationInterval2020} XXX(Ganyani et al. 2020) but refit using a log-normal incubation period with a mean of 5.2 days (SD 1.1) and SD of 1.52 days (SD 1.1) with this incubation period also being used as a prior \citep{lauerIncubationPeriodCoronavirus2020} XXX(Lauer et al. 2020) for \(\xi_{O}\). This resulted in a gamma-distributed generation time with mean 3.6 days (standard deviation (SD) 0.7), and SD of 3.1 days (SD 0.8) for all estimates. We estimated the delay between symptom onset and case report or death required to convolve latent infections to observations by fitting an integer adjusted log-normal distribution to 10 subsampled bootstraps of a public linelist for cases in Germany from April 2020 to June 2020 with each bootstrap using 1\% or 1769 samples of the available data \citep{kraemer2020epidemiological, covidregionaldata} XXX(Xu et al. 2020; Abbott, Sherratt, et al. 2020) and combining the posteriors for the mean and standard deviation of the log-normal distribution \citep{epinow2, epiforecasts.io/covidCovid19TemporalVariation2020, sherrattExploringSurveillanceData2021, rstan} XXX(Abbott, Hellewell, et al. 2020; epiforecasts.io/covid 2020; {``Evaluating the Use of the Reproduction Number as an Epidemiological Tool, Using Spatio-Temporal Trends of the {Covid-19} Outbreak in {England} \textbar{} {medRxiv}''} n.d.; Stan Development Team 2020).
+The prior for the generation time was sourced from \cite{ganyaniEstimatingGenerationInterval2020} but refit using a log-normal incubation period with a mean of 5.2 days (SD 1.1) and SD of 1.52 days (SD 1.1) with this incubation period also being used as a prior \citep{lauerIncubationPeriodCoronavirus2020} for \(\xi_{O}\). This resulted in a gamma-distributed generation time with mean 3.6 days (standard deviation (SD) 0.7), and SD of 3.1 days (SD 0.8) for all estimates. We estimated the delay between symptom onset and case report or death required to convolve latent infections to observations by fitting an integer adjusted log-normal distribution to 10 subsampled bootstraps of a public linelist for cases in Germany from April 2020 to June 2020 with each bootstrap using 1\% or 1769 samples of the available data \citep{kraemer2020epidemiological, covidregionaldata} and combining the posteriors for the mean and standard deviation of the log-normal distribution \citep{epinow2, epiforecasts.io/covidCovid19TemporalVariation2020, sherrattExploringSurveillanceData2021, rstan}.
 
-\(GP_t\) is an approximate Hilbert space Gaussian process as defined in \cite{riutort-mayolPracticalHilbertSpace2022} XXX(Riutort-Mayol et al. 2020) using a Matern 3/2 kernel using a boundary factor of 1.5 and 17 basis functions (20\% of the number of days used in fitting). The length scale of the Gaussian process was given a log-normal prior with a mean of 21 days, and a standard deviation of 7 days truncated to be greater than 3 days and less than 60 days. The magnitude of the Gaussian process was assumed to be normally distributed centred at 0 with a standard deviation of 0.1.
+\(GP_t\) is an approximate Hilbert space Gaussian process as defined in \cite{riutort-mayolPracticalHilbertSpace2022} using a Matern 3/2 kernel using a boundary factor of 1.5 and 17 basis functions (20\% of the number of days used in fitting). The length scale of the Gaussian process was given a log-normal prior with a mean of 21 days, and a standard deviation of 7 days truncated to be greater than 3 days and less than 60 days. The magnitude of the Gaussian process was assumed to be normally distributed centred at 0 with a standard deviation of 0.1.
 
 From the forecast time horizon (\(T\)) and onwards the last value of the Gaussian process was used (hence \(R_t\) was assumed to be fixed) and latent infections were adjusted to account for the proportion of the population that was susceptible to infection as follows,
 
@@ -172,7 +172,7 @@ From the forecast time horizon (\(T\)) and onwards the last value of the Gaussia
     I_t = (N - I^c_{t-1}) \left(1 - \exp \left(\frac{-I'_t}{N - I^c_{T}}\right)\right),
 \end{equation}
 
-where \(I^c_t = \sum_{s< t} I_s\) are cumulative infections by \(t-1\) and \(I'_t\) are the unadjusted infections defined above. This adjustment is based on that implemented in the \texttt{epidemia} R package \citep{epidemia, bhattSemiMechanisticBayesianModeling2023} XXX(Scott et al. 2020; Bhatt et al., n.d.).
+where \(I^c_t = \sum_{s< t} I_s\) are cumulative infections by \(t-1\) and \(I'_t\) are the unadjusted infections defined above. This adjustment is based on that implemented in the \texttt{epidemia} R package \citep{epidemia, bhattSemiMechanisticBayesianModeling2023}.
 
 \hypertarget{convolution-model}{%
 \paragraph{Convolution model}\label{convolution-model}}
@@ -203,40 +203,40 @@ Both models were implemented using the \texttt{EpiNow2} R package (version 1.3.3
 
 \clearpage
 
-\hypertarget{refs}{}
+%\hypertarget{refs}{}
 % \begin{CSLReferences}{1}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-epinow2}{}}%
-Abbott, Sam, Joel Hellewell, Joe Hickson, James Munday, Katelyn Gostic, Peter Ellis, Katharine Sherratt, et al. 2020. {``EpiNow2: Estimate Real-Time Case Counts and Time-Varying Epidemiological Parameters.''} \emph{-} - (-): --. \url{https://doi.org/10.5281/zenodo.3957489}.
+%\leavevmode\vadjust pre{\hypertarget{ref-epinow2}{}}%
+%Abbott, Sam, Joel Hellewell, Joe Hickson, James Munday, Katelyn Gostic, Peter Ellis, Katharine Sherratt, et al. 2020. {``EpiNow2: Estimate Real-Time Case Counts and Time-Varying Epidemiological Parameters.''} \emph{-} - (-): --. \url{https://doi.org/10.5281/zenodo.3957489}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-covidregionaldata}{}}%
-Abbott, Sam, Katharine Sherratt, Jonnie Bevan, Hamish Gibbs, Joel Hellewell, James Munday, Patrick Barks, Paul Campbell, Flavio Finger, and Sebastian Funk. 2020. {``Covidregionaldata: Subnational Data for the Covid-19 Outbreak.''} \emph{-} - (-): --. \url{https://doi.org/10.5281/zenodo.3957539}.
+%\leavevmode\vadjust pre{\hypertarget{ref-covidregionaldata}{}}%
+%Abbott, Sam, Katharine Sherratt, Jonnie Bevan, Hamish Gibbs, Joel Hellewell, James Munday, Patrick Barks, Paul Campbell, Flavio Finger, and Sebastian Funk. 2020. {``Covidregionaldata: Subnational Data for the Covid-19 Outbreak.''} \emph{-} - (-): --. \url{https://doi.org/10.5281/zenodo.3957539}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-bhattSemiMechanisticBayesianModeling}{}}%
-Bhatt, Samir, Neil Ferguson, Seth Flaxman, Axel Gandy, Swapnil Mishra, and James A Scott. n.d. {``Semi-{Mechanistic Bayesian} Modeling of {COVID-19} with {Renewal Processes},''} 14.
+%\leavevmode\vadjust pre{\hypertarget{ref-bhattSemiMechanisticBayesianModeling}{}}%
+%Bhatt, Samir, Neil Ferguson, Seth Flaxman, Axel Gandy, Swapnil Mishra, and James A Scott. n.d. {``Semi-{Mechanistic Bayesian} Modeling of {COVID-19} with {Renewal Processes},''} 14.
 
-\leavevmode\vadjust pre{\hypertarget{ref-epiforecasts.ioux2fcovidCovid19TemporalVariation2020}{}}%
-epiforecasts.io/covid. 2020. {``Covid-19: {Temporal} Variation in Transmission During the {COVID-19} Outbreak.''} {Covid-19}. 2020. \url{https://epiforecasts.io/covid/}.
+%\leavevmode\vadjust pre{\hypertarget{ref-epiforecasts.ioux2fcovidCovid19TemporalVariation2020}{}}%
+%epiforecasts.io/covid. 2020. {``Covid-19: {Temporal} Variation in Transmission During the {COVID-19} Outbreak.''} {Covid-19}. 2020. \url{https://epiforecasts.io/covid/}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-EvaluatingUseReproduction}{}}%
-{``Evaluating the Use of the Reproduction Number as an Epidemiological Tool, Using Spatio-Temporal Trends of the {Covid-19} Outbreak in {England} \textbar{} {medRxiv}.''} n.d. Accessed May 30, 2021. \url{https://www.medrxiv.org/content/10.1101/2020.10.18.20214585v1}.
+%\leavevmode\vadjust pre{\hypertarget{ref-EvaluatingUseReproduction}{}}%
+%{``Evaluating the Use of the Reproduction Number as an Epidemiological Tool, Using Spatio-Temporal Trends of the {Covid-19} Outbreak in {England} \textbar{} {medRxiv}.''} n.d. Accessed May 30, 2021. \url{https://www.medrxiv.org/content/10.1101/2020.10.18.20214585v1}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-generationinterval}{}}%
-Ganyani, Tapiwa, Cecile Kremer, Dongxuan Chen, Andrea Torneri, Christel Faes, Jacco Wallinga, and Niel Hens. 2020. {``Estimating the Generation Interval for Coronavirus Disease (COVID-19) Based on Symptom Onset Data, March 2020.''} \emph{Eurosurveillance} 25 (17).
+%\leavevmode\vadjust pre{\hypertarget{ref-generationinterval}{}}%
+%Ganyani, Tapiwa, Cecile Kremer, Dongxuan Chen, Andrea Torneri, Christel Faes, Jacco Wallinga, and Niel Hens. 2020. {``Estimating the Generation Interval for Coronavirus Disease (COVID-19) Based on Symptom Onset Data, March 2020.''} \emph{Eurosurveillance} 25 (17).
 
-\leavevmode\vadjust pre{\hypertarget{ref-incubationperiod}{}}%
-Lauer, Stephen A, Kyra H Grantz, Qifang Bi, Forrest K Jones, Qulu Zheng, Hannah R Meredith, Andrew S Azman, Nicholas G Reich, and Justin Lessler. 2020. {``The Incubation Period of Coronavirus Disease 2019 (COVID-19) from Publicly Reported Confirmed Cases: Estimation and Application.''} \emph{Annals of Internal Medicine} 172 (9): 577--82.
+%\leavevmode\vadjust pre{\hypertarget{ref-incubationperiod}{}}%
+%Lauer, Stephen A, Kyra H Grantz, Qifang Bi, Forrest K Jones, Qulu Zheng, Hannah R Meredith, Andrew S Azman, Nicholas G Reich, and Justin Lessler. 2020. {``The Incubation Period of Coronavirus Disease 2019 (COVID-19) from Publicly Reported Confirmed Cases: Estimation and Application.''} \emph{Annals of Internal Medicine} 172 (9): 577--82.
 
-\leavevmode\vadjust pre{\hypertarget{ref-approxGP}{}}%
-Riutort-Mayol, Gabriel, Paul-Christian Bürkner, Michael R. Andersen, Arno Solin, and Aki Vehtari. 2020. {``Practical Hilbert Space Approximate Bayesian Gaussian Processes for Probabilistic Programming.''} \url{https://arxiv.org/abs/2004.11408}.
+%\leavevmode\vadjust pre{\hypertarget{ref-approxGP}{}}%
+%Riutort-Mayol, Gabriel, Paul-Christian Bürkner, Michael R. Andersen, Arno Solin, and Aki Vehtari. 2020. {``Practical Hilbert Space Approximate Bayesian Gaussian Processes for Probabilistic Programming.''} \url{https://arxiv.org/abs/2004.11408}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-epidemia}{}}%
-Scott, James A., Axel Gandy, Swapnil Mishra, Juliette Unwin, Seth Flaxman, and Samir Bhatt. 2020. {``Epidemia: Modeling of Epidemics Using Hierarchical Bayesian Models.''} \url{https://imperialcollegelondon.github.io/epidemia/}.
+%\leavevmode\vadjust pre{\hypertarget{ref-epidemia}{}}%
+%Scott, James A., Axel Gandy, Swapnil Mishra, Juliette Unwin, Seth Flaxman, and Samir Bhatt. 2020. {``Epidemia: Modeling of Epidemics Using Hierarchical Bayesian Models.''} \url{https://imperialcollegelondon.github.io/epidemia/}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-rstan}{}}%
-Stan Development Team. 2020. {``RStan: The r Interface to Stan.''} \url{http://mc-stan.org/}.
+%\leavevmode\vadjust pre{\hypertarget{ref-rstan}{}}%
+%Stan Development Team. 2020. {``RStan: The r Interface to Stan.''} \url{http://mc-stan.org/}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-kraemer2020epidemiological}{}}%
-Xu, Bo, Bernardo Gutierrez, Sarah Hill, Samuel Scarpino, Alyssa Loskill, Jessie Wu, Kara Sewalk, et al. 2020. {``Epidemiological Data from the nCoV-2019 Outbreak: Early Descriptions from Publicly Available Data.''} \url{http://virological.org/t/epidemiological-data-from-the-ncov-2019-outbreak-early-descriptions-from-publicly-available-data/337}.
+%\leavevmode\vadjust pre{\hypertarget{ref-kraemer2020epidemiological}{}}%
+%Xu, Bo, Bernardo Gutierrez, Sarah Hill, Samuel Scarpino, Alyssa Loskill, Jessie Wu, Kara Sewalk, et al. 2020. {``Epidemiological Data from the nCoV-2019 Outbreak: Early Descriptions from Publicly Available Data.''} \url{http://virological.org/t/epidemiological-data-from-the-ncov-2019-outbreak-early-descriptions-from-publicly-available-data/337}.
 
 % \end{CSLReferences}
 % 
