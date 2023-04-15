@@ -1,26 +1,22 @@
-@misc{abbottEstimatingIncreaseReproduction2021,
+@article{abbottEstimatingIncreaseReproduction2021,
   title = {Estimating the Increase in Reproduction Number Associated with the {{Delta}} Variant Using Local Area Dynamics in {{England}}},
   author = {Abbott, Sam and Group, CMMID COVID-19 Working and Kucharski, Adam J. and Funk, Sebastian},
   year = {2021},
   month = dec,
   pages = {2021.11.30.21267056},
-  publisher = {{medRxiv}},
   doi = {10.1101/2021.11.30.21267056},
   urldate = {2023-03-29},
   abstract = {Background Local estimates of the time-varying effective reproduction number (Rt) of COVID-19 in England became increasingly heterogeneous during April and May 2021. This may have been attributable to the spread of the Delta SARS-CoV-2 variant. This paper documents real-time analysis that aimed to investigate the association between changes in the proportion of positive cases that were S-gene positive, an indicator of the Delta variant against a background of the previously predominant Alpha variant, and the estimated time-varying Rt at the level of upper-tier local authorities (UTLA). Method We explored the relationship between the proportion of samples that were S-gene positive and the Rt of test-positive cases over time from the 23 February 2021 to the 25 May 2021. Effective reproduction numbers were estimated using the EpiNow2 R package independently for each local authority using two different estimates of the generation time. We then fit a range of regression models to estimate a multiplicative relationship between S-gene positivity and weekly mean Rt estimate. Results We found evidence of an association between increased mean Rt estimates and the proportion of S-gene positives across all models evaluated with the magnitude of the effect increasing as model flexibility was decreased. Models that adjusted for either national level or NHS region level time-varying residuals were found to fit the data better, suggesting potential unexplained confounding. Conclusions Our results indicated that even after adjusting for time-varying residuals between NHS regions, S-gene positivity was associated with an increase in the effective reproduction number of COVID-19. These findings were robust across a range of models and generation time assumptions, though the specific effect size was variable depending on the assumptions used. The lower bound of the estimated effect indicated that the reproduction number of Delta was above 1 in almost all local authorities throughout the period of investigation.},
-  archiveprefix = {medRxiv},
   copyright = {\textcopyright{} 2021, Posted by Cold Spring Harbor Laboratory. This pre-print is available under a Creative Commons License (Attribution 4.0 International), CC BY 4.0, as described at http://creativecommons.org/licenses/by/4.0/},
   langid = {english},
   file = {/Users/nikos/github-synced/zotero-nikos/storage/NS9YJ49P/Abbott et al. - 2021 - Estimating the increase in reproduction number ass.pdf}
 }
 
-@misc{abbottEstimatingTimevaryingReproduction2020a,
+@article{abbottEstimatingTimevaryingReproduction2020a,
   title = {Estimating the Time-Varying Reproduction Number of {{SARS-CoV-2}} Using National and Subnational Case Counts},
   author = {Abbott, Sam and Hellewell, Joel and Thompson, Robin N. and Sherratt, Katharine and Gibbs, Hamish P. and Bosse, Nikos I. and Munday, James D. and Meakin, Sophie and Doughty, Emma L. and Chun, June Young and Chan, Yung-Wai Desmond and Finger, Flavio and Campbell, Paul and Endo, Akira and Pearson, Carl A. B. and Gimma, Amy and Russell, Tim and modelling Group, CMMID COVID and Flasche, Stefan and Kucharski, Adam J. and Eggo, Rosalind M. and Funk, Sebastian},
   year = {2020},
   month = jun,
-  number = {5:112},
-  institution = {{Wellcome Open Research}},
   doi = {10.12688/wellcomeopenres.16006.1},
   urldate = {2021-10-14},
   abstract = {Background: Interventions are now in place worldwide to reduce transmission of the novel coronavirus. Assessing temporal variations in transmission in different countries is essential for evaluating the effectiveness of public health interventions and the impact of changes in policy. Methods: We use case notification data to generate daily estimates of the time-dependent reproduction number in different regions and countries. Our modelling framework, based on open source tooling, accounts for reporting delays, so that temporal variations in reproduction number estimates can be compared directly with the times at which interventions are implemented. Results: We provide three example uses of our framework. First, we demonstrate how the toolset displays temporal changes in the reproduction number. Second, we show how the framework can be used to reconstruct case counts by date of infection from case counts by date of notification, as well as to estimate the reproduction number. Third, we show how maps can be generated to clearly show if case numbers are likely to decrease or increase in different regions. Results are shown for regions and countries worldwide on our website ( https://epiforecasts.io/covid/ ) and are updated daily. Our tooling is provided as an open-source R package to allow replication by others. Conclusions: This decision-support tool can be used to assess changes in virus transmission in different regions and countries worldwide. This allows policymakers to assess the effectiveness of current interventions, and will be useful for inferring whether or not transmission will increase when interventions are lifted. As well as providing daily updates on our website, we also provide adaptable computing code so that our approach can be used directly by researchers and policymakers on confidential datasets. We hope that our tool will be used to support decisions in countries worldwide throughout the ongoing COVID-19 pandemic.},
@@ -81,14 +77,13 @@
   file = {/Users/nikos/github-synced/zotero-nikos/storage/QZ74W5WX/Bosse et al. - 2022 - Comparing human and model-based forecasts of COVID.pdf}
 }
 
-@misc{bosseEvaluatingForecastsScoringutils2022,
+@article{bosseEvaluatingForecastsScoringutils2022,
   title = {Evaluating {{Forecasts}} with Scoringutils in {{R}}},
   author = {Bosse, Nikos I. and Gruson, Hugo and Cori, Anne and {van Leeuwen}, Edwin and Funk, Sebastian and Abbott, Sam},
   year = {2022},
   month = may,
-  number = {arXiv:2205.07090},
-  eprint = {arXiv:2205.07090},
-  publisher = {{arXiv}},
+  eprint = {2205.07090},
+  primaryclass = {stat},
   doi = {10.48550/arXiv.2205.07090},
   urldate = {2023-01-15},
   abstract = {Evaluating forecasts is essential in order to understand and improve forecasting and make forecasts useful to decision-makers. Much theoretical work has been done on the development of proper scoring rules and other scoring metrics that can help evaluate forecasts. In practice, however, conducting a forecast evaluation and comparison of different forecasters remains challenging. In this paper we introduce scoringutils, an R package that aims to greatly facilitate this process. It is especially geared towards comparing multiple forecasters, regardless of how forecasts were created, and visualising results. The package is able to handle missing forecasts and is the first R package to offer extensive support for forecasts represented through predictive quantiles, a format used by several collaborative ensemble forecasting efforts. The paper gives a short introduction to forecast evaluation, discusses the metrics implemented in scoringutils and gives guidance on when they are appropriate to use, and illustrates the application of the package using example data of forecasts for COVID-19 cases and deaths submitted to the European Forecast Hub between May and September 2021},
@@ -98,13 +93,11 @@
   file = {/Users/nikos/github-synced/zotero-nikos/storage/QW8YLYQZ/Bosse et al. - 2022 - Evaluating Forecasts with scoringutils in R.pdf;/Users/nikos/github-synced/zotero-nikos/storage/DNAA9E73/2205.html}
 }
 
-@techreport{bosseTransformationForecastsEvaluating2023,
-  type = {Preprint},
+@article{bosseTransformationForecastsEvaluating2023,
   title = {Transformation of Forecasts for Evaluating Predictive Performance in an Epidemiological Context},
   author = {Bosse, Nikos I. and Abbott, Sam and Cori, Anne and {van Leeuwen}, Edwin and Bracher, Johannes and Funk, Sebastian},
   year = {2023},
   month = jan,
-  institution = {{Epidemiology}},
   doi = {10.1101/2023.01.23.23284722},
   urldate = {2023-02-06},
   abstract = {Abstract           Forecast evaluation plays an essential role in the development cycle of predictive epidemic models and can inform their use for public health decision-making. Common scores to evaluate epidemiological forecasts are the Continuous Ranked Probability Score (CRPS) and the Weighted Interval Score (WIS), which are both measures of the absolute distance between the forecast distribution and the observation. They are commonly applied directly to predicted and observed incidence counts, but it can be questioned whether this yields the most meaningful results given the exponential nature of epidemic processes and the several orders of magnitude that observed values can span over space and time. In this paper, we argue that log transforming counts before applying scores such as the CRPS or WIS can effectively mitigate these difficulties and yield epidemiologically meaningful and easily interpretable results. We motivate the procedure threefold using the CRPS on log-transformed counts as an example: Firstly, it can be interpreted as a probabilistic version of a relative error. Secondly, it reflects how well models predicted the time-varying epidemic growth rate. And lastly, using arguments on variance-stabilizing transformations, it can be shown that under the assumption of a quadratic mean-variance relationship, the logarithmic transformation leads to expected CRPS values which are independent of the order of magnitude of the predicted quantity. Applying the log transformation to data and forecasts from the European COVID-19 Forecast Hub, we find that it changes model rankings regardless of stratification by forecast date, location or target types. Situations in which models missed the beginning of upward swings are more strongly emphasized while failing to predict a downturn following a peak is less severely penalized. We conclude that appropriate transformations, of which the natural logarithm is only one particularly attractive option, should be considered when assessing the performance of different models in the context of infectious disease incidence.},
@@ -461,14 +454,14 @@
   file = {/Users/nikos/github-synced/zotero-nikos/storage/JBR38DMU/Riutort-Mayol et al. - 2022 - Practical Hilbert space approximate Bayesian Gauss.pdf}
 }
 
-@misc{sherrattExploringSurveillanceData2021,
+@article{sherrattExploringSurveillanceData2021,
   title = {Exploring Surveillance Data Biases When Estimating the Reproduction Number: With Insights into Subpopulation Transmission of {{Covid-19}} in {{England}}},
   shorttitle = {Exploring Surveillance Data Biases When Estimating the Reproduction Number},
   author = {Sherratt, Katharine and Abbott, Sam and Meakin, Sophie R. and Hellewell, Joel and Munday, James D. and Bosse, Nikos and working Group, CMMID Covid-19 and Jit, Mark and Funk, Sebastian},
   year = {2021},
   month = mar,
   pages = {2020.10.18.20214585},
-  institution = {{Cold Spring Harbor Laboratory Press}},
+  publisher = {{Cold Spring Harbor Laboratory Press}},
   doi = {10.1101/2020.10.18.20214585},
   urldate = {2021-10-14},
   abstract = {The time-varying reproduction number (Rt: the average number secondary infections caused by each infected person) may be used to assess changes in transmission potential during an epidemic. While new infections are not usually observed directly, they can be estimated from data. However, data may be delayed and potentially biased. We investigated the sensitivity of Rt estimates to different data sources representing Covid-19 in England, and we explored how this sensitivity could track epidemic dynamics in population sub-groups. We sourced public data on test-positive cases, hospital admissions, and deaths with confirmed Covid-19 in seven regions of England over March through August 2020. We estimated Rt using a model that mapped unobserved infections to each data source. We then compared differences in Rt with the demographic and social context of surveillance data over time. Our estimates of transmission potential varied for each data source, with the relative inconsistency of estimates varying across regions and over time. Rt estimates based on hospital admissions and deaths were more spatio-temporally synchronous than when compared to estimates from all test-positives. We found these differences may be linked to biased representations of subpopulations in each data source. These included spatially clustered testing, and where outbreaks in hospitals, care homes, and young age groups reflected the link between age and severity of disease. We highlight that policy makers could better target interventions by considering the source populations of Rt estimates. Further work should clarify the best way to combine and interpret Rt estimates from different data sources based on the desired use.},
@@ -477,7 +470,7 @@
   file = {/Users/nikos/github-synced/zotero-nikos/storage/Y8CPF3U3/Sherratt et al. - 2021 - Exploring surveillance data biases when estimating.pdf;/Users/nikos/github-synced/zotero-nikos/storage/HGFVXLM7/2020.10.18.html}
 }
 
-@misc{sherrattPredictivePerformanceMultimodel2022a,
+@article{sherrattPredictivePerformanceMultimodel2022,
   title = {Predictive Performance of Multi-Model Ensemble Forecasts of {{COVID-19}} across  {{European}} Nation},
   author = {Sherratt, K. and Gruson, H. and Grah, R. and Johnson, H. and Niehus, R. and Prasse, B. and Sandman, F. and Deuschel, J. and Wolffram, D. and Abbott, S. and Ullrich, A. and Gibson, G. and Ray, {\relax EL}. and Reich, {\relax NG}. and Sheldon, D. and Wang, Y. and Wattanachit, N. and Wang, L. and Trnka, J. and Obozinski, G. and Sun, T. and Thanou, D. and Pottier, L. and Krymova, E. and Barbarossa, {\relax MV}. and Leith{\"a}user, N. and Mohring, J. and Schneider, J. and Wlazlo, J. and Fuhrmann, J. and Lange, B. and Rodiah, I. and Baccam, P. and Gurung, H. and Stage, S. and Suchoski, B. and Budzinski, J. and Walraven, R. and Villanueva, I. and Tucek, V. and {\v S}m{\'i}d, M. and Zaj{\'i}cek, M. and P{\'e}rez, {\'A}lvarez C. and Reina, B. and Bosse, {\relax NI}. and Meakin, S. and Di Loro, Alaimo and Maruotti, A. and Eclerov{\'a}, V. and Kraus, A. and Kraus, D. and Pribylova, L. and Dimitris, B. and Li, {\relax ML}. and Saksham, S. and Dehning, J. and Mohr, S. and Priesemann, V. and Redlarski, G. and Bejar, B. and Ardenghi, G. and Parolini, N. and Ziarelli, G. and Bock, W. and Heyder, S. and Hotz, T. and E., Singh D. and {Guzman-Merino}, M. and Aznarte, {\relax JL}. and Mori{\~n}a, D. and Alonso, S. and {\'A}lvarez, E. and L{\'o}pez, D. and Prats, C. and Burgard, {\relax JP}. and Rodloff, A. and Zimmermann, T. and Kuhlmann, A. and Zibert, J. and Pennoni, F. and Divino, F. and Catal{\`a}, M. and Lovison, G. and Giudici, P. and Tarantino, B. and Bartolucci, F. and Jona, Lasinio G. and Mingione, M. and Farcomeni, A. and Srivastava, A. and {Montero-Manso}, P. and Adiga, A. and Hurt, B. and Lewis, B. and Marathe, M. and Porebski, P. and Venkatramanan, S. and Bartczuk, R. and Dreger, F. and Gambin, A. and Gogolewski, K. and {Gruziel-Slomka}, M. and Krupa, B. and Moszynski, A. and Niedzielewski, K. and Nowosielski, J. and Radwan, M. and Rakowski, F. and Semeniuk, M. and Szczurek, E. and Zielinski, J. and Kisielewski, J. and Pabjan, B. and Holger, K. and Kheifetz, Y. and Scholz, M. and Bodych, M. and Filinski, M. and Idzikowski, R. and Krueger, T. and Ozanski, T. and Bracher, J. and Funk, S.},
   year = {2022},
@@ -505,18 +498,16 @@
   file = {/Users/nikos/github-synced/zotero-nikos/storage/GABIPC4B/Swallow et al. - 2022 - Challenges in estimation, uncertainty quantificati.pdf;/Users/nikos/github-synced/zotero-nikos/storage/DSRZFE87/S1755436522000093.html}
 }
 
-@misc{venkatramananUtilityHumanJudgment2022,
+@article{venkatramananUtilityHumanJudgment2022,
   title = {Utility of Human Judgment Ensembles during Times of Pandemic Uncertainty: {{A}} Case Study during the {{COVID-19 Omicron BA}}.1 Wave in the {{USA}}},
   shorttitle = {Utility of Human Judgment Ensembles during Times of Pandemic Uncertainty},
   author = {Venkatramanan, Srinivasan and Cambeiro, Juan and Liptay, Tom and Lewis, Bryan and Orr, Mark and Dempsey, Gaia and Telionis, Alex and Crow, Justin and Barrett, Chris and Marathe, Madhav},
   year = {2022},
   month = oct,
   pages = {2022.10.12.22280997},
-  publisher = {{medRxiv}},
   doi = {10.1101/2022.10.12.22280997},
   urldate = {2023-02-07},
   abstract = {Responding to a rapidly evolving pandemic like COVID-19 is challenging, and involves anticipating novel variants, vaccine uptake, and behavioral adaptations. Human judgment systems can complement computational models by providing valuable real-time forecasts. We report findings from a study conducted on Metaculus, a community forecasting platform, in partnership with the Virginia Department of Health, involving six rounds of forecasting during the Omicron BA.1 wave in the United States from November 2021 to March 2022. We received 8355 probabilistic predictions from 129 unique users across 60 questions pertaining to cases, hospitalizations, vaccine uptake, and peak/trough activity. We observed that the case forecasts performed on par with national multi-model ensembles and the vaccine uptake forecasts were more robust and accurate compared to baseline models. We also identified qualitative shifts in Omicron BA.1 wave prognosis during the surge phase, demonstrating rapid adaptation of such systems. Finally, we found that community estimates of variant characteristics such as growth rate and timing of dominance were in line with the scientific consensus. The observed accuracy, timeliness, and scope of such systems demonstrates the value of incorporating them into pandemic policymaking workflows.},
-  archiveprefix = {medRxiv},
   copyright = {\textcopyright{} 2022, Posted by Cold Spring Harbor Laboratory. This pre-print is available under a Creative Commons License (Attribution 4.0 International), CC BY 4.0, as described at http://creativecommons.org/licenses/by/4.0/},
   langid = {english},
   file = {/Users/nikos/github-synced/zotero-nikos/storage/HG7AGF5X/Venkatramanan et al. - 2022 - Utility of human judgment ensembles during times o.pdf}
