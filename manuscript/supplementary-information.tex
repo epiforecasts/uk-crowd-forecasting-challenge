@@ -1,0 +1,137 @@
+% For more detailed article preparation guidelines, please see: http://wellcomeopenresearch.org/for-authors/article-guidelines and http://wellcomeopenresearch.org/for-authors/data-guidelines
+
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage{WellcomeOR_styles}
+
+%% Packages added manually
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+
+%% Default: numerical citations
+\usepackage[numbers]{natbib}
+\bibliographystyle{custom}
+
+%% Uncomment this lines for superscript citations instead
+% \usepackage[super]{natbib}
+
+%% Uncomment these lines for author-year citations instead
+% \usepackage[round]{natbib}
+% \let\cite\citep
+
+\begin{document}
+
+\title{Supplementary Information - Human judgement forecasting of COVID-19 in the UK}
+%\titlenote{The title should be detailed enough for someone to know whether the article would be of interest to them, but also concise. Please ensure the broadness and claims within the title are appropriate to the content of the article itself.}
+
+\thispagestyle{fancy}
+
+
+
+% Please list all authors that played a significant role in the research involved in the article. Please provide full affiliation information (including full institutional address, ZIP code and e-mail address) for all authors, and identify who is/are the corresponding author(s).
+
+\section*{Supplementary information}
+\renewcommand{\thefigure}{SI.\arabic{figure}}
+\setcounter{figure}{0}
+\renewcommand{\thetable}{SI.\arabic{table}} \setcounter{table}{0}
+
+
+\subsection*{Weighted interval score}
+\label{sec:wis}
+
+The weighted interval score (smaller values are better) is a proper scoring rule for quantile forecasts. It converges to the continuous ranked probability score (which itself is a generalisation of the absolute error to probabilistic forecasts) for an increasing number of intervals. The score can be decomposed into a dispersion (uncertainty) component and penalties for over- and underprediction. For a single interval, the score is computed as 
+  $$IS_\alpha(F,y) = (u-l) + \frac{2}{\alpha} \cdot (l-y) \cdot 1(y \leq l) + \frac{2}{\alpha} \cdot (y-u) \cdot 1(y \geq u), $$ 
+  where $1()$ is the indicator function, $y$ is the true value, and $l$ and $u$ are the $\frac{\alpha}{2}$ and $1 - \frac{\alpha}{2}$ quantiles of the predictive distribution $F$, i.e., the lower and upper bound of a single prediction interval. For a set of $K$ prediction intervals and the median $m$, the score is computed as a weighted sum, 
+  $$WIS = \frac{1}{K + 0.5} \cdot \left( w_0 \cdot |y - m| + \sum_{k = 1}^{K} w_k \cdot IS_{\alpha}(F, y) \right), $$
+  where $w_k$ is a weight for every interval. Usually, $w_k = \frac{\alpha_k}{2}$ and $w_0 = 0.5$. 
+
+\input SI/epinow2.tex
+
+%table 4 weeks
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.99\textwidth]{../output/figures/num-forecasters.png}
+\caption{\bf{Number of forecasts across the study period.} A: number of forecasts included in the Hub ensemble and the combined crowd ensemble. B: number of forecasts by "experts" and "non-experts". Expert status was determined based on the participant's answer to the question whether they "worked in infectious disease modelling or had professional experience in any related field".}
+\label{fig:num-forecasters-SI}
+\end{figure*}
+
+
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.99\textwidth]{../output/figures/plot-data.png}
+\caption{\bf{Observed cases and deaths of COVID-19 in the UK}. A: Observed daily (bars) and weekly (black lines and points) numbers of cases and deaths as available through the European Forecast Hub when the study concluded in 2021. Daily numbers were multiplied by seven in order to appear on the same scale as weekly numbers. Red dots represent days for which the original data and the revised data disagreed by more than five percent. B: Revised data available as of February 14 2023. In August, Johns Hopkins University that provided the data switched the data stream for their death forecasts to reflect the number of death certificates that mentioned COVID-19 rather than the number of people who died within 28 days of a positive test. C: Difference between the original and revised weekly death numbers.}
+\label{fig:plot-data}
+\end{figure*}
+
+
+\input performance-table-horizon-4.tex
+
+
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.99\textwidth]{../output/figures/screenshot-crowd-classical.png}
+\caption{\bf{Screenshot of the direct forecasting interface.}}
+\label{fig:screenshot-classical}
+\end{figure*}
+
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.99\textwidth]{../output/figures/screenshot-crowd-rt-app.png}
+\caption{\bf{Screenshot of the $R_t$ forecasting interface.}}
+\label{fig:screenshot-rt}
+\end{figure*}
+
+
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.99\textwidth]{../output/figures/performance-ranks-4.png}
+\caption{\bf{Ranks for all forecasting approaches for four week ahead forecasts}. Colours indicate how often (out of 13 forecasts) a given approach got 1st, 2nd, 3rd, or 4th rank.}
+\label{fig:performance-ranks-4}
+\end{figure*}
+
+
+\clearpage
+
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.99\textwidth]{../output/figures/performance-expert.png}
+\caption{\bf{Predictive performance of self-reported "experts" and "non-experts" across forecast horizons.} Forecasts from "experts" and "non-experts" were combined to two separate median ensembles, including both direct and $R_t$ forecasts. A-D: WIS stratified by forecast horizon for cases and deaths on the natural and log scale. E, F: Empirical coverage of the 50\% and 90\% prediction intervals stratified by forecast horizon and target type.}
+\label{fig:performance-experts}
+\end{figure*}
+
+
+\input{manuscript/performance-table-experts}
+
+\input{manuscript/performance-table-experts-4}
+
+
+% See this guide for more information on BibTeX:
+% http://libguides.mit.edu/content.php?pid=55482&sid=406343
+
+% For more author guidance please see:
+% http://wellcomeopenresearch.org/for-authors/article-guidelines
+
+% When all authors are happy with the paper, use the 
+% ‘Submit to WELLCOME OPEN RESEARCH' button from the menu above
+% to submit directly to the open life science journal Wellcome Open Research.
+
+% Please note that this template results in a draft pre-submission PDF document.
+% Articles will be professionally typeset when accepted for publication.
+
+% We hope you find the Wellcome Open Research Overleaf template useful,
+% please let us know if you have any feedback using the help menu above.
+
+
+\clearpage
+{\small\bibliographystyle{unsrtnat}
+\bibliography{software, uk-forecasting-challenge}}
+
+\end{document}
