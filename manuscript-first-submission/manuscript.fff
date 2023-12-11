@@ -1,0 +1,22 @@
+\begin{figure*}
+\centering
+\includegraphics[width=0.99\textwidth]{../output/figures/scores-and-forecasts.png}
+\caption{\bf{Forecasts and corresponding WIS for 2-week ahead forecasts of cases and deaths from COVID-19 in the UK.} A: 50\% prediction intervals (coloured bars) and observed values (black line and points) for cases and deaths on the natural scale. B: Corresponding WIS values, decomposed into dispersion, overprediction and underprediction. C: 50\% prediction intervals on the log scale, i.e. after applying the natural logarithm to all forecasts and observations. D: Corresponding WIS on the log scale, i.e. the WIS applied to the log-transformed forecasts and observations.}
+\label{fig:forecasts-scores}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}
+\centering
+\includegraphics[width=0.99\textwidth]{../output/figures/performance.png}
+\caption{\bf{Predictive performance across forecast horizons.} A-D: WIS stratified by forecast horizon for cases and deaths on the natural and log scale. E, F: Empirical coverage of the 50\% and 90\% prediction intervals stratified by forecast horizon and target type.}
+\label{fig:performance}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}
+\centering
+\includegraphics[width=0.99\textwidth]{../output/figures/comparison-direct-rt-individual.png}
+\caption{\bf{Comparison of predictive performance of individual forecasters using either the direct forecasting or $R_t$ interface}. Comparisons are based only on those instances where forecasters have submitted a prediction using both interfaces. The absolute level for a given forecaster relative to others is not meaningful as forecasters differ in the amounts of forecasts they have submitted and when.}
+\label{fig:comparison-direct-rt-individual}
+\end{figure*}

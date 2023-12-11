@@ -11,7 +11,8 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 options(knitr.kable.NA = '')
 library(here)
 library(magrittr)
-library(scoringutils)
+# use scoringutils version 1.2.2: remotes::install_github("epiforecasts/scoringutils@v1.2.2")
+library(scoringutils) 
 library(knitr)
 library(kableExtra)
 library(data.table)
@@ -30,7 +31,7 @@ library(forcats)
 library(scales)
 
 colors <- RColorBrewer::brewer.pal(n = 9, name = "Set1")
-colors <- hex <- hue_pal()(4)
+colors <- hex <- scales::hue_pal()(4)
 
 
 # Helper functions
@@ -80,6 +81,9 @@ models_expert <- forecasts |>
   filter(expert) |>
   pull(model) |> unique() |> sort()
 
+authors <- c("seb", "seabbs", "nib", "anonymous_Human")
+models_authors <- c(authors, paste(authors, "(Rt)"))
+
 update_expert_status <- function(data) {
   data |>
     mutate(expert = ifelse(
@@ -88,7 +92,6 @@ update_expert_status <- function(data) {
       FALSE
     ))
 }
-
 
 label_fn <- function(x) {
   x <- ifelse(x%%1 == 0, 
@@ -119,6 +122,65 @@ score_and_add_log <- function(forecasts) {
     add_type_and_scale() |>
   as.data.table() 
 }
+
+```
+
+
+# Figure 1: overview of the data
+
+
+```{r}
+plot_data_simple <- function(weekly_truth, daily_truth) {
+  weekly_truth |>
+    mutate(status = str_to_title(status)) |>
+  ggplot(aes(x = target_end_date, y = true_value)) +
+  annotate("rect", xmin = time_start, xmax = time_stop, ymin = -Inf, ymax = Inf,
+           fill = "darkolivegreen3", alpha = .1) + 
+  geom_line() + 
+  geom_point(size = 0.8) + 
+  geom_bar(data = daily_truth |>
+             mutate(true_value = true_value * 7), 
+           stat = "identity", 
+           fill = "skyblue3", alpha = 0.4) + 
+  facet_wrap(~ target_type, 
+             nrow = 2, scale = "free_y") + 
+  scale_y_continuous(labels = label_fn) +
+  theme_scoringutils() +
+  labs(y = "Observed values", x = "Date", color = "Data status")
+}
+
+p_data <- plot_data_simple(weekly_truth, daily_truth)
+ggsave("output/figures/overview-data.png", plot = p_data, 
+       width = 7, height = 5)
+
+
+weekly_truth |>
+  filter(target_end_date >= time_start & target_end_date <= time_stop) |>
+  filter(target_type == "Cases") |>
+  pull(target_end_date)
+
+```
+
+Author participation
+
+```{r}
+
+all <- forecasts |> 
+  filter(!is.na(prediction), 
+         model %in% models_human,
+         horizon == 2) |>
+  avail_forecasts(by = c("model", "target_type"))
+
+authors <- forecasts |> 
+  filter(!is.na(prediction), 
+         model %in% models_authors,
+         horizon == 2) |>
+  avail_forecasts(by = c("model", "target_type"))
+
+num_all <- all$`Number forecasts` |> sum()
+num_authors <- authors$`Number forecasts` |> sum()
+
+num_authors / num_all
 
 ```
 
@@ -199,7 +261,7 @@ scores |>
 
 
 
-# Figure 1: Number of forecasters across the study period
+# Figure 2: Number of forecasters across the study period
 ================================================================================
 - numbers of forecasters used in the text
 
@@ -453,7 +515,7 @@ forecasts |>
 
 
 
-# Figure 2: Predictive performance across horizons (summary)
+# Figure 3: Predictive performance across horizons (summary)
 ================================================================================
 
 ```{r}
@@ -550,7 +612,7 @@ ggsave("output/figures/Figure-2.png", plot = p_performance,
 
 
 
-# Figure 3: Forecasts and corresponding WIS
+# Figure 4: Forecasts and corresponding WIS
 ================================================================================
 
 ```{r}
@@ -677,7 +739,7 @@ ggsave("output/figures/Figure-3.png", plot = p_scores_and_pred,
 
 
 
-# Figure 4: Ranks for different models
+# Figure 5: Ranks for different models
 ================================================================================
 
 
@@ -739,7 +801,7 @@ ranks |>
 
 
 
-# Figure 5: Comparison performance direct vs. Rt
+# Figure 6: Comparison performance direct vs. Rt
 ================================================================================
 
 ```{r}
@@ -826,7 +888,7 @@ scores_forecasts_comparison |>
 
 
 
-# Figure 6: Performance of "experts" and "non-experts"
+# Figure 7: Performance of "experts" and "non-experts"
 ================================================================================
 Separate ensemble of experts and non-experts
 
