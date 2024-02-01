@@ -133,23 +133,27 @@ score_and_add_log <- function(forecasts) {
 plot_data_simple <- function(weekly_truth, daily_truth) {
   weekly_truth |>
     mutate(status = str_to_title(status)) |>
-  ggplot(aes(x = target_end_date, y = true_value)) +
+  ggplot(aes(x = target_end_date, y = true_value, colour = "Weekly data")) +
   annotate("rect", xmin = time_start, xmax = time_stop, ymin = -Inf, ymax = Inf,
            fill = "darkolivegreen3", alpha = .1) + 
   geom_line() + 
   geom_point(size = 0.8) + 
   geom_bar(data = daily_truth |>
              mutate(true_value = true_value * 7), 
-           stat = "identity", 
-           fill = "skyblue3", alpha = 0.4) + 
+           aes(fill = "7x daily cases"), 
+           colour = NA,
+           stat = "identity",
+           alpha = 0.4) + 
   facet_wrap(~ target_type, 
              nrow = 2, scale = "free_y") + 
   scale_y_continuous(labels = label_fn) +
+  scale_fill_manual(values = c("7x daily cases" = "skyblue3")) +
+  scale_color_manual(values = c("Weekly data" = "black")) +
   theme_scoringutils() +
-  labs(y = "Observed values", x = "Date", color = "Data status")
+  labs(y = "Observed values", x = "Date", color = " ", fill = " ")
 }
 
-p_data <- plot_data_simple(weekly_truth, daily_truth)
+(p_data <- plot_data_simple(weekly_truth, daily_truth))
 ggsave("output/figures/overview-data.png", plot = p_data, 
        width = 7, height = 5)
 
