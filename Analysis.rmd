@@ -131,26 +131,35 @@ score_and_add_log <- function(forecasts) {
 
 ```{r}
 plot_data_simple <- function(weekly_truth, daily_truth) {
+  
+  date_range <- seq(min(weekly_truth$target_end_date), max(weekly_truth$target_end_date), by="2 week")
+  
+  daily_truth <- daily_truth |> 
+    filter(target_end_date >= min(weekly_truth$target_end_date))
+  
   weekly_truth |>
     mutate(status = str_to_title(status)) |>
-  ggplot(aes(x = target_end_date, y = true_value, colour = "Weekly data")) +
-  annotate("rect", xmin = time_start, xmax = time_stop, ymin = -Inf, ymax = Inf,
-           fill = "darkolivegreen3", alpha = .1) + 
-  geom_line() + 
-  geom_point(size = 0.8) + 
-  geom_bar(data = daily_truth |>
-             mutate(true_value = true_value * 7), 
-           aes(fill = "7x daily cases"), 
-           colour = NA,
-           stat = "identity",
-           alpha = 0.4) + 
-  facet_wrap(~ target_type, 
-             nrow = 2, scale = "free_y") + 
-  scale_y_continuous(labels = label_fn) +
-  scale_fill_manual(values = c("7x daily cases" = "skyblue3")) +
-  scale_color_manual(values = c("Weekly data" = "black")) +
-  theme_scoringutils() +
-  labs(y = "Observed values", x = "Date", color = " ", fill = " ")
+    ggplot(aes(x = as.Date(target_end_date), y = true_value, colour = "Weekly data")) +
+    annotate("rect", xmin = as.Date("2021-05-24"), xmax = as.Date("2021-09-11"), ymin = -Inf, ymax = Inf,
+             fill = "darkolivegreen3", alpha = .1) + 
+    geom_vline(xintercept = as.numeric(date_range), colour="grey90") + # Add vertical lines
+    geom_line() + 
+    geom_point(size = 0.8) + 
+    geom_bar(data = daily_truth |>
+               mutate(true_value = true_value * 7), 
+             aes(fill = "7x daily cases"), 
+             colour = NA,
+             stat = "identity",
+             alpha = 0.4) + 
+    facet_wrap(~ target_type, 
+               nrow = 2, scale = "free_y") + 
+    scale_y_continuous(labels = label_fn) +
+    scale_fill_manual(values = c("7x daily cases" = "skyblue3")) +
+    scale_color_manual(values = c("Weekly data" = "black")) +
+    labs(y = "Observed values", x = "Date", color = " ", fill = " ") + 
+    theme_scoringutils() +
+    scale_x_date(breaks = date_range) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) 
 }
 
 (p_data <- plot_data_simple(weekly_truth, daily_truth))
