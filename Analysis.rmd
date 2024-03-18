@@ -164,7 +164,9 @@ plot_data_simple <- function(weekly_truth, daily_truth) {
 
 (p_data <- plot_data_simple(weekly_truth, daily_truth))
 ggsave("output/figures/overview-data.png", plot = p_data, 
-       width = 7, height = 5)
+       width = 7, height = 5, dpi = 300)
+ggsave("output/figures/Figure1.tif", plot = p_data, 
+       width = 7, height = 5, dpi = 300)
 
 
 weekly_truth |>
